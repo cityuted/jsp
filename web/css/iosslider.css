@@ -1,0 +1,378 @@
+.sliderContainer .m-caption{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+.sliderContainer .caption1{
+  position: absolute;
+}
+.sliderContainer .m-caption>span{display: block;position: absolute;}
+.sliderContainer .caption1>span.font1{
+  font-size: 36px;
+  line-height: 44px;
+  color: #848484;
+  left: 48px;
+  letter-spacing: -1px;
+  top: 54px;
+}
+.sliderContainer .caption1>span.font2{
+  font-size: 50px;
+  line-height: 60px;
+  color: #ee1b40;
+  font-weight: bold;
+  left: 119px;
+  letter-spacing: -1px;
+  top: 54px;
+}
+.sliderContainer .caption1>span.font3{
+  font-size: 110px;
+  line-height: 132px;
+  color: #ee1b40;
+  font-weight: bold;
+  left: 47px;
+  letter-spacing: -2px;
+  top: 76px;
+}
+.sliderContainer .caption1>span.font4{
+  font-size: 36px;
+  line-height: 44px;
+  color: #848484;
+  left: 48px;
+  letter-spacing: 1px;
+  top: 183px;
+}
+.sliderContainer .caption1>span.font5{
+  color: #a3b513;
+  font-size: 50px;
+  line-height: 60px;
+  font-weight: bold;
+  left: 170px;
+  letter-spacing: 1px;
+  top: 179px;
+}
+.sliderContainer .caption1>span.font6{
+  font-size: 86px;
+  font-weight: bold;
+  line-height: 104px;
+  color: #a3b513;
+  left: 95px;
+  letter-spacing: 1px;
+  top: 215px;
+}
+
+.sliderContainer .caption2>span.font1{
+  font-size: 129px;
+  line-height: 160px;
+  font-weight: bold;
+  color: #19aac5;
+  left: 513px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  top: 19px;
+}
+.sliderContainer .caption2>span.font2{
+  font-size: 87px;
+  line-height: 104px;
+  text-transform: uppercase;
+  color: #ee1b40;
+  font-weight: bold;
+  left: 518px;
+  letter-spacing: 3px;
+  top: 135px;
+}
+.sliderContainer .caption2>span.font3, .sliderContainer .caption2>span.font5{
+  font-size: 27px;
+  line-height: 34px;
+  color: #848484;
+  left: 523px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  top: 223px;
+}
+.sliderContainer .caption2>span.font3 span{
+  display: block;
+  margin-top: -7px;
+}
+.sliderContainer .caption2>span.font4{
+  font-size: 65px;
+  line-height: 80px;
+  color: #ee1b40;
+  left: 565px;
+  font-weight: bold;
+  letter-spacing: -3px;
+  top: 212px;
+}
+.sliderContainer .caption2>span.font5{
+  left: 523px;
+  top: 286px;
+  font-size: 24px;
+}
+.sliderContainer .caption2>span.font6{
+  font-size: 33px;
+  line-height: 41px;
+  text-transform: uppercase;
+  color: #19aac5;
+  left: 571px;
+  letter-spacing: -1px;
+  top: 279px;
+}
+
+.sliderContainer .caption3>span.font1{
+  font-size: 78px;
+  line-height: 96px;
+  font-weight: bold;
+  color: #a3b513;
+  left: 44px;
+  letter-spacing: -1px;
+  top: 74px;
+}
+.sliderContainer .caption3>span.font2{
+  font-size: 55px;
+  line-height: 68px;
+  text-transform: uppercase;
+  color: #ee1b40;
+  font-weight: bold;
+  left: 49px;
+  letter-spacing: 0px;
+  top: 148px;
+}
+.sliderContainer .caption3>span.font3{
+  font-size: 25px;
+  line-height: 34px;
+  color: #848484;
+  left: 49px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  top: 224px;
+}
+.sliderContainer .caption3>span.font3 span{
+  display: block;
+  font-size: 20px;
+  margin-top: -11px;
+}
+.sliderContainer .caption3>span.font4{
+  font-size: 32px;
+  line-height: 68px;
+  color: #19aac5;
+  left: 115px;
+  letter-spacing: -3px;
+  top: 207px;
+}
+.sliderContainer .caption3>span.font5{
+  left: 133px;
+  top: 217px;
+  font-size: 55px;
+  line-height: 68px;
+   color: #19aac5;
+   font-weight: bold;
+   letter-spacing: -4px;
+}
+.sliderContainer .caption3>span.font6{
+  font-size: 33px;
+  line-height: 41px;
+  text-transform: uppercase;
+  color: #078aac;
+  left: 571px;
+  letter-spacing: -1px;
+  top: 279px;
+}
+
+.slide_button{
+  display: block;
+  width: 197px;
+  background: #ffdd00;
+  border-radius: 10px;
+  border-bottom: 1px solid #e4c500;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 22px;
+  color: #1b1b1b;
+  font-weight: 800;
+  padding: 15px 0 12px;
+}
+#layerslider .slide_button{
+  width: 190px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  font-size: 20px;
+}
+.sliderContainer .slide_button{
+  left: 50px;
+  bottom: 17px;
+  position: absolute;
+}
+.caption2 .slide_button{
+  left: auto;
+  right: 40px;
+  bottom: 10px;
+  width: 196px;
+}
+.caption3 .slide_button{
+  left: 51px;
+  bottom: 40px;
+  width: 180px;
+}
+.slide_button:hover{
+  background: #ee1b40;
+  color: #fff;
+  border-color: #ca1331;
+}
+.slide_button .btn-arrow{
+  display: inline-block;
+  width: 8px;
+  height: 12px;
+  margin:5px 0 0 20px;
+  background: url('../images/button_arrow.png') no-repeat;
+}
+.slide_button:hover .btn-arrow{
+  background-position: 0 -13px;
+}
+.sliderContainer .caption2 > span.font1, .sliderContainer .caption2 > span.font2, .sliderContainer .caption2 > span.font3, .sliderContainer .caption2 > span.font5{left: 390px;}
+  .sliderContainer .caption2 > span.font4{left: 430px;}
+  .sliderContainer .caption2 > span.font6{left: 450px;}
+  
+.iosSlider .slider .item>a{display: none;overflow: hidden;}
+.iosSlider .slider .item>a img{width: 100%;}
+.sliderContainer-nav{
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  top: 46%;
+  left: 0;
+}
+.selectorsss>div{
+  width: 33px;
+  height: 50px;
+  position: absolute;
+  top: 3px;
+  display: block;
+}
+.sliderContainer-nav a.prev{
+  
+  left: 20px;
+}
+.sliderContainer-nav a.next{
+  background: url('../images/slider_arrows_next.png') no-repeat;
+  right: 20px;
+}
+.sliderContainer-nav a:hover{
+  background-position: 0 -50px;
+}
+
+.sliderContainer{
+	/* defaults for resposive height container */
+	position: relative;
+	width: 100%;
+	height: 0;
+	
+	/* 39% being the ratio we are maintaining 
+	 * calculated by looking at the image 
+	 * ratio: 400/1024 = ~0.39 */
+	padding: 0 0 61% 0;
+}
+.iosSlider {
+	width: 100%;
+	
+	/* this height ends up being your maximum height, 
+	 * if you want it to scale forever, set it to 
+	 * a very high number */
+	height: 470px;
+}
+
+.iosSlider .slider {
+	width: 100%;
+	height: 100%;
+}
+
+.iosSlider .slider .item {
+	float: left;
+	
+	width: 100%;
+}
+
+.iosSlider .slider .item img {
+	width: 100%;
+	height: auto;
+}
+
+/* controls */
+.sliderContainer .prevContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50px;
+	height: 100%;
+	padding: 0 0 0 0;
+	z-index: 10;
+}
+
+.sliderContainer .prevContainer .prev {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+  background: url('../images/slider_arrows_prev.png') 50% 50% no-repeat;
+}
+
+.sliderContainer .nextContainer {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50px;
+	height: 100%;
+	padding: 0 0 0 0;
+	z-index: 10;
+}
+
+.sliderContainer .nextContainer .next {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+  background: url('../images/slider_arrows_next.png') 50% 50% no-repeat;
+}
+.sliderContainer .prevContainer, .sliderContainer .nextContainer{
+  opacity: 0;
+}
+.sliderContainer .prevContainer:hover, .sliderContainer .nextContainer:hover{
+  opacity: 1;
+}
+.sliderContainer .selectorsBlock {
+	position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.sliderContainer .selectorsBlock .selectors {
+	position: relative;
+	top: 0;
+	left: 0;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+}
+
+#layerslider .ls-bottom-slidebuttons{z-index: 999;bottom: -9px;top: auto;}
+.sliderContainer .selectorsBlock .selectors .item, #layerslider .ls-bottom-slidebuttons a{
+	display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 1px;
+  background: url('../images/pag.png') no-repeat;
+  text-indent: -99999px;
+}
+
+.sliderContainer .selectorsBlock .selectors .selected, .sliderContainer .selectorsBlock .selectors .item:hover, #layerslider .ls-bottom-slidebuttons a:hover, #layerslider .ls-bottom-slidebuttons a.ls-nav-active{
+	background-position: 0 -12px;
+}
+
+.sliderContainer .selectorsBlock .selectors .first {
+	margin-left: 0;
+}

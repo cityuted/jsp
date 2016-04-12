@@ -1,0 +1,81 @@
+#panel{
+  background: #fff;
+  width: 192px;
+  left: -192px;
+  position: fixed;
+  z-index: 999;
+  top: 24%;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+  color: #848484;
+  font-size: 14px;
+  border-radius: 0 0 8px 0;
+}
+#panel .panel_button{
+  display: block;
+  position: absolute;
+  right: -40px;
+  top: 0;
+  width: 40px;
+  height: 50px;
+  background: url('../images/panel_button.jpg') no-repeat;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+  border-radius: 0 8px 8px 0;
+}
+#panel .panel_button:after{
+  display: block;
+  position: absolute;
+  width: 10px;
+  left: -10px;
+  top: 0;
+  background: #fff;
+  height: 120%;
+  content: "";
+}
+#panel .panel_button:hover, #panel .panel_button.active{
+  background-position: 0 -50px;
+}
+#panel .inner{
+  padding: 14px 20px 29px 20px;
+}
+#panel p{margin-bottom: 7px;}
+.tools_list >li{
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.bg_colors{
+  margin-bottom: 14px;
+}
+.tools_list a{
+  display: block;
+  float: left;
+  padding: 4px;
+  margin:1px 1px 1px 6px;
+  box-shadow: 0 0 0 1px #e2e2e2;
+  border-radius: 2px;
+}
+.tools_list li a:first-child{margin-left: 1px;}
+.tools_list a span{
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+.tools_list a:hover{box-shadow: 0 0 0 1px #848484;}
+
+.bg_colors a.color1 span{background: #e2e2e2;}
+.bg_colors a.color2 span{background: #fdfbd6;}
+.bg_colors a.color3 span{background: #dff2f7;}
+.bg_colors a.color4 span{background: #e5efc8;}
+.bg_colors a.color5 span{background: #f6e4e6;}
+.bg_colors a.color6 span{background: #fff;}
+
+.pattern_bg a span{
+  width: 60px;
+  height: 60px;
+}
+.pattern_bg{margin-bottom: 6px;}
+.pattern_bg a.pattern1 span{background: url('../images/pattern_ico1.jpg') no-repeat;}
+.pattern_bg a.pattern2 span{background: url('../images/pattern_ico2.jpg') no-repeat;}
+.pattern_bg a.pattern3 span{background: url('../images/pattern_ico3.jpg') no-repeat;}
+.pattern_bg a.pattern4 span{background: url('../images/pattern_ico4.jpg') no-repeat;}
+
+#panel .button_wrap1 a{display: block;text-align: center;margin-top: 20px;}

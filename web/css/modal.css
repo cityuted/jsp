@@ -1,0 +1,91 @@
+    
+    /* functional styles */
+
+    .modal {
+        position: absolute;
+        display: none;
+        z-index: 100000;
+    }
+    
+        .modal-content {
+            height: 100%;
+            overflow: auto;
+            /* width: 100%; IE6/7 won't shrink wrap '.modal' if this is set to 100% */
+        }
+        
+    .modal-overlay {
+        display: none;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 9999;
+    }
+
+    .modal-isopen select {
+        _visibility: hidden;
+    }
+
+    .modal-isopen .modal select {
+        _visibility: visible;
+    }
+        
+    /* aesthetic styles */
+    
+    .modal {
+        background: #fff;
+        border-radius: 10px;
+        margin: 0px;
+        padding: 0px;
+    }
+    
+        .modal-close {
+            color: #444;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: bold;
+            position: absolute;
+            right: 8px;
+            text-decoration: none;
+            text-transform: uppercase;
+            top: 8px;
+            display: none !important;
+        }
+    
+    .modal-overlay {
+        background: #000;
+    }
+
+    .modal.modal-isloading {
+        border: none;
+        padding: 0;
+        border-radius: 10px;
+        width: 50px;
+        height: 50px;
+    }
+
+        /* NOTE: #2 if using an _animated_ gif IE7 requires it to be set on .modal-content not .modal otherwise the scrollbars will flicker */
+        .modal.modal-isloading .modal-content {
+            background: #fff url(../images/loader.html) center center no-repeat;
+        }
+
+        .modal.modal-isloading .modal-close {
+            display: none;
+        }
+        
+.kitchen-sink{
+    width: 400px;
+}
+.kitchen-sink .inner{
+  padding: 25px 30px 32px;
+}
+.kitchen-sink .inner1{
+  padding: 28px 30px;
+  background: #f6f6f6;
+  border-radius: 0 0 10px 10px;
+}
+.border_bot2{background:url("../images/stripe1.jpg") 0 bottom repeat-x;}
+
+#kitchen-sink .create{background:url("../images/green_btn.jpg") 0 0 repeat-x #9db011;border-color: #8fa008;}
+#kitchen-sink .create:hover{background: #ffde00;border-color: #e4c500;color: #1b1b1b;}

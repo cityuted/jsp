@@ -1,0 +1,117 @@
+
+/* REQUIRED for core functionality */
+
+.responsive-tabs{padding-top: 20px;margin-bottom: 94px;}
+.fullwidth .responsive-tabs{margin-bottom: 32px;}
+.responsive-tabs__heading { display: none;}
+.responsive-tabs__list__item { display: block; cursor:pointer;float: left;font-size: 16px;color: #848484;}
+
+
+@media (max-width: 767px) {
+	.responsive-tabs__list { display: none;}
+	.responsive-tabs__heading { display: block; cursor: pointer; }
+	.responsive-tabs__panel--closed-accordion-only { display: none;}
+}
+
+@media (min-width: 768px) {
+	.responsive-tabs__panel--closed-accordion-only { display: block !important;}
+}
+
+/* END - Required for core functionality */
+
+
+/* OPTIONAL - Basic Skin */
+
+.responsive-tabs-wrapper { 
+	clear: both;
+	zoom: 1; 
+}
+.responsive-tabs-wrapper:before,
+.responsive-tabs-wrapper:after {
+    content: "";
+    display: table;
+} 
+.responsive-tabs-wrapper:after {
+    clear: both;
+}
+
+.responsive-tabs__heading:focus,
+.responsive-tabs__list__item:focus {}
+
+.responsive-tabs__heading--active:focus,
+.responsive-tabs__list__item--active:focus { outline: none !important;}
+
+.responsive-tabs__list {overflow: hidden;}
+.responsive-tabs__list__item { background: #fff; padding: 10px 19px 7px; border-radius: 10px 10px 0 0;border: 1px solid #e2e2e2;margin-right: 2px;}
+.elements_tabs .responsive-tabs__list__item{
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.responsive-tabs__list__item:hover {background: #efefef }
+.responsive-tabs__list__item--active, 
+.responsive-tabs__list__item--active:hover {  background: #f6f6f6; border-bottom-color: #f6f6f6;color: #1b1b1b;}
+
+.responsive-tabs__panel {
+  background: #f6f6f6;
+  margin-top: -1px;
+  border: 1px solid #e2e2e2;
+  border-radius: 0 10px 10px 10px;
+  font-size: 14px;
+  color: #1b1b1b;
+}
+.responsive-tabs__panel .inner{
+  padding: 13px 20px 23px 19px;
+}
+.responsive-tabs__panel .inner1{
+  padding: 19px 20px 24px 19px;
+}
+.responsive-tabs__panel p{
+  margin-bottom: 11px;
+}
+@media (max-width: 767px) {
+	.responsive-tabs__heading { 
+		padding: 11px 10px 12px 18px; border-radius: 5px; border: 1px solid #e2e2e2;
+		background: #fff;
+		position: relative;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #848484;
+    letter-spacing: 0;
+    margin-bottom: 2px;
+	}
+
+	.responsive-tabs__heading:after {
+		content:"";
+		display: block;
+		position: absolute;
+		right: 20px;
+		top: 40%;
+		width: 13px; 
+		height: 8px;
+    background: url('../images/accordion_arrows.png') 0 -9px no-repeat;
+	}
+	.responsive-tabs h2{
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: normal;
+  }
+  .responsive-tabs__heading:hover,
+	.responsive-tabs__heading--active:hover { background-color: #f6f6f6;color: #1b1b1b;}
+	.responsive-tabs__heading--active { background: #f6f6f6;color: #1b1b1b;}
+	.responsive-tabs__heading--active:after {
+    background-position: 0 0;
+	 }
+   .responsive-tabs__heading--active{
+    border-radius: 4px 4px 0 0;
+    border-bottom-color: transparent;
+    margin-bottom: 0;
+   }
+   .responsive-tabs__panel{margin-top: -2px;border-radius: 0 0 4px 4px;border-top-color: transparent;margin-bottom: 2px;}
+   .responsive-tabs__panel .inner{padding-top: 10px;}
+}
+
+/* END - Optional - Basic Skin */
+
+.responsive-tabs.fw_page{
+  margin-bottom: 31px;
+}
