@@ -51,32 +51,6 @@
             
         </article>
         <article class="grid_4">
-            <h3 class="ind">Categories</h3>
-            <ul class="categories sf-menu">
-                <li><a href="#">Toys on SALE</a></li>
-                <li><a href="#">Toys by Age</a></li>
-                <li><a href="#">Animals &amp; Wildfire</a></li>
-                <li><a href="#">Arts, Crafts &amp; Music</a></li>
-                <li><a href="#">Bath Toys</a></li>
-                <li><a href="#">Books</a>
-                    <ul>
-                        <li><a href="#">Plastic</a></li>
-                        <li><a href="#">Rubber</a></li>
-                        <li><a href="#">Soft</a></li>
-                        <li><a href="#">Wooden</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Building Blocks</a></li>
-                <li><a href="#">Classic &amp; Retro</a></li>
-                <li><a href="#">Cool Vehicles</a></li>
-                <li><a href="#">Games</a></li>
-                <li><a href="#">Outdoor Toys</a></li>
-                <li class="last_item"><a href="#">Party Favors</a></li>
-            </ul>
-            <a href="#" class="link1">View All</a>
-            <div class="banner5">
-                <a href="#"><img src="images/banner3.png" alt=""><span><img src="images/banner3_h.png" alt=""></span></a>
-            </div>
             <div class="top_rated_block p_top_zero">
                 <h3 class="blue bg_none">Recently Viewed</h3>
                 <ul class="ext_list">

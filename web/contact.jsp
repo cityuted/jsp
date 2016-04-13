@@ -1,4 +1,7 @@
 <jsp:include page="header.jsp"/>
+<script>
+  document.getElementById("licontact").className += " current";
+</script>
   <!--==============================content================================-->
       <section id="content" class="cont_pad">
         <div class="breadcrump">

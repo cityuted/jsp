@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import bean.Cart;
+import bean.*;
 import db.*;
 
 /**
@@ -26,29 +26,52 @@ public class Checkout extends HttpServlet {
         request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
 
-    public Boolean checkout(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user.getUserID() != 0) {
-            bean.Cart cart = (bean.Cart) session.getAttribute("cart");
-            userDB udb = new userDB();
-            if (udb.deduceCashpoint(String.valueOf(user.getUserID()), cart.getTotal())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("stepString", getStep("0",request));
         processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("stepString", getStep(request.getParameter("step"),request));
         processRequest(request, response);
     }
 
+    public String getStep(String stepString, HttpServletRequest request) {
+        CheckoutStatus checkoutStatus = (CheckoutStatus)request.getSession().getAttribute("checkoutStatus");
+        User user = (User)request.getSession().getAttribute("user");
+        int step = Integer.parseInt(stepString);
+        switch (step) {
+            case 1:
+                if(request.getParameter("type").equals("Account owner")){
+                    checkoutStatus.setName(user.getUserName());
+                }else{
+                    checkoutStatus.setName(request.getParameter("firstName")+request.getParameter("lastName"));
+                    checkoutStatus.setName(request.getParameter("tel"));
+                }
+                return Template.getCheckoutStep2();
+            case 2:
+                if(request.getParameter("type").equals("Account Address")){
+                    checkoutStatus.setTel(user.getUserPhone());
+                }else{
+                    checkoutStatus.setTel(request.getParameter("newAddress"));
+                }
+                return Template.getCheckoutStep3();
+            case 3:
+                checkoutStatus.setDelivery(request.getParameter("type"));
+                return Template.getCheckoutStep4();
+            case 4:
+                if(request.getParameter("type").equals("Cash Point")){
+                    
+                }else{
+                    checkoutStatus.setPayment("Credit Card");
+                }
+                return Template.getCheckoutStep5();
+            default:
+                return Template.getCheckoutStep1();
+        }
+    }
 }

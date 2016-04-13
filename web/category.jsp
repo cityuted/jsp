@@ -1,4 +1,7 @@
 <jsp:include page="header.jsp"/>
+<script>
+  document.getElementById("lishop").className += " current";
+</script>
 <%@ page import="bean.Toy" %>
 <%@ page import="bean.Template" %>
 <jsp:useBean id="toys" class="bean.Toys" scope="request"/>
@@ -56,9 +59,9 @@
             </div>
             <ul id="category" class="grid">
                 <%
-                    for(int i=0;i<toys.getToys().size();i++){
+                    for (int i = 0; i < toys.getToys().size(); i++) {
                         Toy toy = toys.getToys().get(i);
-                        out.print(Template.getToyTemplate(toy.getToyIcon(),toy.getToyName(),String.valueOf(toy.getCashpoint()),String.valueOf(toy.getToyID())));
+                        out.print(Template.getToyTemplate(toy.getToyIcon(), toy.getToyName(), String.valueOf(toy.getCashpoint()), String.valueOf(toy.getToyID())));
                     }
                 %>
 
@@ -76,72 +79,6 @@
             </div>
         </article>
         <article class="grid_4">
-            <h3 class="ind">Categories</h3>
-            <ul class="categories sf-menu">
-                <li><a href="#">Toys on SALE</a></li>
-                <li><a href="#">Toys by Age</a></li>
-                <li><a href="#">Animals &amp; Wildfire</a></li>
-                <li><a href="#">Arts, Crafts &amp; Music</a></li>
-                <li><a href="#">Bath Toys</a></li>
-                <li><a href="#">Books</a>
-                    <ul>
-                        <li><a href="#">Plastic</a></li>
-                        <li><a href="#">Rubber</a></li>
-                        <li><a href="#">Soft</a></li>
-                        <li><a href="#">Wooden</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Building Blocks</a></li>
-                <li><a href="#">Classic &amp; Retro</a></li>
-                <li><a href="#">Cool Vehicles</a></li>
-                <li><a href="#">Games</a></li>
-                <li><a href="#">Outdoor Toys</a></li>
-                <li class="last_item"><a href="#">Party Favors</a></li>
-            </ul>
-            <a href="#" class="link1">View All</a>
-            <div class="price_filter">
-                <h3 class="green ind">Filter by Price</h3>
-                <form action="#" method="post">
-                    <div class="sliderCont">
-                        <div id="price_slider"></div>
-                    </div>
-                    <div class="formCost">
-                        <span>Filter</span>
-                        <label>
-                            Price:
-                            $<input type="text" id="minCost" value="0"/>
-                            &mdash;
-                            $<input type="text" id="maxCost" value="1999"/>
-                        </label>
-                    </div>
-                </form>
-            </div>
-            <div class="featured_product">
-                <h3 class="pink bg_none">Top rated products</h3>
-                <ul class="ext_list">
-                    <li>
-                        <figure><a href="#"><img src="images/f_product1.jpg" alt=""></a></figure>
-                        <div>
-                            <h4><a href="#">Colorful toy truck</a></h4>
-                            <div class="price">$21</div>
-                        </div>
-                    </li>
-                    <li>
-                        <figure><a href="#"><img src="images/f_product2.jpg" alt=""></a></figure>
-                        <div>
-                            <h4><a href="#">Fancy giraffe toy</a></h4>
-                            <div class="price">$8</div>
-                        </div>
-                    </li>
-                    <li class="bg_none">
-                        <figure><a href="#"><img src="images/f_product3.jpg" alt=""></a></figure>
-                        <div>
-                            <h4><a href="#">Children soft toy</a></h4>
-                            <div class="price">$15</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
             <div class="tags">
                 <h3 class="blue ind">Product Tags</h3>
                 <ul class="tags">
@@ -172,6 +109,24 @@
                     </li>
                 </ul>
             </div>
+            <div class="price_filter">
+                <h3 class="green ind">Filter by Price</h3>
+                <form action="#" method="post">
+                    <div class="sliderCont">
+                        <div id="price_slider"></div>
+                    </div>
+                    <div class="formCost">
+                        <span>Filter</span>
+                        <label>
+                            Price:
+                            $<input type="text" id="minCost" value="0"/>
+                            &mdash;
+                            $<input type="text" id="maxCost" value="1999"/>
+                        </label>
+                    </div>
+                </form>
+            </div>
+
         </article>
     </div>
 </section>

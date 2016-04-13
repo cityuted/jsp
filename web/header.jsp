@@ -7,7 +7,7 @@
 <html>
     <head>
 
-        <title><jsp:getProperty name="user" property="userName"/></title>
+        <title>Online Toy Shopping</title>
 
         <meta charset="utf-8">
 
@@ -44,7 +44,23 @@
 
             <header>
 
+                <div class="header_top">
+                    <div class="container">
 
+                        <ul class="block_headerlinks">
+                            <%
+                                if(user.getUserID()==0){
+                                    out.print("<li><a href=\"/toy/Register\">Register</a></li>\n" +
+"                            <li><a href=\"/toy/Login\" class=\"modal-toggle-1\">Login</a></li>");
+                                }else{
+                                    out.print("<li><a href=\"/toy/MyAccount\" class=\"modal-toggle-1\">My Account</a></li><li><a href=\"/toy/Logout\" class=\"modal-toggle-1\">Logout</a></li>");
+                                }
+                            %>
+
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
 
                 <div class="container">
 
@@ -70,15 +86,15 @@
 
                                     <ul class="cart_list">
 
-                                       <%
-                                           for(int i=0;i<cart.getToys().size();i++){
-                                               Toy toy = cart.getToys().get(i);
-                                               out.println(Template.cartInHeader(toy.getToyIcon(), toy.getToyName(), toy.getCashpoint(), toy.getQTY()));
-                                           }
-                                       
-                                       %>
+                                        <%
+                                            for (int i = 0; i < cart.getToys().size(); i++) {
+                                                Toy toy = cart.getToys().get(i);
+                                                out.println(Template.cartInHeader(toy.getToyIcon(), toy.getToyName(), toy.getCashpoint(), toy.getQTY()));
+                                            }
 
-                            
+                                        %>
+
+
 
                                     </ul>
 
@@ -89,8 +105,12 @@
                                     </div>
 
                                     <div class="cart_buttons">
-
-                                        <a href="/toy/Checkout" class="checkout">Checkout</a><a href="/toy/Cart" class="view_cart">View Cart</a>
+                                        <%
+                                            if (cart.getSize() > 0) {
+                                                out.println("<a href=\"/toy/Checkout\" class=\"checkout\" >Checkout</a>");
+                                            }
+                                        %>
+                                        <a href="/toy/Cart" class="view_cart">View Cart</a>
 
                                     </div>
 
@@ -116,57 +136,36 @@
 
                     <ul class="sf-menu">
 
-                        <li class="first_item current"><a href="/toy/">Home</a>
+                        <li id="lihome" class="first_item"><a href="/toy/">Home</a>
 
 
 
                         </li>
 
-                        <li><a href="/toy/Category">Shop</a>
+                        <li id="lishop"><a href="/toy/Category">Shop</a>
 
                             <ul>
 
                                 <li class="first_item"><a href="/toy/Category">Toys on SALE</a></li>
 
-                                <li><a href="/toy/Category?type=age">Toys by Age</a>
+                                <li><a>Toys by Age</a>
 
                                     <ul>
+                                        
+                                        <li><a href="/toy/Category?type=age&age=3">Aged 1-3</a></li>
 
-                                        <li class="first_item"><a href="category.html">Toys on SALE</a></li>
+                                        <li><a href="/toy/Category?type=age&age=6">Aged 3-6</a></li>
 
-                                        <li><a href="category.html">Toys by Age</a></li>
-
-                                        <li><a href="category.html">Toys for Boys</a></li>
-
-                                        <li><a href="category.html">Toys for Girls</a></li>
-
-                                        <li class="last_item"><a href="category.html">Neutral Toys</a></li>
+                                        <li><a href="/toy/Category?type=age&age=10">Aged 7-10</a></li>
 
                                     </ul>
 
                                 </li>
 
-                                <li><a href="category.html">Toys for Boys</a>
+                                <li><a href="/toy/Category?tag=boys">Toys for Boys</a></li>
 
-                                    <ul>
+                                <li><a href="/toy/Category?tag=girls">Toys for Girls</a></li>
 
-                                        <li class="first_item"><a href="category.html">Toys on SALE</a></li>
-
-                                        <li><a href="category.html">Toys by Age</a></li>
-
-                                        <li><a href="category.html">Toys for Boys</a></li>
-
-                                        <li><a href="category.html">Toys for Girls</a></li>
-
-                                        <li class="last_item"><a href="category.html">Neutral Toys</a></li>
-
-                                    </ul>
-
-                                </li>
-
-                                <li><a href="category.html">Toys for Girls</a></li>
-
-                                <li class="last_item"><a href="category.html">Neutral Toys</a></li>
 
                             </ul>
 
@@ -174,11 +173,9 @@
 
 
 
-                        <li><a href="/toy/Contact">Contact</a></li>
+                        <li id="licontact"><a href="/toy/Contact">Contact</a></li>
 
-                        <li><a href="/toy/Register">Register</a></li>
 
-                        <li><a href="/toy/Login">Login</a></li>
 
                     </ul>
 
@@ -190,8 +187,8 @@
                                         this.value = 'Search'" onFocus="if (this.value == 'Search')
                                                     this.value = ''">
 
-                            
-                        <a href="javascript:;" onclick="get_form(this).submit(); return false" ></a>
+
+                            <a href="javascript:;" onclick="get_form(this).submit(); return false" ></a>
                         </label>
 
                     </form>
