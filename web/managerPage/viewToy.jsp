@@ -72,7 +72,7 @@
 
                         <div class="col-sm-6 " >
                             <img class="img-responsive"  src="data:image/jpeg;base64,<%=base64DataString%>" alt="Photo">
-                            =
+                            
                         </div>
                         
                         <br/>
