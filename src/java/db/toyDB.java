@@ -43,7 +43,7 @@ public class toyDB extends GeneralDB {
                 tempToy.setCashpoint(rs.getInt("CASHPOINT"));
                 tempToy.setQTY(rs.getInt("QTY"));
                 tempToy.setDiscount(rs.getInt("DISCOUNT"));
-                tempToy.setTypeID(rs.getInt("TYPEID"));
+             
                 tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
 
                 tempToyList.add(tempToy);
@@ -56,7 +56,7 @@ public class toyDB extends GeneralDB {
             return null;
         }
     }
-    
+
     public ArrayList<Toy> listSecondHandToy() {
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
@@ -73,7 +73,7 @@ public class toyDB extends GeneralDB {
                 tempToy.setCashpoint(rs.getInt("CASHPOINT"));
                 tempToy.setQTY(rs.getInt("QTY"));
                 tempToy.setDiscount(rs.getInt("DISCOUNT"));
-                tempToy.setTypeID(rs.getInt("TYPEID"));
+               // tempToy.setTypeID(rs.getInt("TYPEID"));
                 tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
 
                 tempToyList.add(tempToy);
@@ -86,9 +86,8 @@ public class toyDB extends GeneralDB {
             return null;
         }
     }
-    
-    public ArrayList<Toy> listToyByCategory(int typeID)
-    {
+
+    public ArrayList<Toy> listToyByCategory(int typeID) {
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM TOY WHERE TYPEID = ?");
@@ -106,7 +105,7 @@ public class toyDB extends GeneralDB {
                 tempToy.setCashpoint(rs.getInt("CASHPOINT"));
                 tempToy.setQTY(rs.getInt("QTY"));
                 tempToy.setDiscount(rs.getInt("DISCOUNT"));
-                tempToy.setTypeID(rs.getInt("TYPEID"));
+              //  tempToy.setTypeID(rs.getInt("TYPEID"));
                 tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
 
                 tempToyList.add(tempToy);
@@ -121,9 +120,8 @@ public class toyDB extends GeneralDB {
             return null;
         }
     }
-    
-    public ArrayList<Toy> listSecondHandToyByCategory(int typeID)
-    {
+
+    public ArrayList<Toy> listSecondHandToyByCategory(int typeID) {
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM TOY WHERE SECONDHANDID IS NOT NULL AND TYPEID = ?");
@@ -141,7 +139,7 @@ public class toyDB extends GeneralDB {
                 tempToy.setCashpoint(rs.getInt("CASHPOINT"));
                 tempToy.setQTY(rs.getInt("QTY"));
                 tempToy.setDiscount(rs.getInt("DISCOUNT"));
-                tempToy.setTypeID(rs.getInt("TYPEID"));
+               // tempToy.setTypeID(rs.getInt("TYPEID"));
                 tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
 
                 tempToyList.add(tempToy);
@@ -156,15 +154,14 @@ public class toyDB extends GeneralDB {
             return null;
         }
     }
-    
+
     public ArrayList<Toy> searchToy(String toyName) {
 
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             Statement stmt = conn.createStatement();
-            ResultSet rs =stmt.executeQuery("SELECT * FROM TOY WHERE TOYNAME LIKE '%"+toyName+"%'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TOY WHERE TOYNAME LIKE '%" + toyName + "%'");
 
-            
             ArrayList<Toy> tempToyList = new ArrayList();
             while (rs.next()) {
 
@@ -176,7 +173,7 @@ public class toyDB extends GeneralDB {
                 tempToy.setCashpoint(rs.getInt("CASHPOINT"));
                 tempToy.setQTY(rs.getInt("QTY"));
                 tempToy.setDiscount(rs.getInt("DISCOUNT"));
-                tempToy.setTypeID(rs.getInt("TYPEID"));
+              //  tempToy.setTypeID(rs.getInt("TYPEID"));
                 tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
                 tempToyList.add(tempToy);
             }
@@ -191,15 +188,14 @@ public class toyDB extends GeneralDB {
         }
 
     }
-    
+
     public Toy searchToyByID(String toyID) {
 
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             Statement stmt = conn.createStatement();
-            ResultSet rs =stmt.executeQuery("SELECT * FROM TOY WHERE TOYID = "+toyID);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TOY WHERE TOYID = " + toyID);
 
-            
             ArrayList<Toy> tempToyList = new ArrayList();
             while (rs.next()) {
 
@@ -211,7 +207,7 @@ public class toyDB extends GeneralDB {
                 tempToy.setCashpoint(rs.getInt("CASHPOINT"));
                 tempToy.setQTY(rs.getInt("QTY"));
                 tempToy.setDiscount(rs.getInt("DISCOUNT"));
-                tempToy.setTypeID(rs.getInt("TYPEID"));
+              //  tempToy.setTypeID(rs.getInt("TYPEID"));
                 tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
                 tempToyList.add(tempToy);
                 return tempToy;
@@ -226,15 +222,14 @@ public class toyDB extends GeneralDB {
         }
         return null;
     }
-    
+
     public ArrayList<Toy> searchSecondHandToy(String toyName) {
 
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             Statement stmt = conn.createStatement();
-            ResultSet rs =stmt.executeQuery("SELECT * FROM TOY WHERE SECONDHANDID IS NOT NULL AND TOYNAME LIKE '%"+toyName+"%'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TOY WHERE SECONDHANDID IS NOT NULL AND TOYNAME LIKE '%" + toyName + "%'");
 
-            
             ArrayList<Toy> tempToyList = new ArrayList();
             while (rs.next()) {
 
@@ -246,7 +241,7 @@ public class toyDB extends GeneralDB {
                 tempToy.setCashpoint(rs.getInt("CASHPOINT"));
                 tempToy.setQTY(rs.getInt("QTY"));
                 tempToy.setDiscount(rs.getInt("DISCOUNT"));
-                tempToy.setTypeID(rs.getInt("TYPEID"));
+               // tempToy.setTypeID(rs.getInt("TYPEID"));
                 tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
                 tempToyList.add(tempToy);
             }
@@ -261,16 +256,15 @@ public class toyDB extends GeneralDB {
         }
 
     }
-    
-    public ArrayList<Toy> searchToyByCategory(String toyName,int typeID) {
+
+    public ArrayList<Toy> searchToyByCategory(String toyName, int typeID) {
 
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
-            
+
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM TOY WHERE TOYNAME LIKE '%"+toyName+"%' AND TYPEID = '"+typeID+"'");
-           
-            
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TOY WHERE TOYNAME LIKE '%" + toyName + "%' AND TYPEID = '" + typeID + "'");
+
             ArrayList<Toy> tempToyList = new ArrayList();
             while (rs.next()) {
 
@@ -282,7 +276,7 @@ public class toyDB extends GeneralDB {
                 tempToy.setCashpoint(rs.getInt("CASHPOINT"));
                 tempToy.setQTY(rs.getInt("QTY"));
                 tempToy.setDiscount(rs.getInt("DISCOUNT"));
-                tempToy.setTypeID(rs.getInt("TYPEID"));
+              //  tempToy.setTypeID(rs.getInt("TYPEID"));
                 tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
                 tempToyList.add(tempToy);
             }
@@ -297,16 +291,15 @@ public class toyDB extends GeneralDB {
         }
 
     }
-    
-    public ArrayList<Toy> searchSecondHandToyByCategory(String toyName,int typeID) {
+
+    public ArrayList<Toy> searchSecondHandToyByCategory(String toyName, int typeID) {
 
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
-            
+
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM TOY WHERE SECONDHANDID IS NOT NULL AND TOYNAME LIKE '%"+toyName+"%' AND TYPEID = '"+typeID+"'");
-           
-            
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TOY WHERE SECONDHANDID IS NOT NULL AND TOYNAME LIKE '%" + toyName + "%' AND TYPEID = '" + typeID + "'");
+
             ArrayList<Toy> tempToyList = new ArrayList();
             while (rs.next()) {
 
@@ -318,7 +311,7 @@ public class toyDB extends GeneralDB {
                 tempToy.setCashpoint(rs.getInt("CASHPOINT"));
                 tempToy.setQTY(rs.getInt("QTY"));
                 tempToy.setDiscount(rs.getInt("DISCOUNT"));
-                tempToy.setTypeID(rs.getInt("TYPEID"));
+              //  tempToy.setTypeID(rs.getInt("TYPEID"));
                 tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
                 tempToyList.add(tempToy);
             }
@@ -365,8 +358,8 @@ public class toyDB extends GeneralDB {
         }
 
     }
-    
-    public String createSecondHandToy(String toyName, String description, String toyIcon, int cashpoint, int qty, int discount, int typeID,int secondHandID) {
+
+    public String createSecondHandToy(String toyName, String description, String toyIcon, int cashpoint, int qty, int discount, int typeID, int secondHandID) {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
@@ -400,23 +393,24 @@ public class toyDB extends GeneralDB {
 
     }
 
-    public boolean updateToy(int toyID, String toyIcon,int cashpoint,int QTY, int discount) {
+    public boolean updateToy(int toyID, String toyIcon, int cashpoint, int QTY, int discount) {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE TOY SET TOYICON=?,CASHPOINT=?,QTY=?,DISCOUNT=? WHERE TOYID = ?" );
-                   
-            if(toyIcon.equals(""))
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE TOY SET TOYICON=?,CASHPOINT=?,QTY=?,DISCOUNT=? WHERE TOYID = ?");
+
+            if (toyIcon.equals("")) {
                 toyIcon = "";
-      
+            }
+
             pstmt.setString(1, toyIcon);
             pstmt.setInt(2, cashpoint);
             pstmt.setInt(3, QTY);
             pstmt.setInt(4, discount);
             pstmt.setInt(5, toyID);
             pstmt.executeUpdate();
-         
+
             conn.commit();
             pstmt.close();
             conn.close();
@@ -432,21 +426,18 @@ public class toyDB extends GeneralDB {
         }
 
     }
-    
+
     public boolean updateToyByCategory(int typeID, int discount) {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("UPDATE TOY SET DISCOUNT = ? WHERE TYPEID = ?");
-          
-           
-      
-           
+
             pstmt.setInt(1, discount);
             pstmt.setInt(2, typeID);
             pstmt.executeUpdate();
-         
+
             conn.commit();
             pstmt.close();
             conn.close();
@@ -488,5 +479,143 @@ public class toyDB extends GeneralDB {
             return false;
         }
 
+    }
+
+    public boolean createToy(String toyName, String description, String toyIcon, int cashpoint, int qty, int discount) {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO TOY(TOYNAME,DESCRIPTION,TOYICON,CASHPOINT,QTY,DISCOUNT)"
+                    + "VALUES(?,?,?,?,?,?)");
+            pstmt.setString(1, toyName);
+            pstmt.setString(2, description);
+            pstmt.setString(3, toyIcon);
+            pstmt.setInt(4, cashpoint);
+            pstmt.setInt(5, qty);
+            pstmt.setInt(6, discount);
+
+            pstmt.executeUpdate();
+            // }
+            //stmnt.executeQuery()
+            conn.commit();
+            pstmt.close();
+            conn.close();
+
+            return true;
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+
+            }
+            return false;
+        }
+
+    }
+
+    public boolean updateToySecondHand(int toyID, int secondHandID) {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE TOY SET SECONDHANDID = ? WHERE TOYID = ?");
+            if (secondHandID == -1) {
+                pstmt.setNull(1, java.sql.Types.INTEGER);
+            } else {
+                pstmt.setInt(1, secondHandID);
+            }
+
+            pstmt.setInt(2, toyID);
+            pstmt.executeUpdate();
+
+            conn.commit();
+            pstmt.close();
+            conn.close();
+
+            return true;
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+
+            }
+            return false;
+        }
+
+    }
+
+    public boolean updateToy(int toyID, String toyName, String description, String toyIcon, int cashpoint, int QTY, int discount) {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE TOY SET TOYNAME = ?,DESCRIPTION = ?,TOYICON=?,CASHPOINT=?,QTY=?,DISCOUNT=? WHERE TOYID = ?");
+
+            if (toyIcon.equals("")) {
+                toyIcon = "";
+            }
+            pstmt.setString(1, toyName);
+            pstmt.setString(2, description);
+            pstmt.setString(3, toyIcon);
+
+            pstmt.setInt(4, cashpoint);
+            pstmt.setInt(5, QTY);
+            pstmt.setInt(6, discount);
+            pstmt.setInt(7, toyID);
+            pstmt.executeUpdate();
+
+            conn.commit();
+            pstmt.close();
+            conn.close();
+
+            return true;
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+
+            }
+            return false;
+        }
+
+    }
+    
+     public Toy listToyByID(int toyID) {
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM TOY WHERE TOYID = ?");
+            pstmt.setInt(1, toyID);
+            ArrayList<Toy> tempToyList = new ArrayList();
+            Toy tempToy = new Toy();
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+
+                
+                tempToy.setToyID(rs.getInt("TOYID"));
+                tempToy.setToyName(rs.getString("TOYNAME"));
+                tempToy.setDescription(rs.getString("DESCRIPTION"));
+                tempToy.setToyIcon(rs.getString("TOYICON"));
+                tempToy.setCashpoint(rs.getInt("CASHPOINT"));
+                tempToy.setQTY(rs.getInt("QTY"));
+                tempToy.setDiscount(rs.getInt("DISCOUNT"));
+               //tempToy.setIcon(rs.getBlob("TOYICON"));
+                tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
+
+                tempToyList.add(tempToy);
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempToy;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+     
+      public int getNextAvailableID()
+    {
+        return getAutoIncrement("toy");
     }
 }

@@ -44,6 +44,7 @@ public class doCreateToy extends HttpServlet {
     private int qty;
     private int discount;
     private String imgString = "";
+    private String base64String ="";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -99,6 +100,11 @@ public class doCreateToy extends HttpServlet {
                         }
                         if (item.getFieldName().equals("discount")) {
                             discount = Integer.parseInt(item.getString());
+                        }
+                        
+                        if(item.getFieldName().equals("uploadString"))
+                        {
+                            base64String = item.getString();
                         }
                         //if(item.getFieldName().equals("desc"))
                         // desc= item.getString();
@@ -174,6 +180,8 @@ public class doCreateToy extends HttpServlet {
 //           int qty = Integer.parseInt(request.getParameter("qty"));
 //           int discount = Integer.parseInt(request.getParameter("discount"));
             //toydb.updateToy(toyID, toyName,description, toyIcon, cashpoint, qty, discount);
+            if(!base64String.equals(""))
+            imgString = base64String;
             toydb.createToy(toyName, description, imgString, cashpoint, qty, discount);
             //for(String c : category)
             //   out.println(c);

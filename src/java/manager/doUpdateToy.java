@@ -49,6 +49,7 @@ public class doUpdateToy extends HttpServlet {
     private int qty;
     private int discount;
     private String imgString="";
+    private String base64String ="";
 
     //private  String imageDataString = "";
 
@@ -108,6 +109,10 @@ public class doUpdateToy extends HttpServlet {
                         if (item.getFieldName().equals("discount")) {
                             discount = Integer.parseInt(item.getString());
                         }
+                        if(item.getFieldName().equals("uploadString"))
+                        {
+                            base64String = item.getString();
+                        }
                         //if(item.getFieldName().equals("desc"))
                         // desc= item.getString();
                     }
@@ -139,6 +144,7 @@ public class doUpdateToy extends HttpServlet {
 			 * Converting Image byte array into Base64 String 
                  */
                  String imageDataString = encodeImage(imageData);
+                 
                 request.setAttribute("test", imageDataString);
                 /*
 			 * Converting a Base64 String into Image byte array 
@@ -171,6 +177,8 @@ public class doUpdateToy extends HttpServlet {
             toyDB toydb = new toyDB();
             // out.println("s");
             //out.println(String.format("%s,%s,%s,%s,%s,%s,%s", toyID, toyName, description, imageDataString, cashpoint, qty, discount));
+            if(!base64String.equals(""))
+            imgString = base64String;
             toydb.updateToy(toyID, toyName, description, imgString, cashpoint, qty, discount);
            
             //for(String c : category)
@@ -199,7 +207,7 @@ public class doUpdateToy extends HttpServlet {
                 toydb.updateToySecondHand(toyID, -1);
 
             }
-           // out.println(imgString);
+            //out.println(imgString);
             response.sendRedirect("doSearchToy");
         } catch (Exception e) {
             out.println(e.getMessage());
@@ -208,9 +216,12 @@ public class doUpdateToy extends HttpServlet {
             out.close();
         }
     }
+    
+    
 
     public  String encodeImage(byte[] imageByteArray) {
         return Base64.encodeBase64URLSafeString(imageByteArray);
+       
     }
 
     /**

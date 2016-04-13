@@ -50,9 +50,12 @@ public class doSearchToy extends HttpServlet {
             toyCategoryDB toyCatdb = new toyCategoryDB();
             ArrayList<Category> categoryList = categorydb.listToyCategory();
             String categoryInfo ="";
+            out.println((toylist==null)+"55");
             for(Toy t : toylist)
-            {                 
+            {       
+                
                     ArrayList<ToyCategory> toyCatList = toyCatdb.listToyCategoryByToyID(t.getToyID());
+                    
                     for(ToyCategory tc : toyCatList)
                     {
                         Category c = categorydb.searchCategory(tc.getCategoryID());
@@ -62,14 +65,20 @@ public class doSearchToy extends HttpServlet {
                     session.setAttribute(t.getToyID()+".categoryInfo", categoryInfo);
                     categoryInfo="";
             }
+            
             session.setAttribute("toyList", toylist);
+            
             
             response.sendRedirect("managerPage/adminPage.jsp?page=1");
             
 //            RequestDispatcher dispatcher
 //                    = request.getRequestDispatcher("/managerPage/adminPage.jsp");
 //            dispatcher.forward(request, response);
-        } finally {
+        } 
+        catch(Exception e )
+        {
+            out.println(e.getMessage());
+        }finally {
             out.close();
         }
     }

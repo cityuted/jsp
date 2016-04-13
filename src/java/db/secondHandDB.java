@@ -248,4 +248,63 @@ public class secondHandDB extends GeneralDB {
         }
     }
   
+     public SecondHand searchSecondHand(int ID) {
+
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM SECONDHAND WHERE ID = ?");
+            pstmt.setInt(1, ID);
+            ResultSet rs = pstmt.executeQuery();
+          //  ArrayList<SecondHand> tempSecondHandList = new ArrayList();
+           SecondHand tempSecondHand = new SecondHand();
+            while (rs.next()) {
+
+               
+                tempSecondHand.setID(rs.getInt("ID"));
+                tempSecondHand.setCustID(rs.getInt("CUSTID"));
+                tempSecondHand.setName(rs.getString("NAME"));
+                tempSecondHand.setCashpoint(rs.getInt("CASHPOINT"));
+                tempSecondHand.setApproval(rs.getString("APPROVAL"));
+                //tempSecondHand.setToyID(rs.getInt("TOYID"));
+
+               // tempSecondHandList.add(tempSecondHand);
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempSecondHand;
+
+        } catch (SQLException ex) {
+            return null;
+        }
+
+    }
+     
+     public ArrayList<SecondHand> listApprovedSecondHand() {
+        
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM SECONDHAND WHERE APPROVAL ='APPROVED'");
+            ArrayList<SecondHand> tempSecondHandList = new ArrayList();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                SecondHand tempSecondHand = new SecondHand();
+                tempSecondHand.setID(rs.getInt("ID"));
+                tempSecondHand.setCustID(rs.getInt("CUSTID"));
+                tempSecondHand.setName(rs.getString("NAME"));
+                tempSecondHand.setCashpoint(rs.getInt("CASHPOINT"));
+                tempSecondHand.setApproval(rs.getString("APPROVAL"));
+                //tempSecondHand.setToyID(rs.getInt("TOYID"));
+
+                tempSecondHandList.add(tempSecondHand);
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempSecondHandList;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
 }

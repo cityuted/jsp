@@ -245,4 +245,37 @@ public class userDB extends GeneralDB {
         }
 
     }
+    
+     public User searchUserByID(int userID) {
+
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM USER WHERE USERID = ?");
+            pstmt.setInt(1, userID);
+           
+            ResultSet rs = pstmt.executeQuery();
+            //while(rs.next() && rs!=null)
+            rs.next();
+            //{
+            User tempUser = new User();
+            tempUser.setUserID(rs.getInt("UserID"));
+            tempUser.setUserName(rs.getString("UserName"));
+            tempUser.setUserSex(rs.getString("UserSex"));
+            tempUser.setLoginName(rs.getString("LoginName"));
+            tempUser.setPassword(rs.getString("Password"));
+            tempUser.setUserAddress(rs.getString("UserAddress"));
+            tempUser.setUserPhone(rs.getString("UserPhone"));
+            tempUser.setEmail(rs.getString("Email"));
+            tempUser.setCashpoint(rs.getInt("Cashpoint"));
+            tempUser.setTypeID(rs.getInt("TypeID"));
+            //return "1";
+            return tempUser;
+            // }
+            //stmnt.executeQuery()
+
+        } catch (SQLException ex) {
+            return null;
+        }
+
+    } 
 }

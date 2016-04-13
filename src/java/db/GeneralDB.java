@@ -8,6 +8,7 @@ package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,4 +105,35 @@ public class GeneralDB {
             return false;
         }
     }
+    
+    public int getAutoIncrement(String tableName) {
+        int index = 0;
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("SHOW TABLE STATUS WHERE `Name` = ?");
+            pstmt.setString(1, tableName);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            index = rs.getInt("Auto_increment");
+            // }
+            //stmnt.executeQuery()
+            conn.commit();
+            pstmt.close();
+            conn.close();
+
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+
+            }
+
+        }
+        return index;
+
+    }
+    
+    
 }
