@@ -18,6 +18,10 @@ public class Cart {
 
     }
 
+    public void clear(){
+        toys.clear();
+    }
+    
     public void addToy(Toy toy) {
         toys.add(toy);
     }

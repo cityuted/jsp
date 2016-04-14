@@ -22,7 +22,7 @@
                     </tr>
                     <%                        for (int i = 0; i < cart.getToys().size(); i++) {
                             Toy toy = cart.getToys().get(i);
-                            out.println(Template.getCart(toy.getToyIcon(), toy.getToyName(), toy.getCashpoint(), toy.getQTY(), toy.getToyID()));
+                            out.println(Template.getCart(toy.encodedImage(), toy.getToyName(), toy.getCashpoint(), toy.getQTY(), toy.getToyID()));
                         }
 
                     %>

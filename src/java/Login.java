@@ -33,8 +33,16 @@ public class Login extends HttpServlet {
         userDB ud = new userDB();
         String loginName = (String) request.getParameter("loginName");
         String password = (String) request.getParameter("password");
-
-        if (loginName != null && password != null) {
+        String Error="";
+        if (loginName.isEmpty()){
+            Error+="Login Name is required.</br>";
+        }
+        if (password.isEmpty()){
+            Error+="Password is required.</br>";
+        }
+        
+        
+        if (!loginName.isEmpty() && !password.isEmpty() ) {
             User user = ud.searchUser(loginName, password);
             System.out.println("vertify");
             if (user != null) {
@@ -43,7 +51,12 @@ public class Login extends HttpServlet {
                 session.setAttribute("user", user);
                 request.getRequestDispatcher("/Home").forward(request, response);
                 return;
+            }else{
+                Error+="Login Name or Password is incorrect, Please try it again.</br>";
             }
+        }
+        if(!Error.equals("")){
+            request.setAttribute("alert", Template.getErrorAlert(Error,true));
         }
         request.getRequestDispatcher("login.jsp").forward(request, response);
         return;

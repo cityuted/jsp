@@ -65,6 +65,8 @@ public class Cart extends HttpServlet {
                 if (t != null) {
                     if(request.getParameter("qty")!=null){
                         t.setQTY(Integer.parseInt(request.getParameter("qty")));
+                    }else{
+                         t.setQTY(1);
                     }
                     cart.addToy(t);
                 }

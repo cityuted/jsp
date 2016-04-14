@@ -10,9 +10,66 @@ package bean;
  * @author ted
  */
 public class CheckoutStatus {
-    String addressee,name,tel,address,delivery,payment;
+    Boolean boolAddressee=false,boolAddress=false,boolDelivery=false,boolPayment=false;
+    String addressee,tel,address,delivery,payment,creditCardID,firstName,lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getCreditCardID() {
+        return creditCardID;
+    }
+
+    public void setCreditCardID(String creditCardID) {
+        this.creditCardID = creditCardID;
+    }
     public CheckoutStatus(){
         
+    }
+
+    public Boolean getBoolAddressee() {
+        return boolAddressee;
+    }
+
+    public void setBoolAddressee(Boolean boolAddressee) {
+        this.boolAddressee = boolAddressee;
+    }
+
+    public Boolean getBoolAddress() {
+        return boolAddress;
+    }
+
+    public void setBoolAddress(Boolean boolAddress) {
+        this.boolAddress = boolAddress;
+    }
+
+    public Boolean getBoolDelivery() {
+        return boolDelivery;
+    }
+
+    public void setBoolDelivery(Boolean boolDelivery) {
+        this.boolDelivery = boolDelivery;
+    }
+
+    public Boolean getBoolPayment() {
+        return boolPayment;
+    }
+
+    public void setBoolPayment(Boolean boolPayment) {
+        this.boolPayment = boolPayment;
     }
 
     public String getAddressee() {
@@ -21,14 +78,6 @@ public class CheckoutStatus {
 
     public void setAddressee(String addressee) {
         this.addressee = addressee;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getTel() {

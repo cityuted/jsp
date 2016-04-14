@@ -9,9 +9,7 @@
 <section id="content" class="cont_pad">
     <div class="breadcrump">
         <ul>
-            <li><a href="#">Home</a></li>
             <li><a href="#">Shop</a></li>
-            <li>Toys on SALE</li>
         </ul>
     </div>
     <div class="row">
@@ -61,7 +59,7 @@
                 <%
                     for (int i = 0; i < toys.getToys().size(); i++) {
                         Toy toy = toys.getToys().get(i);
-                        out.print(Template.getToyTemplate(toy.getToyIcon(), toy.getToyName(), String.valueOf(toy.getCashpoint()), String.valueOf(toy.getToyID())));
+                        out.print(Template.getToyTemplate(toy.encodedImage(), toy.getToyName(), String.valueOf(toy.getCashpoint()), String.valueOf(toy.getToyID())));
                     }
                 %>
 

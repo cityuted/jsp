@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="account_box">
-                    <div class="form_title">Newsletter Subscribe</div>
+                    <div class="form_title">Gender</div>
                     <div class="inner">
                         <ul class="radioblock last">
                             <li class="radio">Male</li>

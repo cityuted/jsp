@@ -5,16 +5,44 @@
  */
 package bean;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  *
  * @author ted
  */
 public class Template {
 
+    public static String getHref(String title, String link) {
+        return "<a href='" + link + "' >" + title + "</a>";
+    }
+
+    public static String getSuccessAlert(String msg) {
+        return "            <div class=\"alert alert-success\">\n"
+                + "                <strong>Success!</strong> " + msg + ".\n"
+                + "            </div>";
+    }
+
+    public static String getInfoAlert(String msg) {
+        return "            <div class=\"alert alert-info\">\n"
+                + "                <strong>Go To </strong> " + msg + ".\n"
+                + "            </div>";
+    }
+
+    public static String getErrorAlert(String msg, Boolean br) {
+        String brString = "";
+        if (br) {
+            brString = "</br>";
+        }
+        return "            <div class=\"alert alert-error\">\n"
+                + "                <strong>Warning!</strong> " + brString + msg + ".\n"
+                + "            </div>";
+    }
+
     public static String getToyTemplate(String img, String name, String cashPoint, String id) {
         return "              <li>\n"
                 + "                  <div>\n"
-                + "                    <figure><a href=\"#\"><img src=\"images/" + img + "\" alt=\"\"></a></figure>\n"
+                + "                    <figure><a href=\"#\"><img width=\"150\" height=\"150\" src=\"" + img + "\" alt=\"\"></a></figure>\n"
                 + "                    <div>\n"
                 + "                      <h4><a href=\"#\">" + name + "</a></h4>\n"
                 + "                      <div class=\"price\">$" + cashPoint + "</div>\n"
@@ -61,7 +89,7 @@ public class Template {
                 + "\n"
                 + "                                                    <td class=\"product_image\">\n"
                 + "\n"
-                + "                                                        <img src=\"images/cart1.jpg\" alt=\"\">\n"
+                + "                                                        <img width=\"60\" height=\"60\" src=\"" + image + "\" alt=\"\">\n"
                 + "\n"
                 + "                                                    </td>\n"
                 + "\n"
@@ -90,7 +118,7 @@ public class Template {
         return "                    <tr>\n"
                 + "                        <td>\n"
                 + "                            <div class=\"ext_box confirm_product\">\n"
-                + "                                <figure><img width=\"60\" height=\"60\" src=\"images/" + image + "\" alt=\"\"></figure>\n"
+                + "                                <figure><img width=\"60\" height=\"60\" src=\"" + image + "\" alt=\"\"></figure>\n"
                 + "                                <div>\n"
                 + "                                    <a href=\"#\">" + name + "</a>\n"
                 + "                                </div>\n"
@@ -117,7 +145,7 @@ public class Template {
         return "                    <tr>\n"
                 + "                        <td>\n"
                 + "                            <div class=\"ext_box confirm_product\">\n"
-                + "                                <figure><img width=\"60\" height=\"60\" src=\"images/" + image + "\" alt=\"\"></figure>\n"
+                + "                                <figure><img width=\"60\" height=\"60\" src=\"" + image + "\" alt=\"\"></figure>\n"
                 + "                                <div>\n"
                 + "                                    <a href=\"#\">" + name + "</a>\n"
                 + "                                </div>\n"
@@ -146,10 +174,10 @@ public class Template {
                 + "                            <article class=\"grid_8\">\n"
                 + "                                <input type=\"hidden\" name=\"step\" value=\"1\"/>\n"
                 + "                                <div class=\"pad_box3\">\n"
-                + "                                    <p class=\"p2\">Please select the preferred reciever to use on this order.</p>\n"
+                + "                                    <p class=\"p2\">Please select the preferred Addressee to use on this order.</p>\n"
                 + "                                    <ul class=\"radioblock\">\n"
-                + "                                        <li class=\"radio\" onclick=\"hf()\">Account owner</li>\n"
-                + "                                        <li class=\"radio\" onclick=\"sf()\">Other one</li>\n"
+                + "                                        <li id='rdFalse' class=\"radio\" onclick=\"hf()\">Account owner</li>\n"
+                + "                                        <li id='rdTrue' class=\"radio\" onclick=\"sf()\">Other one</li>\n"
                 + "                                        <input name=\"type\" type=\"hidden\" id=\"radion1\" />\n"
                 + "                                    </ul>\n"
                 + "                                    <label>\n"
@@ -164,7 +192,7 @@ public class Template {
                 + "                                        <span id=\"telS\">Telephone<sup>*</sup></span>\n"
                 + "                                        <input name=\"tel\" id=\"tel\" type=\"text\">\n"
                 + "                                    </label>\n"
-                + "                                    <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"button\">Continue</a>\n"
+                + "                                    <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"form_btn log_in\">Continue</a>\n"
                 + "                                </div>\n"
                 + "\n"
                 + "                            </article>\n"
@@ -201,16 +229,19 @@ public class Template {
                 + "                                <p class=\"p2\">Please select the preferred address to use on this order.</p>\n"
                 + "\n"
                 + "                                <ul class=\"radioblock\">\n"
-                + "                                    <li class=\"radio\" onclick=\"hf()\">Account Address</li>\n"
-                + "                                    <li class=\"radio\" onclick=\"sf()\">New Address</li>\n"
+                + "                                    <li id='rdFalse' class=\"radio\" onclick=\"hf()\">Account Address</li>\n"
+                + "                                    <li id='rdTrue' class=\"radio\" onclick=\"sf()\">New Address</li>\n"
                 + "                                    <input name=\"type\" type=\"hidden\" id=\"radion1\" />\n"
                 + "                                </ul>\n"
                 + "                                    <label>\n"
                 + "                                        <span id=\"newAddressS\">New Address<sup>*</sup></span>\n"
                 + "                                        <input name=\"newAddress\" id=\"newAddress\" type=\"text\">\n"
                 + "                                    </label>\n"
+                + "                                    <input name=\"goStep\" type=\"hidden\" id=\"goStep\"/>\n"
+                + "                                <a href=\"javascript:;\" onclick=\"document.getElementById('goStep').value='2'; get_form(this).submit();\n"
+                + "                                     return false\" class=\"button\">Go back</a>\n"
                 + "                                <a href=\"javascript:;\" onclick=\"get_form(this).submit();\n"
-                + "                                     return false\" class=\"button\">Continue</a>\n"
+                + "                                     return false\" class=\"form_btn log_in\">Continue</a>\n"
                 + "                            </form>\n"
                 + "                        </div>\n"
                 + "                    </div>\n"
@@ -233,13 +264,16 @@ public class Template {
                 + "                        <div class=\"pad_box5\">\n"
                 + "                            <form action=\"/toy/Checkout\" method=\"post\" class=\"checkout_form\">\n"
                 + "                                <input type=\"hidden\" name=\"step\" value=\"3\"/>\n"
-                + "                                <p class=\"p2\">Please select the preferred shipping method to use on this order.</p>\n"
+                + "                                <p class=\"p2\">Please select the preferred delivery method to use on this order.</p>\n"
                 + "                                <ul class=\"radioblock\">\n"
-                + "                                    <li class=\"radio\">SELF-PICKUP</li>\n"
-                + "                                    <li class=\"radio\">DELIVERY</li>\n"
+                + "                                    <li id='rdFalse' class=\"radio\">Sea Freight</li>\n"
+                + "                                    <li id='rdTrue' class=\"radio\">Air Freight</li>\n"
                 + "                                    <input name=\"type\" type=\"hidden\" id=\"radion1\" />\n"
                 + "                                </ul>\n"
-                + "                                <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"button\">Continue</a>\n"
+                + "                                    <input name=\"goStep\" type=\"hidden\" id=\"goStep\"/>\n"
+                + "                                <a href=\"javascript:;\" onclick=\"document.getElementById('goStep').value='3'; get_form(this).submit();\n"
+                + "                                     return false\" class=\"button\">Go back</a>\n"	
+                + "                                <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"form_btn log_in\">Continue</a>\n"
                 + "                            </form>\n"
                 + "                        </div>\n"
                 + "                    </div>\n"
@@ -253,21 +287,42 @@ public class Template {
                 + "                        <div class=\"pad_box5\">\n"
                 + "                            <form action=\"/toy/Checkout\" method=\"post\" class=\"checkout_form\">\n"
                 + "                                <input type=\"hidden\" name=\"step\" value=\"4\"/>\n"
-                + "                                <p class=\"p2\">Please select the preferred shipping method to use on this order.</p>\n"
+                + "                                <p class=\"p2\">Please select the preferred payment method to use on this order.</p>\n"
                 + "                                <ul class=\"radioblock\">\n"
-                + "                                    <li class=\"radio\">Cash Point</li>\n"
-                + "                                    <li class=\"radio\">Credit Card</li>\n"
+                + "                                    <li id='rdFalse' class=\"radio\" onclick='hf()' >Cash Point</li>\n"
+                + "                                    <li id='rdTrue' class=\"radio\" onclick='sf()'>Credit Card</li>\n"
                 + "                                    <input name=\"type\" type=\"hidden\" id=\"radion2\" />\n"
                 + "                                </ul>\n"
-                + "                                <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"button\">Continue</a>\n"
+                + "                                    <label>\n"
+                + "                                        <span id=\"creditcardS\">Crdit Card ID<sup>*</sup></span>\n"
+                + "                                <input id='creditcard' name='creditcard' /></label>"
+                + "                                    <input name=\"goStep\" type=\"hidden\" id=\"goStep\"/>\n"
+                + "                                <a href=\"javascript:;\" onclick=\"document.getElementById('goStep').value='4'; get_form(this).submit();\n"
+                + "                                     return false\" class=\"button\">Go back</a>\n"	
+                + "                                <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"form_btn log_in\">Continue</a>\n"
                 + "\n"
                 + "                            </form>\n"
                 + "                        </div>\n"
                 + "                    </div>\n"
-                + "                </li>";
+                + "                </li>"
+                + "                <script>    function hf() {\n"
+                + "                        document.getElementById(\"creditcardS\").style.display = \"none\";\n"
+                + "                        document.getElementById(\"creditcard\").style.display = \"none\";\n"
+                + "                    }\n"
+                + "                    function sf() {\n"
+                + "                        document.getElementById(\"creditcardS\").style.display = \"inline\";\n"
+                + "                        document.getElementById(\"creditcard\").style.display = \"inline\";\n"
+                + "                    }\n"
+                + "                    hf()</script>";
     }
 
-    public static String getCheckoutStep5() {
+    public static String getCheckoutStep5(bean.Cart cart) throws UnsupportedEncodingException {
+        String cartString = "";
+        for (int i = 0; i < cart.getToys().size(); i++) {
+            Toy toy = cart.getToys().get(i);
+            cartString += Template.getCartCheckout(toy.encodedImage(), toy.getToyName(), toy.getCashpoint(), toy.getQTY(), toy.getToyID());
+        }
+
         return "                <li>\n"
                 + "                    <a href=\"javascript:;\"><i></i>Step 5: Confirm Order</a> \n"
                 + "                    <div class=\"accordion_content\">\n"
@@ -281,16 +336,14 @@ public class Template {
                 + "                                        <th class=\"width_8\">Price</th>\n"
                 + "                                        <th>Total</th>\n"
                 + "                                    </tr>\n"
-                + "                                    <%                        for (int i = 0; i < cart.getToys().size(); i++) {\n"
-                + "                                            Toy toy = cart.getToys().get(i);\n"
-                + "                                            out.println(Template.getCartCheckout(toy.getToyIcon(), toy.getToyName(), toy.getCashpoint(), toy.getQTY(), toy.getToyID()));\n"
-                + "                                        }\n"
-                + "\n"
-                + "                                    %>\n"
+                + cartString
                 + "                                </table>\n"
                 + "                            </div>\n"
-                + "                            <a href=\"/toy/Cart\" class=\"button continue\">Go Back</a>&nbsp;\n"
-                + "                            <a href=\"\" class=\"form_btn log_in\">Confirm</a>\n"
+                + "                            <form action='/toy/Checkout' method='post' ><input type='hidden' name='step' value='5' />"
+                + "                                    <input name=\"goStep\" type=\"hidden\" id=\"goStep\"/>\n"
+                + "                                <a href=\"javascript:;\" onclick=\"document.getElementById('goStep').value='5'; get_form(this).submit();\n"
+                + "                                     return false\" class=\"button\">Go back</a>\n"	
+                + "                            <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"form_btn log_in\">Confirm</a></form>\n"
                 + "                        </div>\n"
                 + "                    </div>\n"
                 + "                </li>";
@@ -350,5 +403,66 @@ public class Template {
                 + "                        </div>\n"
                 + "\n"
                 + "                    </li>";
+    }
+
+    public static String getCheckoutStep1Session(CheckoutStatus checkoutStatus) {
+        String out = "<script>";
+        if (checkoutStatus.boolAddressee) {
+            out += "document.getElementById('rdTrue').className +=' active';";
+            out += "document.getElementById('rdTrue').click();";
+            out += "document.getElementById('radion1').value='Other one';";
+            out += "document.getElementById('firstName').value='" + checkoutStatus.firstName + "';";
+            out += "document.getElementById('lastName').value='" + checkoutStatus.lastName + "';";
+            out += "document.getElementById('tel').value='" + checkoutStatus.tel + "';";
+        } else {
+            out += "document.getElementById('rdFalse').className +=' active';";
+            out += "document.getElementById('rdFalse').click();";
+            out += "document.getElementById('radion1').value='Account owner';";
+        }
+        return out + "</script>";
+    }
+
+    public static String getCheckoutStep2Session(CheckoutStatus checkoutStatus) {
+        String out = "<script>";
+        if (checkoutStatus.boolAddress) {
+            out += "document.getElementById('rdTrue').className +=' active';";
+            out += "document.getElementById('rdTrue').click();";
+            out += "document.getElementById('newAddress').value='" + checkoutStatus.address + "';";
+            out += "document.getElementById('radion1').value='New Address';";
+        } else {
+            out += "document.getElementById('rdFalse').className +=' active';";
+            out += "document.getElementById('rdFalse').click();";
+            out += "document.getElementById('radion1').value='Account Address';";
+        }
+        return out + "</script>";
+    }
+    
+    public static String getCheckoutStep3Session(CheckoutStatus checkoutStatus) {
+        String out = "<script>";
+        if (checkoutStatus.boolDelivery) {
+            out += "document.getElementById('rdTrue').className +=' active';";
+            out += "document.getElementById('rdTrue').click();";
+            out += "document.getElementById('radion1').value='Air Freight';";
+        } else {
+            out += "document.getElementById('rdFalse').className +=' active';";
+            out += "document.getElementById('rdFalse').click();";
+            out += "document.getElementById('radion1').value='Sea Freight';";
+        }
+        return out + "</script>";
+    }
+    
+    public static String getCheckoutStep4Session(CheckoutStatus checkoutStatus) {
+        String out = "<script>";
+        if (checkoutStatus.boolPayment) {
+            out += "document.getElementById('rdTrue').className +=' active';";
+            out += "document.getElementById('rdTrue').click();";
+            out += "document.getElementById('radion2').value='Credit Card';";
+            out += "document.getElementById('creditcard').value='" + checkoutStatus.creditCardID + "';";
+        } else {
+            out += "document.getElementById('rdFalse').className +=' active';";
+            out += "document.getElementById('rdFalse').click();";
+            out += "document.getElementById('radion2').value='Cash Point';";
+        }
+        return out + "</script>";
     }
 }

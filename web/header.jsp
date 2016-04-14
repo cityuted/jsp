@@ -14,7 +14,7 @@
         <link rel="icon" href="images/favicon.html" type="image/x-icon">
 
         <link rel="shortcut icon" href="images/favicon.html" type="image/x-icon" />
-
+        <link rel="stylesheet" type="text/css" href="css/alerts.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
 
         <script type="text/javascript" src="js/jquery.js"></script>
@@ -89,7 +89,7 @@
                                         <%
                                             for (int i = 0; i < cart.getToys().size(); i++) {
                                                 Toy toy = cart.getToys().get(i);
-                                                out.println(Template.cartInHeader(toy.getToyIcon(), toy.getToyName(), toy.getCashpoint(), toy.getQTY()));
+                                                out.println(Template.cartInHeader(toy.encodedImage(), toy.getToyName(), toy.getCashpoint(), toy.getQTY()));
                                             }
 
                                         %>

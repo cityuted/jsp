@@ -11,11 +11,18 @@
     </div>
     <div class="row">
         <article class="grid_8">
+
             <h2 class="blue ind1">Checkout</h2>
+            <%                if (request.getAttribute("alert") != null) {
+                    out.print(request.getAttribute("alert"));
+                }
+            %>
             <ul id="accordion2" class="accordion checkout">
 
                 <%
-                    out.println(request.getAttribute("stepString"));
+                    if (request.getAttribute("stepString") != null) {
+                        out.println(request.getAttribute("stepString"));
+                    }
                 %>
 
 

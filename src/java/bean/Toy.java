@@ -5,11 +5,15 @@
  */
 package bean;
 
+import java.io.UnsupportedEncodingException;
+import org.apache.commons.codec.binary.Base64;
+
 /**
  *
  * @author Mesong
  */
 public class Toy {
+
     private int toyID;
     private String toyName;
     private String description;
@@ -80,7 +84,7 @@ public class Toy {
      * @return the QTY
      */
     public int getQTY() {
-        if(QTY==0){
+        if (QTY == 0) {
             return 1;
         }
         return QTY;
@@ -147,5 +151,11 @@ public class Toy {
      */
     public void setSecondHandID(int secondHandID) {
         this.secondHandID = secondHandID;
+    }
+
+    public String encodedImage() throws UnsupportedEncodingException {
+        byte[] encodeBase64 = Base64.encodeBase64(Base64.decodeBase64(getToyIcon()));
+        String base64DataString = new String(encodeBase64, "UTF-8");
+        return "data:image/jpeg;base64,"+base64DataString;
     }
 }
