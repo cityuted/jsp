@@ -172,7 +172,7 @@ public class Checkout extends HttpServlet {
     public Boolean checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
         if (user.getUserID() == 0) {
-            request.setAttribute("alert", Template.getErrorAlert("Please Login First", false) + Template.getInfoAlert(Template.getHref("Login", "/toy/Login")));
+            request.setAttribute("alert", Template.getErrorAlert("Please Login or Register a new account", false) + Template.getInfoAlert(Template.getHref("Login", "/toy/Login"))+Template.getInfoAlert(Template.getHref("Register", "/toy/Register")));
             processRequest(request, response);
             return false;
         }

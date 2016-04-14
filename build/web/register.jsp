@@ -11,6 +11,11 @@
         <article class="grid_8">
             <h2 class="blue ind1">Create an Account</h2>
             <form id="create_account" method="post" action="/toy/Register">
+                <%
+                    if (request.getAttribute("alert") != null) {
+                        out.print(request.getAttribute("alert"));
+                    }
+                %>
                 <div class="account_box">
                     <div class="form_title">Your Personal Details</div>
                     <div class="inner">

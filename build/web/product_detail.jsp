@@ -21,7 +21,7 @@
                 <article class="grid_4">
                     <div class="product_gallery">
                         <div id="slider" class="flexslider">
-                            <img width="100%"src="images/<%=toy.getToyIcon()%>" />
+                            <img width="100%"src="<%=toy.encodedImage()%>" />
                         </div>  
                     </div>  
                 </article>
