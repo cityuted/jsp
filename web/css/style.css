@@ -1993,7 +1993,7 @@ a.img_wrap1:hover, #flickr_badge a:hover{
 
 }
 
-.sorting_block #sort ul a, .slct3, .slct4{
+.sorting_block #sort ul a, .slct3, .slct4, .slct5{
 
   display: block;
 
@@ -2049,7 +2049,7 @@ a.img_wrap1:hover, #flickr_badge a:hover{
 
 }
 
-.slct3, .slct4{
+.slct3, .slct4, .slct5{
 
   float: left;
 
@@ -2067,9 +2067,9 @@ a.img_wrap1:hover, #flickr_badge a:hover{
 
 }
 
-.slct4{width: 39px;}
+.slct4, .slct5{width: 39px;}
 
-.slct3:after, .slct4:after{
+.slct3:after, .slct4:after, .slct5:after{
 
   width: 12px;
 
@@ -6386,6 +6386,8 @@ aside.footer_bottom .privacy span{color: #848484;}
   .sorting_block #view span{width: 55px;}
 
   .slct4{margin-left: 22px;}
+
+.slct5{margin-left: 22px;}
 
   .tags a{width: 99%;padding-left: 0px;padding-right: 0px;}
 

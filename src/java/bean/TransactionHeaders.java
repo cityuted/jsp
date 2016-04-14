@@ -11,18 +11,19 @@ import java.util.ArrayList;
  *
  * @author ted
  */
-public class Toys {
+public class TransactionHeaders {
 
-    ArrayList<Toy> toys = new ArrayList<Toy>();
+    ArrayList<TransactionHeader> ths = new ArrayList<TransactionHeader>();
 
-    public ArrayList<Toy> getToys() {
-        return toys;
+    public ArrayList<TransactionHeader> getThs() {
+        return ths;
     }
 
-    public void setToys(ArrayList<Toy> toys) {
-        if (toys != null) {
-            this.toys = toys;
-        }
+    public void setThs(ArrayList<TransactionHeader> ths) {
+        this.ths = ths;
     }
+
+
+    
 
 }

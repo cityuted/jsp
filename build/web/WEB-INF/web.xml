@@ -68,6 +68,10 @@
         <servlet-name>Image</servlet-name>
         <servlet-class>Image</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderHistory</servlet-name>
+        <servlet-class>OrderHistory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -136,10 +140,6 @@
         <servlet-name>Image</servlet-name>
         <url-pattern>/Image</url-pattern>
     </servlet-mapping>
-    
-    
-    
-    
     <servlet>
         <servlet-name>test</servlet-name>
         <servlet-class>test</servlet-class>
@@ -267,6 +267,10 @@
     <servlet-mapping>
         <servlet-name>doSearchToyCategory</servlet-name>
         <url-pattern>/doSearchToyCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderHistory</servlet-name>
+        <url-pattern>/OrderHistory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

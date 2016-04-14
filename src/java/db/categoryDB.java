@@ -6,7 +6,6 @@
 package db;
 
 import bean.Category;
-import bean.ToyType;
 import static db.GeneralDB.conn_url;
 import java.sql.Connection;
 import java.sql.DriverManager;

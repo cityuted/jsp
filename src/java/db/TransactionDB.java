@@ -6,6 +6,8 @@
 package db;
 
 import bean.CheckoutStatus;
+import bean.Toy;
+import bean.TransactionHeader;
 import com.mysql.jdbc.Statement;
 import static db.GeneralDB.conn_url;
 import java.sql.Connection;
@@ -14,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +31,7 @@ public class TransactionDB extends GeneralDB {
         connectDB();
     }
 
-    public boolean createTransaction(int custID, CheckoutStatus checkoutStatus,bean.Cart cart) {
+    public boolean createTransaction(int custID, CheckoutStatus checkoutStatus, bean.Cart cart) {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
@@ -48,7 +51,7 @@ public class TransactionDB extends GeneralDB {
             conn.commit();
             ResultSet rs = pstmt.getGeneratedKeys();
             rs.next();
-            createTransactionItem(rs.getInt(1),cart);
+            createTransactionItem(rs.getInt(1), cart);
             pstmt.close();
             conn.close();
             return true;
@@ -85,6 +88,36 @@ public class TransactionDB extends GeneralDB {
                 Logger.getLogger(TransactionDB.class.getName()).log(Level.SEVERE, null, ex1);
             }
             return false;
+        }
+    }
+
+    public ArrayList<TransactionHeader> listTransactionHeader(int custID) {
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM transactionheader where CUSTID = ? ");
+            pstmt.setInt(1, custID);
+            ArrayList<TransactionHeader> tempList = new ArrayList();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                TransactionHeader tempToy = new TransactionHeader();
+                tempToy.setTRANSACTIONID(rs.getInt("TRANSACTIONID"));
+                tempToy.setCUSTID(rs.getInt("CUSTID"));
+                tempToy.setDELIVERYAddressee(rs.getString("DELIVERYAddressee"));
+                tempToy.setDELIVERYAddresseePhone(rs.getString("DELIVERYAddresseePhone"));
+                tempToy.setDELIVERYOPTION(rs.getString("DELIVERYOPTION"));
+                tempToy.setDELIVERYADDRESS(rs.getString("DELIVERYADDRESS"));
+                tempToy.setDELIVERYPROGRSS(rs.getString("DELIVERYPROGRSS"));
+                tempToy.setDELIVERYTIME(rs.getString("DELIVERYTIME"));
+                tempToy.setPayment(rs.getString("Payment"));
+                tempList.add(tempToy);
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempList;
+        } catch (SQLException ex) {
+            return null;
         }
     }
 

@@ -13,6 +13,25 @@ import java.io.UnsupportedEncodingException;
  */
 public class Template {
 
+    public static String getOrder(TransactionHeader th) {
+        return "                    <ul id=\"accordion2\" class=\"accordion\">\n"
+                + "                        <li>\n"
+                + "                            <a href=\"javascript:;\"><i></i>Order ID: "+th.getTRANSACTIONID()+"</a>\n"
+                + "                            <div class=\"accordion_content pad1\">\n"
+                + "                                <ul class=\"list2\">\n"
+                + "                                    <li><a href=\"#\">Addressee: "+th.getDELIVERYAddressee()+"</a></li>\n"
+                + "                                    <li><a href=\"#\">TelePhone: "+th.getDELIVERYAddresseePhone()+"</a></li>\n"
+                + "                                    <li><a href=\"#\">Delivery Method: "+th.getDELIVERYOPTION()+"</a></li>\n"
+                + "                                    <li><a href=\"#\">Delivery Address: "+th.getDELIVERYADDRESS()+"</a></li>\n"
+                + "                                    <li><a href=\"#\">Delivery Time: "+th.getDELIVERYTIME()+"</a></li>\n"
+                + "                                    <li><a href=\"#\">Payment Method: "+th.getPayment()+"</a></li>\n"
+                + "                                    <li><a href=\"#\">Progress: "+th.getDELIVERYPROGRSS()+"</a></li>\n"
+                + "                                </ul>\n"
+                + "                            </div>\n"
+                + "                        </li>\n"
+                + "                    </ul> ";
+    }
+
     public static String getHref(String title, String link) {
         return "<a href='" + link + "' >" + title + "</a>";
     }
@@ -272,7 +291,7 @@ public class Template {
                 + "                                </ul>\n"
                 + "                                    <input name=\"goStep\" type=\"hidden\" id=\"goStep\"/>\n"
                 + "                                <a href=\"javascript:;\" onclick=\"document.getElementById('goStep').value='3'; get_form(this).submit();\n"
-                + "                                     return false\" class=\"button\">Go back</a>\n"	
+                + "                                     return false\" class=\"button\">Go back</a>\n"
                 + "                                <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"form_btn log_in\">Continue</a>\n"
                 + "                            </form>\n"
                 + "                        </div>\n"
@@ -298,7 +317,7 @@ public class Template {
                 + "                                <input id='creditcard' name='creditcard' /></label>"
                 + "                                    <input name=\"goStep\" type=\"hidden\" id=\"goStep\"/>\n"
                 + "                                <a href=\"javascript:;\" onclick=\"document.getElementById('goStep').value='4'; get_form(this).submit();\n"
-                + "                                     return false\" class=\"button\">Go back</a>\n"	
+                + "                                     return false\" class=\"button\">Go back</a>\n"
                 + "                                <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"form_btn log_in\">Continue</a>\n"
                 + "\n"
                 + "                            </form>\n"
@@ -342,7 +361,7 @@ public class Template {
                 + "                            <form action='/toy/Checkout' method='post' ><input type='hidden' name='step' value='5' />"
                 + "                                    <input name=\"goStep\" type=\"hidden\" id=\"goStep\"/>\n"
                 + "                                <a href=\"javascript:;\" onclick=\"document.getElementById('goStep').value='5'; get_form(this).submit();\n"
-                + "                                     return false\" class=\"button\">Go back</a>\n"	
+                + "                                     return false\" class=\"button\">Go back</a>\n"
                 + "                            <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"form_btn log_in\">Confirm</a></form>\n"
                 + "                        </div>\n"
                 + "                    </div>\n"
@@ -436,7 +455,7 @@ public class Template {
         }
         return out + "</script>";
     }
-    
+
     public static String getCheckoutStep3Session(CheckoutStatus checkoutStatus) {
         String out = "<script>";
         if (checkoutStatus.boolDelivery) {
@@ -450,7 +469,7 @@ public class Template {
         }
         return out + "</script>";
     }
-    
+
     public static String getCheckoutStep4Session(CheckoutStatus checkoutStatus) {
         String out = "<script>";
         if (checkoutStatus.boolPayment) {

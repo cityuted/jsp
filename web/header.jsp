@@ -1,5 +1,7 @@
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
-<%@ page import="bean.Toy" %>
+<%@ page import="bean.*" %>
+<%@ page import="db.categoryDB" %>
 <%@ page import="bean.Template" %>
 <jsp:useBean id="user" class="bean.User" scope="session"/>
 <jsp:useBean id="cart" class="bean.Cart" scope="session"/>
@@ -49,10 +51,10 @@
 
                         <ul class="block_headerlinks">
                             <%
-                                if(user.getUserID()==0){
-                                    out.print("<li><a href=\"/toy/Register\">Register</a></li>\n" +
-"                            <li><a href=\"/toy/Login\" class=\"modal-toggle-1\">Login</a></li>");
-                                }else{
+                                if (user.getUserID() == 0) {
+                                    out.print("<li><a href=\"/toy/Register\">Register</a></li>\n"
+                                            + "                            <li><a href=\"/toy/Login\" class=\"modal-toggle-1\">Login</a></li>");
+                                } else {
                                     out.print("<li><a href=\"/toy/MyAccount\" class=\"modal-toggle-1\">My Account</a></li><li><a href=\"/toy/Logout\" class=\"modal-toggle-1\">Logout</a></li>");
                                 }
                             %>
@@ -142,31 +144,37 @@
 
                         </li>
 
-                        <li id="lishop"><a href="/toy/Category">Shop</a>
+                        <li id="lishop"><a href="/toy/Category?order=asc&sort=TOYNAME">Shop</a>
 
                             <ul>
 
-                                <li class="first_item"><a href="/toy/Category">Toys on SALE</a></li>
+                                <%
+                                    categoryDB catedb = new categoryDB();
+                                    ArrayList<bean.Category> listCate = catedb.listToyCategory();
+                                    for (int i = 0; i < listCate.size(); i++) {
+                                        if (!listCate.get(i).getCategoryName().toLowerCase().contains("age")) {
+                                            out.print("<li><a href=\"/toy/Category?order=asc&sort=TOYNAME&cate="+listCate.get(i).getCategoryID()+"\">" + listCate.get(i).getCategoryName() + "</a></li>");
+                                        }
+                                    }
+                                %>
 
                                 <li><a>Toys by Age</a>
 
                                     <ul>
-                                        
-                                        <li><a href="/toy/Category?type=age&age=3">Aged 1-3</a></li>
 
-                                        <li><a href="/toy/Category?type=age&age=6">Aged 3-6</a></li>
+                                        <%
+                                            for (int i = 0; i < listCate.size(); i++) {
+                                                if (listCate.get(i).getCategoryName().toLowerCase().contains("age")) {
+                                                    out.print("<li><a href=\"/toy/Category?order=desc&sort=TOYNAME&cate="+listCate.get(i).getCategoryID()+"\">" + listCate.get(i).getCategoryName() + "</a></li>");
+                                                }
+                                            }
+                                        %>
 
-                                        <li><a href="/toy/Category?type=age&age=10">Aged 7-10</a></li>
+
 
                                     </ul>
 
                                 </li>
-
-                                <li><a href="/toy/Category?tag=boys">Toys for Boys</a></li>
-
-                                <li><a href="/toy/Category?tag=girls">Toys for Girls</a></li>
-
-
                             </ul>
 
                         </li>
@@ -182,7 +190,8 @@
                     <form id="search" method="get" action="/toy/Category">
 
                         <label>
-
+                            <input type="hidden" name="order" value="Asc" />
+                            <input type="hidden" name="sort" value="ToyName" />
                             <input name="search" type="text" value="Search" onBlur="if (this.value == '')
                                         this.value = 'Search'" onFocus="if (this.value == 'Search')
                                                     this.value = ''">

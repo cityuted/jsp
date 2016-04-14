@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import bean.Template;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,6 +32,7 @@ public class Logout extends HttpServlet {
         bean.Cart cart = (bean.Cart) request.getSession().getAttribute("cart");
         request.getSession().invalidate();
         request.getSession().setAttribute("cart", cart);
+        request.setAttribute("alert", Template.getSuccessAlert("Logout succeed"));
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 

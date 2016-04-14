@@ -1,6 +1,6 @@
 <jsp:include page="header.jsp"/>
 <script>
-  document.getElementById("lishop").className += " current";
+    document.getElementById("lishop").className += " current";
 </script>
 <%@ page import="bean.Toy" %>
 <%@ page import="bean.Template" %>
@@ -9,10 +9,19 @@
 <section id="content" class="cont_pad">
     <div class="breadcrump">
         <ul>
-            <li><a href="#">Shop</a></li>
+            <li><a href="#">Shop<%=request.getQueryString()%></a></li>
         </ul>
     </div>
     <div class="row">
+        <form id="formSort" action="/toy/Category" method="get">
+            <%
+                String[] sQuery = request.getQueryString().split("&");
+                for (int i = 0; i < sQuery.length; i++) {
+                    String[] sQueryV = sQuery[i].split("=");
+                    out.print("<input type=\"hidden\" id='" + sQueryV[0] + "' name=\"" + sQueryV[0] + "\" value='" + sQueryV[1] + "' />");
+                }
+            %>
+        </form>
         <article class="grid_8">
             <h2 class="ind1"><%=request.getAttribute("pageFor")%></h2>
             <figure class="category_image"><img src="images/category_img1.png" alt=""></figure>
@@ -20,31 +29,36 @@
                 <form id="sort">
                     <label class="criterion">
                         <span>Sort by:</span>
-                        <a href="javascript:;" class="slct3">Alphabetically</a>
+                        <a href="javascript:;"  class="slct3">Toy Name</a>
                         <ul class="drop3">
-                            <li><a href="javascript:;">Alphabetically</a></li>
-                            <li><a href="javascript:;">Default</a></li>
-                            <li><a href="javascript:;">Alphabetically</a></li>
-                            <li><a href="javascript:;">Most recent</a></li>
-                            <li class="last_item"><a href="javascript:;">Price</a></li>
+                            <li onclick="document.getElementById('sort').value = 'TOYNAME';"><a href="javascript:;">Toy Name</a></li>
+                            <li onclick="document.getElementById('sort').value = this.childNodes[0].innerHTML;"><a href="javascript:;">Sales</a></li>
+                            <li onclick="document.getElementById('sort').value = 'CASHPOINT';"><a href="javascript:;">Cash Point</a></li>
                         </ul>
                         <input type="hidden" id="select3" />
                         <div class="clear"></div>
                     </label>
-                    <label class="show">
-                        <span>Show:</span>
-                        <a href="javascript:;" class="slct4">8</a>
+                    <label class="criterion">
+                        <span></span>
+                        <a href="javascript:;" class="slct4">Asc</a>
                         <ul class="drop4">
-                            <li><a href="javascript:;">8</a></li>
-                            <li><a href="javascript:;">16</a></li>
-                            <li><a href="javascript:;">32</a></li>
-                            <li><a href="javascript:;">64</a></li>
-                            <li class="last_item"><a href="javascript:;">All</a></li>
+                            <li onclick="document.getElementById('order').value = this.childNodes[0].innerHTML;"><a href="javascript:;">Asc</a></li>
+                            <li onclick="document.getElementById('order').value = this.childNodes[0].innerHTML;"><a href="javascript:;">Desc</a></li>
                         </ul>
                         <input type="hidden" id="select4" />
                         <div class="clear"></div>
                     </label>
+
+
+
+
+
+
+                    <a href="javascript:;" style="margin: -5px 0 0 11px;" onclick="document.getElementById('formSort').submit();" class="button">Sort</a>
+
+
                     <div class="clear"></div>
+
                 </form>
                 <form id="view">
                     <label>
@@ -75,6 +89,7 @@
                     <a href="#" class="end"></a>
                 </div>
             </div>
+
         </article>
         <article class="grid_4">
             <div class="tags">
