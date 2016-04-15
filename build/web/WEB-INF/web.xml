@@ -72,6 +72,14 @@
         <servlet-name>OrderHistory</servlet-name>
         <servlet-class>OrderHistory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Second</servlet-name>
+        <servlet-class>Second</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SecondHandToy</servlet-name>
+        <servlet-class>SecondHandToy</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -271,6 +279,14 @@
     <servlet-mapping>
         <servlet-name>OrderHistory</servlet-name>
         <url-pattern>/OrderHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Second</servlet-name>
+        <url-pattern>/Second</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SecondHandToy</servlet-name>
+        <url-pattern>/SecondHandToy</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

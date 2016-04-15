@@ -160,14 +160,14 @@ public class secondHandDB extends GeneralDB {
             pstmt.close();
             conn.close();
 
-            return null;
+            return "ok";
         } catch (SQLException ex) {
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
                 Logger.getLogger(secondHandDB.class.getName()).log(Level.SEVERE, null, ex1);
             }
-            return ex.getMessage();
+            return null;
         }
 
     }

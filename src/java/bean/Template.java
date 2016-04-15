@@ -13,6 +13,25 @@ import java.io.UnsupportedEncodingException;
  */
 public class Template {
 
+    public static String getSubmitSecondHand(){
+        return "            <form id=\"create_account\" method=\"post\" action=\"/toy/SecondHandToy\">\n" +
+"                <div class=\"account_box\">\n" +
+"                    <div class=\"form_title\">Submit Second Hand Toy</div>\n" +
+"                    <div class=\"inner\">\n" +
+"                        <label>\n" +
+"                            <span>Second Hand Toy Name <sup class=\"red\">*</sup></span>\n" +
+"                            <input type=\"text\" name=\"toyName\">\n" +
+"                        </label>\n" +
+"                        <label>\n" +
+"                            <span>Prefered Cash Point <sup class=\"red\">*</sup></span>\n" +
+"                            <input type=\"text\" name=\"cashPoint\">\n" +
+"                        </label>\n" +
+"                        <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"form_btn log_in\">Submit</a>\n" +
+"                    </div>\n" +
+"                </div>\n" +
+"            </form>";
+    }
+    
     public static String getOrder(TransactionHeader th) {
         return "                    <ul id=\"accordion2\" class=\"accordion\">\n"
                 + "                        <li>\n"
@@ -26,6 +45,21 @@ public class Template {
                 + "                                    <li><a href=\"#\">Delivery Time: "+th.getDELIVERYTIME()+"</a></li>\n"
                 + "                                    <li><a href=\"#\">Payment Method: "+th.getPayment()+"</a></li>\n"
                 + "                                    <li><a href=\"#\">Progress: "+th.getDELIVERYPROGRSS()+"</a></li>\n"
+                + "                                </ul>\n"
+                + "                            </div>\n"
+                + "                        </li>\n"
+                + "                    </ul> ";
+    }
+    
+    public static String getSecondHand(SecondHand sh) {
+        return "                    <ul id=\"accordion2\" class=\"accordion\">\n"
+                + "                        <li>\n"
+                + "                            <a href=\"javascript:;\"><i></i>Second Hand Submission ID: "+sh.getID()+"</a>\n"
+                + "                            <div class=\"accordion_content pad1\">\n"
+                + "                                <ul class=\"list2\">\n"
+                + "                                    <li><a href=\"#\">Second Hand Toy Name: "+sh.getName()+"</a></li>\n"
+                + "                                    <li><a href=\"#\">Prefered Cash Point: "+sh.getCashpoint()+"</a></li>\n"
+                + "                                    <li><a href=\"#\">Status: "+sh.getApproval()+"</a></li>\n"
                 + "                                </ul>\n"
                 + "                            </div>\n"
                 + "                        </li>\n"

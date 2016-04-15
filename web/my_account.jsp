@@ -37,7 +37,7 @@
             <ul class="categories sf-menu">
                 <li><a href="/toy/MyAccount">My Account</a></li>
                 <li><a href="/toy/EditAccount">Edit Account</a></li>
-                <li><a href="/toy/SecondHandToy">Submit Second Hand Toy</a></li>
+                <li><a href="/toy/SecondHandToy">MY Second Hand Toy</a></li>
                 <li><a href="/toy/OrderHistory">Order History</a></li>
                 <li><a href="/toy/Logout">Wishlist</a></li>
 
