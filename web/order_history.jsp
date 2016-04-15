@@ -5,10 +5,8 @@
 <section id="content" class="cont_pad">
     <div class="breadcrump">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Pages</a></li>
             <li>My Account</li>
+            <li>Order History</li>
         </ul>
     </div>
     <div class="row">
@@ -33,7 +31,6 @@
                 <li><a href="/toy/SecondHandToy">My Second Hand Toy</a></li>
                 <li><a href="/toy/OrderHistory">Order History</a></li>
                 <li><a href="/toy/Logout">Wishlist</a></li>
-
                 <li class="last_item"><a href="/toy/Logout">Logout</a></li>
             </ul>
         </article>

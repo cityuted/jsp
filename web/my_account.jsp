@@ -3,9 +3,6 @@
 <section id="content" class="cont_pad">
     <div class="breadcrump">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Pages</a></li>
             <li>My Account</li>
         </ul>
     </div>

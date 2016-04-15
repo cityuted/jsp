@@ -29,7 +29,7 @@
                 <form id="sort">
                     <label class="criterion">
                         <span>Sort by:</span>
-                        <a href="javascript:;"  class="slct3">Toy Name</a>
+                        <a id="sortDisplay" href="javascript:;"  class="slct3">Toy Name</a>
                         <ul class="drop3">
                             <li onclick="document.getElementById('sort').value = 'TOYNAME';"><a href="javascript:;">Toy Name</a></li>
                             <li onclick="document.getElementById('sort').value = this.childNodes[0].innerHTML;"><a href="javascript:;">Sales</a></li>
@@ -40,10 +40,10 @@
                     </label>
                     <label class="criterion">
                         <span></span>
-                        <a href="javascript:;" class="slct4">Asc</a>
+                        <a id="orderDisplay" href="javascript:;" class="slct4">Asc</a>
                         <ul class="drop4">
-                            <li onclick="document.getElementById('order').value = this.childNodes[0].innerHTML;"><a href="javascript:;">Asc</a></li>
-                            <li onclick="document.getElementById('order').value = this.childNodes[0].innerHTML;"><a href="javascript:;">Desc</a></li>
+                            <li onclick="document.getElementById('order').value = 'asc';"><a href="javascript:;">Ascending</a></li>
+                            <li onclick="document.getElementById('order').value = 'desc';"><a href="javascript:;">Descending</a></li>
                         </ul>
                         <input type="hidden" id="select4" />
                         <div class="clear"></div>
@@ -79,17 +79,55 @@
 
             </ul>
             <div class="categories_nav wrapper">
-                <div class="showing">Showing 1 to 12 of 18 (2 Pages)</div>
+                <%
+                    int pageCount = (toys.getToys().size() / 8);
+                    int pageNum = 1;
+                    int from = (pageNum - 1) * 8 + 1;
+
+                    int end = pageNum * 8;
+                    if (toys.getToys().size() < 8) {
+                        end = toys.getToys().size();
+                    }
+                    if (toys.getToys().size() % 8 != 0) {
+                        pageCount += 1;
+                    }
+                    out.println("<div class=\"showing\">Showing " + from + " to " + end + " of " + toys.getToys().size() + " (" + pageCount + " Pages)</div>");
+
+
+                %>
                 <div class="buttons">
                     <a href="#" class="prev"></a>
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
+                    <%                        
+
+                        for (int i = 0; i < pageCount; i++) {
+                            out.print(" <a href=\"#\">"+(i+1)+"</a>");
+                        }
+                    %>
                     <a href="#" class="next"></a>
                     <a href="#" class="end"></a>
                 </div>
             </div>
-
+            <script>
+                var sort="";
+                var order="";
+                if(document.getElementById("sort").value==='TOYNAME'){
+                    sort='Toy Name';
+                }
+                if(document.getElementById("sort").value==='CASHPOINT'){
+                    sort='Cash Point';
+                }
+                if(document.getElementById("sort").value==='Sales'){
+                    sort='Sales';
+                }
+                if(document.getElementById("order").value==='asc'){
+                    order='Ascending';
+                }
+                if(document.getElementById("order").value==='desc'){
+                    order='Descending';
+                }
+                document.getElementById("sortDisplay").innerHTML = sort;
+                document.getElementById("orderDisplay").innerHTML = order;
+            </script>
         </article>
         <article class="grid_4">
             <div class="tags">

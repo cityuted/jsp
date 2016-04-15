@@ -80,6 +80,10 @@
         <servlet-name>SecondHandToy</servlet-name>
         <servlet-class>SecondHandToy</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditAccount</servlet-name>
+        <servlet-class>EditAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -287,6 +291,10 @@
     <servlet-mapping>
         <servlet-name>SecondHandToy</servlet-name>
         <url-pattern>/SecondHandToy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAccount</servlet-name>
+        <url-pattern>/EditAccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

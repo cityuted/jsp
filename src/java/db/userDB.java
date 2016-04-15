@@ -123,18 +123,20 @@ public class userDB extends GeneralDB {
     }
 
     public boolean updateUser(String userID, String password, String userAddress, String userPhone, String email) {
+        if(!password.equals("")){
+            password = "PASSWORD='"+password+"',";
+        }
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE USER SET PASSWORD=?,USERADDRESS=?,USERPHONE=?,EMAIL=?"
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE USER SET "+password+"USERADDRESS=?,USERPHONE=?,EMAIL=?"
                     + "WHERE USERID = ?");
 
-            pstmt.setString(1, password);
-            pstmt.setString(2, userAddress);
-            pstmt.setString(3, userPhone);
-            pstmt.setString(4, email);
-            pstmt.setString(5, userID);
+            pstmt.setString(1, userAddress);
+            pstmt.setString(2, userPhone);
+            pstmt.setString(3, email);
+            pstmt.setString(4, userID);
             pstmt.executeUpdate();
             // }
             //stmnt.executeQuery()
@@ -144,6 +146,7 @@ public class userDB extends GeneralDB {
 
             return true;
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             try {
                 conn.rollback();
             } catch (SQLException ex1) {

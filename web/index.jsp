@@ -175,7 +175,7 @@
 
         <article class="grid_12">
 
-            <h2 class="ind">Latest Products</h2>
+            <h2 class="ind pink">Bestsellers</h2>
 
             <div class="carousel_box list_carousel responsive">
 
@@ -207,7 +207,7 @@
 
         <article class="grid_12">
 
-            <h2 class="ind pink">Bestsellers</h2>
+            <h2 class="ind">Second Hand Toy</h2>
 
             <div class="carousel_box list_carousel responsive last">
 
