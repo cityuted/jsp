@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2016 at 02:10 PM
+-- Generation Time: Apr 16, 2016 at 09:25 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -36,16 +36,13 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`CATEGORYID`, `CATEGORYNAME`) VALUES
-(1, 'MALE'),
-(2, 'FEMALE'),
-(3, 'NEUTRAL'),
-(4, '0-1 AGE'),
-(5, '1-2 AGE'),
-(6, '3-4 AGE'),
-(7, '5-7 AGE'),
-(8, '8-11 AGE'),
-(9, '12-14 AGE'),
-(10, '15++ AGE');
+(1, 'Toys for Boys'),
+(2, 'Toys for Girls'),
+(3, 'Neutral Toys'),
+(5, 'Aged 1-3'),
+(6, 'Aged 4-7'),
+(7, 'Aged 8-12'),
+(11, 'Toys on Sale');
 
 -- --------------------------------------------------------
 
@@ -55,10 +52,20 @@ INSERT INTO `category` (`CATEGORYID`, `CATEGORYNAME`) VALUES
 
 CREATE TABLE `message` (
   `MESSAGEID` int(11) NOT NULL,
+  `TRANSACTIONID` int(11) NOT NULL,
   `TOYID` int(11) NOT NULL,
   `CUSTID` int(11) NOT NULL,
-  `CONTENT` varchar(100) DEFAULT NULL
+  `CONTENT` varchar(100) DEFAULT NULL,
+  `Rating` int(11) NOT NULL DEFAULT '5',
+  `Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`MESSAGEID`, `TRANSACTIONID`, `TOYID`, `CUSTID`, `CONTENT`, `Rating`, `Date`) VALUES
+(12, 18, 4, 4, '1', 1, '2016-04-17 03:14:27');
 
 -- --------------------------------------------------------
 
@@ -73,6 +80,23 @@ CREATE TABLE `secondhand` (
   `CASHPOINT` int(4) NOT NULL DEFAULT '0',
   `APPROVAL` enum('WAITING','APPROVED','REJECTED') DEFAULT 'WAITING'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `secondhand`
+--
+
+INSERT INTO `secondhand` (`ID`, `CUSTID`, `NAME`, `CASHPOINT`, `APPROVAL`) VALUES
+(1, 4, 't1t1', 123, 'WAITING'),
+(2, 4, '22', 22, 'WAITING'),
+(3, 4, '2', 222, 'WAITING'),
+(4, 4, '333', 333, 'WAITING'),
+(5, 4, '1', 22, 'WAITING'),
+(6, 4, '111', 222, 'WAITING'),
+(7, 4, 'sss', 222, 'WAITING'),
+(8, 4, '555', 555, 'WAITING'),
+(9, 4, '999', 132, 'WAITING'),
+(10, 4, 'New s 3', 9, 'WAITING'),
+(11, 4, '22', 22, 'WAITING');
 
 -- --------------------------------------------------------
 
@@ -181,7 +205,8 @@ CREATE TABLE `transactionheader` (
 --
 
 INSERT INTO `transactionheader` (`TRANSACTIONID`, `CUSTID`, `DELIVERYAddressee`, `DELIVERYAddresseePhone`, `DELIVERYOPTION`, `DELIVERYADDRESS`, `DELIVERYPROGRSS`, `DELIVERYTIME`, `Payment`) VALUES
-(11, 4, '2', '7', 'Sea Freight', '6', 'PREPARING', '2016.04.14 at 20:09:29', 'Credit Card-123');
+(18, 4, '2', '5', 'Sea Freight', '7', 'COMPLETED', '2016.04.16 at 19:08:55', 'Cash Point-Total:40'),
+(19, 4, '2', '5', 'Sea Freight', '123131', 'PREPARING', '2016.04.16 at 19:29:03', 'Cash Point-Total:295');
 
 -- --------------------------------------------------------
 
@@ -193,6 +218,8 @@ CREATE TABLE `transactionitem` (
   `ID` int(11) NOT NULL,
   `TRANSACTIONID` int(11) NOT NULL,
   `TOYID` int(11) NOT NULL,
+  `TOYNAME` varchar(30) NOT NULL,
+  `CASHPOINT` int(11) NOT NULL,
   `QTY` int(2) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -200,8 +227,10 @@ CREATE TABLE `transactionitem` (
 -- Dumping data for table `transactionitem`
 --
 
-INSERT INTO `transactionitem` (`ID`, `TRANSACTIONID`, `TOYID`, `QTY`) VALUES
-(10, 11, 1, 1);
+INSERT INTO `transactionitem` (`ID`, `TRANSACTIONID`, `TOYID`, `TOYNAME`, `CASHPOINT`, `QTY`) VALUES
+(19, 18, 5, 'Bear soft toy', 25, 1),
+(20, 18, 4, 'Colorful toy with beads', 15, 1),
+(21, 19, 12, 'Play-Doh Confetti Compound', 59, 5);
 
 -- --------------------------------------------------------
 
@@ -228,9 +257,12 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`USERID`, `USERNAME`, `USERSEX`, `LOGINNAME`, `PASSWORD`, `USERADDRESS`, `USERPHONE`, `EMAIL`, `CASHPOINT`, `TYPEID`) VALUES
 (1, 'Pang Siu Fung', 'MALE', 'psfang', 'abcdef', 'RM 02,19/F,Ho Fung House,Ho Wa Court,SHATIN', '91779921', 'psfang@gmail.com', 0, 4),
-(4, '2', 'MALE', '123456', '123456', '6', '7', '8', 0, 4),
+(4, '2', 'MALE', '123456', '123456', '7', '5', '4', 500, 4),
 (5, '2', 'MALE', '4', '5', '6', '7', '8', 0, 4),
-(6, 'pang', 'MALE', 'pang', '123456', '423423', '4423423', '312312', 0, 1);
+(6, 'pang', 'MALE', 'pang', '123456', '423423', '4423423', '312312', 0, 1),
+(7, '2 1', 'MALE', '3333', '123456', '6', '5', '44', 0, 4),
+(8, 'a2 a1', 'MALE', 'a3', 'a7', 'a6', 'a5', 'a4', 0, 4),
+(9, 'b2 b1', 'MALE', 'b3', 'b1', 'b6', 'b5', 'b4', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -328,17 +360,17 @@ ALTER TABLE `usertype`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `CATEGORYID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `CATEGORYID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `MESSAGEID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `MESSAGEID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `secondhand`
 --
 ALTER TABLE `secondhand`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `toy`
 --
@@ -348,17 +380,17 @@ ALTER TABLE `toy`
 -- AUTO_INCREMENT for table `transactionheader`
 --
 ALTER TABLE `transactionheader`
-  MODIFY `TRANSACTIONID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `TRANSACTIONID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `transactionitem`
 --
 ALTER TABLE `transactionitem`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `USERID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `USERID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `usertype`
 --
