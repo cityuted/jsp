@@ -29,6 +29,10 @@ public class SecondHandToy extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(!checkLogin(request,response)){
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
         secondHandDB sdb = new secondHandDB();
         SecondHands shs = new SecondHands();
         if (request.getParameter("action") != null && request.getParameter("action").equals("submit")) {
@@ -49,6 +53,7 @@ public class SecondHandToy extends HttpServlet {
         error = getCheckInput(request.getParameter("cashPoint").isEmpty(), "Cash Point", error);
         if (!error.equals("")) {
             request.setAttribute("alert", Template.getErrorAlert(error, true));
+            request.setAttribute("action", "submit");
         } else {
             int custID = ((User) request.getSession().getAttribute("user")).getUserID();
             String toyName = request.getParameter("toyName");
@@ -72,6 +77,18 @@ public class SecondHandToy extends HttpServlet {
             error += input + " is required.</br>";
         }
         return error;
+    }
+
+    public Boolean checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            user = new User();
+        }
+        if (user.getUserID() == 0) {
+            request.setAttribute("alert", Template.getErrorAlert("Please Login First", false));
+            return false;
+        }
+        return true;
     }
 
 }

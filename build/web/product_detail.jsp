@@ -1,4 +1,4 @@
-<jsp:include page="header.jsp"/>
+<%@include file="header.jsp" %>
 <script>
     document.getElementById("lishop").className += " current";
 </script>
@@ -28,16 +28,19 @@
                 <article class="grid_8">
                     <h2 class="black"><%=toy.getToyName()%></h2>
                     <div class="product_info">
+
+
                         <div class="rating">
-                            <span class="active"></span>
-                            <span class="active"></span>
-                            <span class="active"></span>
-                            <span></span>
-                            <span></span>
+                            <%
+                                if (messages.getMessages() != null) {
+
+                                    out.print(Template.getRate(messages.averageRating()));
+                                }
+
+                            %>
                         </div>
                         <div class="review">
                             <a href="#"><%=messages.getMessages().size()%> Review(s)</a>&nbsp;
-                            <a href="#" class="write_view">Write a Review</a>
                         </div>
                     </div>
                     <div class="description">
@@ -87,7 +90,6 @@
                     </div>
                     <dl class="tags1">
                         <dd>Category: <a href="#">Toys on SALE</a>, <a href="#">Classic &amp; Retro</a></dd>
-                        <dd>Tags: <a href="#">classic</a>, <a href="#">music</a>, <a href="#">plastic</a>, <a href="#">sale</a>,</dd>
                     </dl>
                 </article>
             </div>
@@ -100,39 +102,41 @@
                     </div>
                 </div>
 
-                <h2>Additional Info</h2>
-                <div>
-                    <dl class="add_info">
-                        <dd><strong>Size:</strong>Big</dd>
-                        <dd><strong>Color:</strong>Colorful</dd>
-                        <dd class="last"><strong>Material:</strong>Plastic</dd>
-                    </dl>
-                </div>
-                <h2>Reviews (3)</h2>
+
+                <h2>Reviews (<%=messages.getMessages().size()%>)</h2>
                 <div>
                     <div class="review_info">
                         <div class="qty_review">
-                            <strong>3 reviews for <%=toy.getToyName()%></strong>
+                            <strong><%=messages.getMessages().size()%> review(s) for <%=toy.getToyName()%></strong>
                         </div>
                         <div class="rating average_rating">
-                            <em>Average Rating:</em>
-                            <span class="active"></span>
-                            <span class="active"></span>
-                            <span class="active"></span>
-                            <span class="active"></span>
-                            <span></span>
+
+                            <%
+                                if (messages.getMessages().size() > 0) {
+                                    out.print("<em>Average Rating:</em>");
+                                    out.print(Template.getRate(messages.averageRating()));
+                                }
+
+                            %>
                         </div>
                     </div>
                     <ul class="ext_list review_list">
-                        <%
-                            for (int i = 0; i < messages.getMessages().size(); i++) {
+                        <%                            for (int i = 0; i < messages.getMessages().size(); i++) {
                                 Message m = messages.getMessages().get(i);
-                                out.print(Template.getMessageTemplate("123", m.getContent(), "date", 3));
+                                out.print(Template.getMessageTemplate(m.getCustName(), m.getContent(), m.getDate(), m.getRating()));
                             }
                         %>
 
                     </ul>
-                    <a href="#" class="add_review button">Add a Review</a>
+
+                    <%
+                        if (user.getUserID() != 0 && request.getParameter("id") != null && request.getParameter("transID") != null) {
+                            int transID = Integer.parseInt(request.getParameter("transID"));
+                            int toyID = Integer.parseInt(request.getParameter("id"));
+                            out.print(Template.getAddReview(transID, toyID, user.getUserID()));
+                        }
+                    %>
+
                 </div>
             </div>
             <div class="related_products">
@@ -210,5 +214,6 @@
     </div>
 </section>
 </div>
+
 <!--==============================footer=================================-->
 <jsp:include page="footer.jsp"/>

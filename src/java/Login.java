@@ -49,7 +49,7 @@ public class Login extends HttpServlet {
                 System.out.println("F");
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                request.getRequestDispatcher("/Home").forward(request, response);
+                request.getRequestDispatcher("/MyAccount").forward(request, response);
                 return;
             }else{
                 Error+="Login Name or Password is incorrect, Please try it again.</br>";

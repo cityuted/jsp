@@ -24,7 +24,13 @@
         </form>
         <article class="grid_8">
             <h2 class="ind1"><%=request.getAttribute("pageFor")%></h2>
-            <figure class="category_image"><img src="images/category_img1.png" alt=""></figure>
+            <%
+                
+                    out.print("<figure class=\"category_image\"><img src=\"images/category_img1.png\" alt=\"\"></figure>");
+                
+
+            %>
+
             <div class="sorting_block">
                 <form id="sort">
                     <label class="criterion">
@@ -70,8 +76,7 @@
                 <div class="clear"></div>
             </div>
             <ul id="category" class="grid">
-                <%
-                    for (int i = 0; i < toys.getToys().size(); i++) {
+                <%                    for (int i = 0; i < toys.getToys().size(); i++) {
                         Toy toy = toys.getToys().get(i);
                         out.print(Template.getToyTemplate(toy.encodedImage(), toy.getToyName(), String.valueOf(toy.getCashpoint()), String.valueOf(toy.getToyID())));
                     }
@@ -97,10 +102,8 @@
                 %>
                 <div class="buttons">
                     <a href="#" class="prev"></a>
-                    <%                        
-
-                        for (int i = 0; i < pageCount; i++) {
-                            out.print(" <a href=\"#\">"+(i+1)+"</a>");
+                    <%                        for (int i = 0; i < pageCount; i++) {
+                            out.print(" <a href=\"#\">" + (i + 1) + "</a>");
                         }
                     %>
                     <a href="#" class="next"></a>
@@ -108,22 +111,22 @@
                 </div>
             </div>
             <script>
-                var sort="";
-                var order="";
-                if(document.getElementById("sort").value==='TOYNAME'){
-                    sort='Toy Name';
+                var sort = "";
+                var order = "";
+                if (document.getElementById("sort").value === 'TOYNAME') {
+                    sort = 'Toy Name';
                 }
-                if(document.getElementById("sort").value==='CASHPOINT'){
-                    sort='Cash Point';
+                if (document.getElementById("sort").value === 'CASHPOINT') {
+                    sort = 'Cash Point';
                 }
-                if(document.getElementById("sort").value==='Sales'){
-                    sort='Sales';
+                if (document.getElementById("sort").value === 'Sales') {
+                    sort = 'Sales';
                 }
-                if(document.getElementById("order").value==='asc'){
-                    order='Ascending';
+                if (document.getElementById("order").value === 'asc') {
+                    order = 'Ascending';
                 }
-                if(document.getElementById("order").value==='desc'){
-                    order='Descending';
+                if (document.getElementById("order").value === 'desc') {
+                    order = 'Descending';
                 }
                 document.getElementById("sortDisplay").innerHTML = sort;
                 document.getElementById("orderDisplay").innerHTML = order;

@@ -49,13 +49,8 @@
                   <input type="text" value="">
                     <span class="error">*This is not a valid email address.</span> <span class="empty">*This field is required.</span>
                 </label>
-                <label class="website notRequired">
-                   Your Website <br>
-                  <input type="text" value="">
-                    <span class="error">*This is not a valid phone number.</span> <span class="empty">*This field is required.</span>
-                </label>
-                <label class="subject notRequired">
-                   Subject <br>
+                <label class="subject">
+                   Subject <sup class="red">*</sup><br>
                   <input type="text" value="">
                     <span class="error">*This is not a valid phone number.</span> <span class="empty">*This field is required.</span>
                 </label>

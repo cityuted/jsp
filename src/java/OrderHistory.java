@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import bean.Template;
 import bean.TransactionHeaders;
 import bean.User;
 import db.TransactionDB;
@@ -33,6 +34,10 @@ public class OrderHistory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(!checkLogin(request,response)){
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
         processRequest(request, response);
     }
 
@@ -42,4 +47,15 @@ public class OrderHistory extends HttpServlet {
         processRequest(request, response);
     }
 
+    public Boolean checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            user = new User();
+        }
+        if (user.getUserID() == 0) {
+            request.setAttribute("alert", Template.getErrorAlert("Please Login First", false));
+            return false;
+        }
+        return true;
+    }
 }

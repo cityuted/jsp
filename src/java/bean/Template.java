@@ -5,7 +5,10 @@
  */
 package bean;
 
+import db.TransactionDB;
+import db.messageDB;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,53 +16,150 @@ import java.io.UnsupportedEncodingException;
  */
 public class Template {
 
-    public static String getSubmitSecondHand(){
-        return "            <form id=\"create_account\" method=\"post\" action=\"/toy/SecondHandToy\">\n" +
-"                <div class=\"account_box\">\n" +
-"                    <div class=\"form_title\">Submit Second Hand Toy</div>\n" +
-"                    <div class=\"inner\">\n" +
-"                        <label>\n" +
-"                            <span>Second Hand Toy Name <sup class=\"red\">*</sup></span>\n" +
-"                            <input type=\"text\" name=\"toyName\">\n" +
-"                        </label>\n" +
-"                        <label>\n" +
-"                            <span>Prefered Cash Point <sup class=\"red\">*</sup></span>\n" +
-"                            <input type=\"text\" name=\"cashPoint\">\n" +
-"                        </label>\n" +
-"                        <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"form_btn log_in\">Submit</a>\n" +
-"                    </div>\n" +
-"                </div>\n" +
-"            </form>";
+    public static String getSubmitSecondHand() {
+        return "            <form id=\"create_account\" method=\"post\" action=\"/toy/SecondHandToy\">\n"
+                + "                <div class=\"account_box\">\n"
+                + "                    <div class=\"form_title\">Submit Second Hand Toy</div>\n"
+                + "                    <div class=\"inner\">\n"
+                + "                        <label>\n"
+                + "                            <span>Second Hand Toy Name <sup class=\"red\">*</sup></span>\n"
+                + "                            <input type=\"text\" name=\"toyName\">\n"
+                + "                        </label>\n"
+                + "                        <label>\n"
+                + "                            <span>Prefered Cash Point <sup class=\"red\">*</sup></span>\n"
+                + "                            <input type=\"text\" name=\"cashPoint\">\n"
+                + "                        </label>\n"
+                + "                        <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"form_btn log_in\">Submit</a>\n"
+                + "                    </div>\n"
+                + "                </div>\n"
+                + "            </form>";
     }
-    
+
+    public static String getAddReview(int transID, int toyID, int custID) {
+        messageDB mdb = new messageDB();
+        if (!mdb.checkAddMessage(transID, toyID, custID)) {
+            return "";
+        }
+        return "                    <div id='reviewpos' class=\"rating\"> Rating Star(s):\n"
+                + "                        <ul id='commentStar' class=\"ext_list review_list\">\n"
+                + "                            <span class='active' onclick=\"changeRate(1)\"></span><span onclick=\"changeRate(2)\"></span><span onclick=\"changeRate(3)\"></span><span onclick=\"changeRate(4)\"></span><span onclick=\"changeRate(5)\"></span></ul></div><br/>\n"
+                + "                    <form class=\"checkout_form\" action='/toy/ProductDetail' method=\"post\">\n"
+                + "                        <textarea placeholder=\"Add Comment here...\" name='comment' ></textarea>\n"
+                + "                        <input type='hidden' name='rating' id='rating' value='1' />\n"
+                + "                        <input type='hidden' name='transID' id='transID' value='" + transID + "' />\n"
+                + "                        <input type='hidden' name='toyID' id='toyID' value='" + toyID + "' />\n"
+                + "                        <input type='hidden' name='id' id='id' value='" + toyID + "' />\n"
+                + "                        <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"add_review button\">Submit review</a>\n"
+                + "                    </form>\n"
+                + "                    <script>\n"
+                + "                        function changeRate(num) {\n"
+                + "                            document.getElementById('rating').value = num;\n"
+                + "                            var l = document.getElementById('commentStar').childNodes.length;\n"
+                + "                            for (var i = 0; i < l; i++) {\n"
+                + "                                if (i < num) {\n"
+                + "                                    document.getElementById('commentStar').childNodes[i + 1].className = 'active';\n"
+                + "                                } else {\n"
+                + "                                    document.getElementById('commentStar').childNodes[i + 1].className = '';\n"
+                + "                                }\n"
+                + "\n"
+                + "                            }\n"
+                + "                        }\n"
+                + "\n"
+                + "                    </script><script>\n"
+                + "                            $(document).ready(function () {\n"
+                + "                                $('html, body').animate({\n"
+                + "                                    scrollTop: $(\"#reviewpos\").offset().top\n"
+                + "                                }, 2000);\n"
+                + "\n"
+                + "                            });\n"
+                + "</script>";
+    }
+
     public static String getOrder(TransactionHeader th) {
         return "                    <ul id=\"accordion2\" class=\"accordion\">\n"
                 + "                        <li>\n"
-                + "                            <a href=\"javascript:;\"><i></i>Order ID: "+th.getTRANSACTIONID()+"</a>\n"
+                + "                            <a href=\"javascript:;\"><i></i>Order ID: " + th.getTRANSACTIONID() + "</a>\n"
                 + "                            <div class=\"accordion_content pad1\">\n"
                 + "                                <ul class=\"list2\">\n"
-                + "                                    <li><a href=\"#\">Addressee: "+th.getDELIVERYAddressee()+"</a></li>\n"
-                + "                                    <li><a href=\"#\">TelePhone: "+th.getDELIVERYAddresseePhone()+"</a></li>\n"
-                + "                                    <li><a href=\"#\">Delivery Method: "+th.getDELIVERYOPTION()+"</a></li>\n"
-                + "                                    <li><a href=\"#\">Delivery Address: "+th.getDELIVERYADDRESS()+"</a></li>\n"
-                + "                                    <li><a href=\"#\">Delivery Time: "+th.getDELIVERYTIME()+"</a></li>\n"
-                + "                                    <li><a href=\"#\">Payment Method: "+th.getPayment()+"</a></li>\n"
-                + "                                    <li><a href=\"#\">Progress: "+th.getDELIVERYPROGRSS()+"</a></li>\n"
-                + "                                </ul>\n"
+                + "                                    <li><a href=\"#\">Addressee: " + th.getDELIVERYAddressee() + "</a></li>\n"
+                + "                                    <li><a href=\"#\">TelePhone: " + th.getDELIVERYAddresseePhone() + "</a></li>\n"
+                + "                                    <li><a href=\"#\">Delivery Method: " + th.getDELIVERYOPTION() + "</a></li>\n"
+                + "                                    <li><a href=\"#\">Delivery Address: " + th.getDELIVERYADDRESS() + "</a></li>\n"
+                + "                                    <li><a href=\"#\">Delivery Time: " + th.getDELIVERYTIME() + "</a></li>\n"
+                + "                                    <li><a href=\"#\">Payment Method: " + th.getPayment() + "</a></li>\n"
+                + "                                    <li><a href=\"#\">Progress: <red>" + th.getDELIVERYPROGRSS() + "</red></a></li>\n"
+                + "                                </ul>\n" + getOrderItem(th.getTRANSACTIONID(), th.getCUSTID())
                 + "                            </div>\n"
                 + "                        </li>\n"
                 + "                    </ul> ";
     }
-    
+
+    public static String getOrderItem(int transID, int custID) {
+        TransactionDB tdb = new TransactionDB();
+        ArrayList<TransactionItem> tempList = tdb.listTransactionItem(transID);
+        String cartString = "";
+        if (tempList != null) {
+            for (int i = 0; i < tempList.size(); i++) {
+                TransactionItem ti = tempList.get(i);
+                cartString += Template.getOrderItem(ti.getToyName(), ti.getCashPoint(), ti.getQTY(), ti.getToyID(), transID, custID);
+            }
+        }
+        return "<div class=\"pad_box5\">\n"
+                + "                            <div class=\"table_wrap\">\n"
+                + "                                <table class=\"order_table confirm\">\n"
+                + "                                    <tbody><tr>\n"
+                + "                                        <th class=\"width_7\">Product Name</th>\n"
+                + "                                        <th class=\"width_4\">Model</th>\n"
+                + "                                        <th class=\"width_8\">Quantity</th>\n"
+                + "                                        <th class=\"width_8\">Cash Point</th>\n"
+                + "                                        <th>Total</th>\n"
+                + "                                        <th></th>\n"
+                + "                                    </tr>\n"
+                + cartString
+                + "                    </tr>                                </tbody></table>\n"
+                + "                            </div>\n"
+                + "                        </div>";
+    }
+
+    public static String getOrderItem(String name, int cashPoint, int qty, int id, int transID, int custID) {
+        messageDB mdb = new messageDB();
+        String review = "<td></td>";
+        if (mdb.checkAddMessage(transID, id, custID)) {
+            review = "<td><a href=\"/toy/ProductDetail?id=" + id + "&transID=" + transID + "\"  class=\"button\">Add a Review</a></td>";
+        }
+        int total = qty * cashPoint;
+        return "                    <tr>\n"
+                + "                        <td>\n"
+                + "                            <div class=\"ext_box confirm_product\">\n"
+                + "                                <div>\n"
+                + "                                    <a href=\"#\">" + name + "</a>\n"
+                + "                                </div>\n"
+                + "                            </div> \n"
+                + "                        </td>\n"
+                + "                        <td>" + id + "</td>\n"
+                + "                        <td>\n"
+                + "                            <form class=\"confirm_quantity\" action='/toy/Cart' method='post' >\n"
+                + "                                <input type='hidden' name='id' value='" + id + "' /><input disabled=\"disabled\" name='qty'type=\"text\" value=\"" + qty + "\" onBlur=\"if (this.value == '' || this.value == 0)\n"
+                + "                                            this.value = '1'\" onFocus=\"if (this.value == '1')\n"
+                + "                                                        this.value = ''\">\n"
+                + "                                </form>"
+                + "                            </form>\n"
+                + "                        </td>\n"
+                + "                        <td>$" + cashPoint + "</td>\n"
+                + "                        <td>$" + total + "</td>\n"
+                + review
+                + "                    </tr>";
+    }
+
     public static String getSecondHand(SecondHand sh) {
         return "                    <ul id=\"accordion2\" class=\"accordion\">\n"
                 + "                        <li>\n"
-                + "                            <a href=\"javascript:;\"><i></i>Second Hand Submission ID: "+sh.getID()+"</a>\n"
+                + "                            <a href=\"javascript:;\"><i></i>Second Hand Submission ID: " + sh.getID() + "</a>\n"
                 + "                            <div class=\"accordion_content pad1\">\n"
                 + "                                <ul class=\"list2\">\n"
-                + "                                    <li><a href=\"#\">Second Hand Toy Name: "+sh.getName()+"</a></li>\n"
-                + "                                    <li><a href=\"#\">Prefered Cash Point: "+sh.getCashpoint()+"</a></li>\n"
-                + "                                    <li><a href=\"#\">Status: "+sh.getApproval()+"</a></li>\n"
+                + "                                    <li><a href=\"#\">Second Hand Toy Name: " + sh.getName() + "</a></li>\n"
+                + "                                    <li><a href=\"#\">Prefered Cash Point: " + sh.getCashpoint() + "</a></li>\n"
+                + "                                    <li><a href=\"#\">Status: " + sh.getApproval() + "</a></li>\n"
                 + "                                </ul>\n"
                 + "                            </div>\n"
                 + "                        </li>\n"
@@ -93,7 +193,10 @@ public class Template {
     }
 
     public static String getToyTemplate(String img, String name, String cashPoint, String id) {
-        return "              <li>\n"
+        if (name.length() > 20) {
+            name = name.substring(0, 19);
+        }
+        return "              <li >\n"
                 + "                  <div>\n"
                 + "                    <figure><a href=\"#\"><img width=\"150\" height=\"150\" src=\"" + img + "\" alt=\"\"></a></figure>\n"
                 + "                    <div>\n"
@@ -109,7 +212,6 @@ public class Template {
     }
 
     public static String getMessageTemplate(String name, String content, String Date, int rate) {
-        Date = "Jan 29th 2013";
         return "                    <li>\n"
                 + "                      <figure><img src=\"images/ava.jpg\" alt=\"\"></figure>\n"
                 + "                      <div>\n"
@@ -118,8 +220,6 @@ public class Template {
                 + "                      </div>\n"
                 + "                      <div class=\"rating\">\n"
                 + getRate(rate)
-                + "                        <span></span>\n"
-                + "                        <span></span>\n"
                 + "                      </div>\n"
                 + "                    </li>";
     }
@@ -128,6 +228,11 @@ public class Template {
         String s = "";
         for (int i = 0; i < rate; i++) {
             s += "<span class=\"active\"></span>";
+        }
+        if (rate < 5) {
+            for (int i = 0; i < 5 - rate; i++) {
+                s += "<span></span>";
+            }
         }
         return s;
     }
@@ -220,7 +325,7 @@ public class Template {
 
     public static String getCheckoutStep1() {
         return "                <li id=\"billind_block\">\n"
-                + "                    <a href=\"javascript:;\"><i></i>Step 1: Billing Details</a>\n"
+                + "                    <a href=\"javascript:;\"><i></i>Step 1: Addressee</a>\n"
                 + "\n"
                 + "                    <div class=\"accordion_content \">\n"
                 + "                        <form action=\"/toy/Checkout\" method=\"post\" class=\"row checkout_form\">\n"

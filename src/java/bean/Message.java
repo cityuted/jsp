@@ -13,7 +13,36 @@ public class Message {
     private int messageID;
     private int toyID;
     private int custID;
+    private String custName;
+
+    public String getCustName() {
+        return custName;
+    }
+
+    public void setCustName(String custName) {
+        this.custName = custName;
+    }
+    private int rating;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
     private String content;
+    private String date;
+
+
+    
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
     /**
      * @return the messageID

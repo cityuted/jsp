@@ -37,7 +37,7 @@
 
                                     <span class="font6">Time!</span>
 
-                                    <a href="#" class="slide_button">Click Here</a>
+                                    <a href="/toy/Category?order=asc&sort=TOYNAME" class="slide_button">Click Here</a>
 
                                 </div>
 
@@ -61,39 +61,17 @@
 
                                     <span class="font5">on</span>
 
-                                    <span class="font6">Clothes</span>
+                                    <span class="font6">Second Hand Toy</span>
 
-                                    <a href="#" class="slide_button">Shop Now</a>
-
-                                </div>
-
-                                <a href="#"><img src="images/slide2_s.png"></a>
-
-                            </div>
-
-                            <div class="item">
-
-                                <img src="images/slide3.png">
-
-                                <div class="m-caption caption3">
-
-                                    <span class="font1">Powerful</span>
-
-                                    <span class="font2">tractor</span>
-
-                                    <span class="font3">for <span>only</span></span>
-
-                                    <span class="font4">$</span>
-
-                                    <span class="font5">39.99</span>
-
-                                    <a href="#" class="slide_button">Buy now</a>
+                                   <a href="/toy/Category?order=asc&sort=TOYNAME" class="slide_button">Click Here</a>
 
                                 </div>
 
-                                <a href="#"><img src="images/slide3_s.png"></a>
+                                <a href="/toy/Category"><img src="images/slide2_s.png"></a>
 
                             </div>
+
+                        
 
                         </div>
 
@@ -117,7 +95,6 @@
 
                                 <div class = 'item'></div>
 
-                                <div class = 'item'></div>
 
                             </div>
 
@@ -139,7 +116,7 @@
 
                     <div class="banner1">
 
-                        <a href="#"><img src="images/banner1.png" alt=""><span><img src="images/banner1_h.png" alt=""></span></a>
+                        <a href="/toy/Category?order=asc&sort=TOYNAME&cate=1"><img src="images/banner1.png" alt=""><span><img src="images/banner1_h.png" alt=""></span></a>
 
                     </div>
 
@@ -149,7 +126,7 @@
 
                     <div class="banner2">
 
-                        <a href="#"><img src="images/banner2.png" alt=""><span><img src="images/banner2_h.png" alt=""></span></a>
+                        <a href="/toy/Category?order=asc&sort=TOYNAME&cate=2"><img src="images/banner2.png" alt=""><span><img src="images/banner2_h.png" alt=""></span></a>
 
                     </div>
 
@@ -159,7 +136,7 @@
 
                     <div class="banner3">
 
-                        <a href="#"><img src="images/banner3.png" alt=""><span><img src="images/banner3_h.png" alt=""></span></a>
+                        <a href="/toy/Category?order=asc&sort=TOYNAME&cate=11"><img src="images/banner3.png" alt=""><span><img src="images/banner3_h.png" alt=""></span></a>
 
                     </div>
 

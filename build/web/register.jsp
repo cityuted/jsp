@@ -3,7 +3,6 @@
 <section id="content" class="cont_pad">
     <div class="breadcrump">
         <ul>
-            <li><a href="#">Pages</a></li>
             <li>Create an Account</li>
         </ul>
     </div>

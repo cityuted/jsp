@@ -41,7 +41,7 @@ public class Category extends HttpServlet {
             request.setAttribute("pageFor", "Search for "+request.getParameter("search"));
         }else{
             toys.setToys(tdb.listToy(order));
-            request.setAttribute("pageFor", "Toys on SALE");
+            request.setAttribute("pageFor", "All Toys");
         }
         request.setAttribute("toys", toys);
         request.getRequestDispatcher("category.jsp").forward(request, response);

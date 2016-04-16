@@ -9,21 +9,30 @@
     <div class="row">
         <article class="grid_8">
             <h2 class="blue ind1">My Account</h2>
+            <%                if (request.getAttribute("alert") != null) {
+                    out.print(request.getAttribute("alert"));
+                }
+            %>
             <div class="row">
                 <div class="grid_8">
                     <ul id="accordion2" class="accordion">
                         <li>
-                            <a href="javascript:;"><i></i>My Account</a>
-                            <div class="accordion_content pad1">
-                                <ul class="list2">
-                                    <li><a href="#">User Name: <%=user.getUserName()%></a></li>
-                                    <li><a href="#">Cash Point: <%=user.getCashpoint()%></a></li>
-                                    <li><a href="#">Email: <%=user.getEmail()%></a></li>
-                                    <li><a href="#">Telephone: <%=user.getUserPhone()%></a></li>
-                                    <li><a href="#">Address: <%=user.getUserAddress()%></a></li>
-                                    <li><a href="#">Gender: <%=user.getUserSex()%></a></li>
-                                </ul>
-                            </div>
+                            <%
+                                if (user != null && user.getUserID() != 0) {
+                                    out.print("<a href='javascript:;'><i></i>My Account</a>");
+                                    out.print("<div class='accordion_content pad1'>");
+                                    out.print("<ul class='list2'>");
+                                    out.print("<li><a href='#'>User Name: " + user.getUserName() + "</a></li>");
+                                    out.print("<li><a href='#'>Cash Point: " + user.getCashpoint() + "</a></li>");
+                                    out.print("<li><a href='#'>Email: " + user.getEmail() + "</a></li>");
+                                    out.print("<li><a href='#'>Telephone: " + user.getUserPhone() + "</a></li>");
+                                    out.print("<li><a href='#'>Address: " + user.getUserAddress() + "</a></li>");
+                                    out.print("<li><a href='#'>Gender: " + user.getUserSex() + "</a></li>");
+                                    out.print("</ul>");
+                                    out.print("</div>");
+                                }
+                            %>
+
                         </li>
                     </ul> 
                 </div>

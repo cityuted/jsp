@@ -13,6 +13,24 @@ public class TransactionItem {
     private int ID;
     private int transactionID;
     private int toyID;
+    private String toyName;
+
+    public String getToyName() {
+        return toyName;
+    }
+
+    public void setToyName(String toyName) {
+        this.toyName = toyName;
+    }
+    private int cashPoint;
+
+    public int getCashPoint() {
+        return cashPoint;
+    }
+
+    public void setCashPoint(int cashPoint) {
+        this.cashPoint = cashPoint;
+    }
     private int QTY;
 
     /**

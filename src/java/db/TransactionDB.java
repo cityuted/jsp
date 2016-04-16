@@ -8,6 +8,7 @@ package db;
 import bean.CheckoutStatus;
 import bean.Toy;
 import bean.TransactionHeader;
+import bean.TransactionItem;
 import com.mysql.jdbc.Statement;
 import static db.GeneralDB.conn_url;
 import java.sql.Connection;
@@ -70,16 +71,20 @@ public class TransactionDB extends GeneralDB {
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             conn.setAutoCommit(false);
+            PreparedStatement pstmt = null;
             for (int i = 0; i < cart.getSize(); i++) {
-                PreparedStatement pstmt = conn.prepareStatement("INSERT INTO transactionitem(TRANSACTIONID,TOYID,QTY) VALUES (?,?,?)");
+                pstmt = conn.prepareStatement("INSERT INTO transactionitem(TRANSACTIONID,TOYID,TOYNAME,CASHPOINT,QTY) VALUES (?,?,?,?,?)");
                 pstmt.setInt(1, TRANSACTIONID);
                 pstmt.setInt(2, cart.getToys().get(i).getToyID());
-                pstmt.setInt(3, cart.getToys().get(i).getQTY());
+                pstmt.setString(3, cart.getToys().get(i).getToyName());
+                pstmt.setInt(4, cart.getToys().get(i).getCashpoint());
+                pstmt.setInt(5, cart.getToys().get(i).getQTY());
                 pstmt.executeUpdate();
-                conn.commit();
-                pstmt.close();
-                conn.close();
+
             }
+            conn.commit();
+            pstmt.close();
+            conn.close();
             return true;
         } catch (SQLException ex) {
             try {
@@ -117,6 +122,34 @@ public class TransactionDB extends GeneralDB {
             conn.close();
             return tempList;
         } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    public ArrayList<TransactionItem> listTransactionItem(int TRANSACTIONID) {
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM transactionitem where TRANSACTIONID = ? ");
+            pstmt.setInt(1, TRANSACTIONID);
+            ArrayList<TransactionItem> tempList = new ArrayList();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                TransactionItem tempToy = new TransactionItem();
+                tempToy.setID(rs.getInt("ID"));
+                tempToy.setTransactionID(rs.getInt("TRANSACTIONID"));
+                tempToy.setToyName(rs.getString("TOYNAME"));
+                tempToy.setToyID(rs.getInt("TOYID"));
+                tempToy.setCashPoint(rs.getInt("CASHPOINT"));
+                tempToy.setQTY(rs.getInt("QTY"));
+                tempList.add(tempToy);
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempList;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             return null;
         }
     }

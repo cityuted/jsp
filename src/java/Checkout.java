@@ -125,16 +125,16 @@ public class Checkout extends HttpServlet {
             case 4:
                 if (request.getParameter("type").equals("Cash Point")) {
                     checkoutStatus.setBoolPayment(false);
-                    if (user.getUserID() <= cart.getTotal()) {
+                    if (user.getCashpoint() <= cart.getTotal()) {
                         System.out.println("Not enough");
                         request.setAttribute("alert", Template.getErrorAlert("Not Enough Cash Point!", false));
                         return Template.getCheckoutStep4() + Template.getCheckoutStep4Session(checkoutStatus);
                     }
-                    checkoutStatus.setPayment("Cash Point-" + cart.getTotal());
+                    checkoutStatus.setPayment("Cash Point-Total:" + cart.getTotal());
                 } else {
                     checkoutStatus.setBoolPayment(true);
                     error = getCheckInput(request.getParameter("creditcard").isEmpty(), "Credit Card ID", error);
-                    checkoutStatus.setPayment("Credit Card-" + request.getParameter("creditcard"));
+                    checkoutStatus.setPayment("Credit Card-ID:" + request.getParameter("creditcard")+" -Total:"+ cart.getTotal());
                     if (!error.equals("")) {
                         request.setAttribute("alert", Template.getErrorAlert(error, true));
                         return Template.getCheckoutStep4() + Template.getCheckoutStep4Session(checkoutStatus);
@@ -148,7 +148,7 @@ public class Checkout extends HttpServlet {
                 if (tdb.createTransaction(user.getUserID(), checkoutStatus, cart)) {
                     cart.clear();
                     request.getSession().setAttribute("cart", cart);
-                    request.setAttribute("alert", Template.getSuccessAlert("Transaction Scucceed") + Template.getInfoAlert(Template.getHref("My Account", "/toy/MyAccount")));
+                    request.setAttribute("alert", Template.getSuccessAlert("Transaction Scucceed") + Template.getInfoAlert(Template.getHref("Order History", "/toy/OrderHistory")));
                 } else {
                     request.setAttribute("alert", Template.getErrorAlert("Transaction Failed, Please try again later!", false));
                 }
