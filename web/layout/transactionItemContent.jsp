@@ -74,7 +74,7 @@
         <div class="box">
             <div class="box-header">
 
-                <h3 class="box-title">Transaction Header Table</h3>
+                <h3 class="box-title">Item Table</h3>
 
                 <div class="box-tools">
 

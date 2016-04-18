@@ -62,7 +62,7 @@
                 <!-- Main content -->
                 <div class="box box-warning">
                     <div class="box-header with-border">
-                        <h3 class="box-title">View Toy</h3>
+                        <h3 class="box-title">View Transaction Item</h3>
                     </div>
                     <!-- /.box-header -->
 
