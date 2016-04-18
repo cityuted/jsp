@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="bean.TransactionItem"%>
+<%@page import="db.TransactionDB"%>
 <%@page import="org.apache.commons.codec.binary.Base64"%>
 <%@page import="bean.SecondHand"%>
 <%@page import="db.secondHandDB"%>
@@ -27,7 +29,7 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <%@ include file="/layout/style.jsp"%>
-
+        
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -46,131 +48,106 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <jsp:include page="/layout/contentHeader.jsp"/>
-                <% toyDB toyDb = new toyDB();
-                    categoryDB categorydb = new categoryDB();
-                    toyCategoryDB toyCatdb = new toyCategoryDB();
-                    userDB userdb = new userDB();
-                    secondHandDB secondHanddb = new secondHandDB();
+                <%
+                    int tranID = 0;
+                    if (request.getParameter("transactionID") != null) {
+                        tranID = Integer.parseInt(request.getParameter("transactionID"));
+                    }
+                    TransactionDB tranDB = new TransactionDB();
+                    TransactionHeader header = tranDB.searchTransaction(tranID);
+                   
 
                 %>
-                <% Toy t = toyDb.listToyByID(Integer.parseInt(request.getParameter("id")));
-                    ArrayList<Category> categoryList = categorydb.listToyCategory();
-                    ArrayList<ToyCategory> toyCatList = toyCatdb.listToyCategoryByToyID(Integer.parseInt(request.getParameter("id")));
-                    ArrayList<SecondHand> secondHandList = secondHanddb.listSecondHand();
-                %>
+
                 <!-- Main content -->
                 <div class="box box-warning">
                     <div class="box-header with-border">
                         <h3 class="box-title">View Toy</h3>
                     </div>
                     <!-- /.box-header -->
-                    <% byte[] encodeBase64 = Base64.encodeBase64(Base64.decodeBase64(t.getToyIcon()));
-                        String base64DataString = new String(encodeBase64, "UTF-8");
 
-                    %>
-                    <div class="form-group row-sm-8" style="display:inline-block; vertical-align: bottom;float: none;">
 
-                        <div class="col-sm-6 " >
-                            <img class="img-responsive"  src="data:image/jpeg;base64,<%=base64DataString%>" alt="Photo">
-                            
-                        </div>
-                        
-                        <br/>
-                    </div>
-                            
+
                     <div class="box-body row-sm-8">
-                        <form  method='post' action='/toy/doSearchToy' >
+                        <form  method='post' action='/toy/doSearchTransaction' >
                             <div class="form-group">
-                                <label>Toy ID</label>
-                                <input type="text" class="form-control" value="<%=request.getParameter("id")%>" disabled="">
-                                <input type="hidden" name='toyID' id='toyID' value="<%=request.getParameter("id")%>" >
+                                <label>Transaction ID</label>
+                                <input type="text" class="form-control" value="<%= tranID%>" disabled="">
+                                <input type="hidden" name='transactionID' id='toyID' value="<%=tranID%>" >
                             </div>
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Toy Name</label>
-                                <input type="text" name='toyName' disabled=""  id='toyName' class="form-control" required value='<%= t.getToyName()%>'>
+                            
+                             <div class="form-group">
+                                <label>Customer ID  </label>
+                                <div class='btn-group-vertical'>
+                                    <%  String viewToyUrl = "viewCustomer.jsp?id=" + header.getCUSTID(); %>
+                                        <button type='button' onclick='javascript:location.href="<%=viewToyUrl%>"' class='btn btn-success'><i class='fa fa-search'></i></button>
+                                </div>
+                                
+                                <input type="text" class="form-control" value="<%= header.getCUSTID()%>" disabled="">
+                               
+                                <input type="hidden" name='deliveryTime' id='deliveryTime' value="<%=header.getCUSTID()%>" >
+                               
                             </div>
-
-                            <!-- textarea -->
+                                
                             <div class="form-group">
-                                <label>Description</label>
-                                <textarea class="form-control" name='description' disabled=""  id='description' rows="3" ><%= t.getDescription()%></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Cashpoint</label>
-                                <input type="number" class="form-control" name='cashpoint' disabled="" min="0" required value="<%= t.getCashpoint()%>">
-                            </div>
-
-                            <div class="form-group">
-                                <label>QTY</label>
-                                <input type="number" class="form-control" name='qty' disabled="" min="0" required value="<%= t.getQTY()%>">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Discount(%)</label>
-                                <input type="number" class="form-control" name='discount' disabled="" min="0" required value="<%=t.getDiscount()%>">
-                            </div>
-
-
-                            <!-- select -->
-                            <div class="form-group">
-                                <label>Second-Hand</label>
-                                <select class="form-control" id="secondHand" name="secondHand" disabled="">
-                                    <option value="" selected> </option>
-                                    <% for (SecondHand sc : secondHandList) {
-
-                                            String custName = userdb.searchUserByID(sc.getCustID()).getUserName();
-                                            int secondHandID = t.getSecondHandID();
-                                            if (secondHandID == sc.getID()) {
-                                                out.println(String.format("<option value='%s' selected>%s</option>", sc.getID(), custName + "-" + sc.getName()));
-                                            } else {
-                                                out.println(String.format("<option value='%s' >%s</option>", sc.getID(), custName + "-" + sc.getName()));
-                                            }
-                                        }
-                                    %>
+                                <label>Payment </label>
+                                <input type="text" class="form-control" value="<%= header.getPayment() %>" disabled="">
+                                <input type="hidden" name='deliveryTime' id='deliveryTime' value="<%=header.getPayment()%>" >
+                               
+                            </div>    
+                            
+                             <div class="form-group">
+                                <label>Delivery Progress</label>
+                                <select class="form-control" disabled="">
+                                    <option value="PREPARING" selected="<%= "PREPARING".equals(header.getDELIVERYPROGRSS()) %>">PREPARING </option>
+                                    <option value="DELIVERING" selected="<%= "DELIVERING".equals(header.getDELIVERYPROGRSS()) %>">DELIVERING </option>
+                                    <option value="COMPLETED" selected="<%= "COMPLETED".equals(header.getDELIVERYPROGRSS()) %>">COMPLETED </option>
                                 </select>
-                            </div>
+                             
+                                <input type="hidden" name='deliveryProgress' id='deliveryProgress' value="<%=header.getDELIVERYPROGRSS()%>" >
+                               
+                            </div>    
+                            
+                           
+                                
+                            
+                                
+                            
+                            
 
 
-                            <!-- Select multiple-->
-                            <div class="form-group">
-                                <label>Category</label>
-                                <select multiple="" name="category" id="category" class="form-control" disabled="">
-
-                                    <% for (Category c : categoryList) {
-                                            boolean isSelected = false;
-                                            for (ToyCategory ct : toyCatList) {
-                                                if (ct.getCategoryID() == c.getCategoryID()) {
-                                                    isSelected = true;
-                                                }
-                                            }
-                                            if (!isSelected) {
-                                                out.println(String.format("<option value='%s'>%s</option>", c.getCategoryID(), c.getCategoryID() + "-" + c.getCategoryName()));
-                                            } else {
-                                                out.println(String.format("<option value='%s' selected>%s</option>", c.getCategoryID(), c.getCategoryID() + "-" + c.getCategoryName()));
-                                            }
-                                        }
-                                    %>
 
 
-                                </select>
-                            </div>
+
+
+
+
+
                             <div class="box-footer">
-                                <button class="btn btn-danger " type='button' onclick="javascript:location.href = window.history.back(); ">Back</button>
-<!--                                    <button class="btn btn-danger " type='button' onclick="javascript:location.href = '/toy/doSearchToy'">Back</button>-->
+                                <%@include file="../layout/transactionItemContent.jsp" %>
+                                <button class="btn btn-danger " type='button' onclick="javascript:location.href = '/toy/doSearchTransaction'">Back</button>
+
 
                             </div>  
 
                         </form>
+                        
                     </div>
 
 
+
                     <!-- /.box-body -->
+                    
                 </div>
 
                 <!-- /.content -->
+                
             </div>
+            
+                            
+                            
+                            
+
             <!-- /.content-wrapper -->
             <//jsp:include page="layout/footer.jsp"/>
 
@@ -378,7 +355,12 @@
             var menu = document.getElementById("toyMenu");
             menu.className += "active";
             //alert(slider.className);
+
         </script>
+
+
+
+        
     </body>
 </html>
 

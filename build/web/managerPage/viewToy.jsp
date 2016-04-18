@@ -157,8 +157,8 @@
                                 </select>
                             </div>
                             <div class="box-footer">
-                                <button class="btn btn-danger " type='button' onclick="javascript:location.href = '/toy/doSearchToy'">Back</button>
-
+                                <button class="btn btn-danger " type='button' onclick="javascript:location.href = window.history.back(); ">Back</button>
+<!--                                    <button class="btn btn-danger " type='button' onclick="javascript:location.href = '/toy/doSearchToy'">Back</button>-->
 
                             </div>  
 

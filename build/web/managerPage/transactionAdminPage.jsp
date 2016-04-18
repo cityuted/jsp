@@ -1,33 +1,14 @@
-<%-- 
-    Document   : updateToy
-    Created on : 2016/4/10, 上午 12:53:02
-    Author     : Mesong
---%>
-
-
-<%@page import="org.apache.commons.codec.binary.Base64"%>
-<%@page import="bean.SecondHand"%>
-<%@page import="db.secondHandDB"%>
-<%@page import="db.userDB"%>
-<%@page import="bean.ToyCategory"%>
-<%@page import="db.toyCategoryDB"%>
-<%@page import="bean.Category"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="db.categoryDB"%>
-<%@page import="bean.Toy"%>
-<%@page import="db.toyDB"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
     <head>
+       
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>AdminLTE 2 | Dashboard</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <%@ include file="/layout/style.jsp"%>
-
+        
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -46,129 +27,10 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <jsp:include page="/layout/contentHeader.jsp"/>
-                <% toyDB toyDb = new toyDB();
-                    categoryDB categorydb = new categoryDB();
-                    toyCategoryDB toyCatdb = new toyCategoryDB();
-                    userDB userdb = new userDB();
-                    secondHandDB secondHanddb = new secondHandDB();
 
-                %>
-                <% Toy t = toyDb.listToyByID(Integer.parseInt(request.getParameter("id")));
-                    ArrayList<Category> categoryList = categorydb.listToyCategory();
-                    ArrayList<ToyCategory> toyCatList = toyCatdb.listToyCategoryByToyID(Integer.parseInt(request.getParameter("id")));
-                    ArrayList<SecondHand> secondHandList = secondHanddb.listSecondHand();
-                %>
                 <!-- Main content -->
-                <div class="box box-warning">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">View Toy</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <% byte[] encodeBase64 = Base64.encodeBase64(Base64.decodeBase64(t.getToyIcon()));
-                        String base64DataString = new String(encodeBase64, "UTF-8");
-
-                    %>
-                    <div class="form-group row-sm-8" style="display:inline-block; vertical-align: bottom;float: none;">
-
-                        <div class="col-sm-6 " >
-                            <img class="img-responsive"  src="data:image/jpeg;base64,<%=base64DataString%>" alt="Photo">
-                            
-                        </div>
-                        
-                        <br/>
-                    </div>
-                            
-                    <div class="box-body row-sm-8">
-                        <form  method='post' action='/toy/doSearchToy' >
-                            <div class="form-group">
-                                <label>Toy ID</label>
-                                <input type="text" class="form-control" value="<%=request.getParameter("id")%>" disabled="">
-                                <input type="hidden" name='toyID' id='toyID' value="<%=request.getParameter("id")%>" >
-                            </div>
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Toy Name</label>
-                                <input type="text" name='toyName' disabled=""  id='toyName' class="form-control" required value='<%= t.getToyName()%>'>
-                            </div>
-
-                            <!-- textarea -->
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea class="form-control" name='description' disabled=""  id='description' rows="3" ><%= t.getDescription()%></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Cashpoint</label>
-                                <input type="number" class="form-control" name='cashpoint' disabled="" min="0" required value="<%= t.getCashpoint()%>">
-                            </div>
-
-                            <div class="form-group">
-                                <label>QTY</label>
-                                <input type="number" class="form-control" name='qty' disabled="" min="0" required value="<%= t.getQTY()%>">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Discount(%)</label>
-                                <input type="number" class="form-control" name='discount' disabled="" min="0" required value="<%=t.getDiscount()%>">
-                            </div>
-
-
-                            <!-- select -->
-                            <div class="form-group">
-                                <label>Second-Hand</label>
-                                <select class="form-control" id="secondHand" name="secondHand" disabled="">
-                                    <option value="" selected> </option>
-                                    <% for (SecondHand sc : secondHandList) {
-
-                                            String custName = userdb.searchUserByID(sc.getCustID()).getUserName();
-                                            int secondHandID = t.getSecondHandID();
-                                            if (secondHandID == sc.getID()) {
-                                                out.println(String.format("<option value='%s' selected>%s</option>", sc.getID(), custName + "-" + sc.getName()));
-                                            } else {
-                                                out.println(String.format("<option value='%s' >%s</option>", sc.getID(), custName + "-" + sc.getName()));
-                                            }
-                                        }
-                                    %>
-                                </select>
-                            </div>
-
-
-                            <!-- Select multiple-->
-                            <div class="form-group">
-                                <label>Category</label>
-                                <select multiple="" name="category" id="category" class="form-control" disabled="">
-
-                                    <% for (Category c : categoryList) {
-                                            boolean isSelected = false;
-                                            for (ToyCategory ct : toyCatList) {
-                                                if (ct.getCategoryID() == c.getCategoryID()) {
-                                                    isSelected = true;
-                                                }
-                                            }
-                                            if (!isSelected) {
-                                                out.println(String.format("<option value='%s'>%s</option>", c.getCategoryID(), c.getCategoryID() + "-" + c.getCategoryName()));
-                                            } else {
-                                                out.println(String.format("<option value='%s' selected>%s</option>", c.getCategoryID(), c.getCategoryID() + "-" + c.getCategoryName()));
-                                            }
-                                        }
-                                    %>
-
-
-                                </select>
-                            </div>
-                            <div class="box-footer">
-                                <button class="btn btn-danger " type='button' onclick="javascript:location.href = window.history.back(); ">Back</button>
-<!--                                    <button class="btn btn-danger " type='button' onclick="javascript:location.href = '/toy/doSearchToy'">Back</button>-->
-
-                            </div>  
-
-                        </form>
-                    </div>
-
-
-                    <!-- /.box-body -->
-                </div>
-
+                
+                <%@include  file="/layout/transactionContent.jsp" %>
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
@@ -372,14 +234,12 @@
 
         <%@include file="/layout/library.jsp" %>
         <script>
-
-            var slider = document.getElementById("toy");
-            slider.className += " active";
-            var menu = document.getElementById("toyMenu");
-            menu.className += "active";
+            
+            var slider = document.getElementById("cust");
+            slider.className+= " active";
+            var menu = document.getElementById("transactionMenu");
+            menu.className+= "active";
             //alert(slider.className);
         </script>
     </body>
 </html>
-
-

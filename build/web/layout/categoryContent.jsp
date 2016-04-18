@@ -160,7 +160,7 @@
                             %>
                             <% for (i = 1; i <= index; i++) {
                                     out.println("<li class='paginate_button'>");
-                                    String url = String.format("/toy/managerPage/secondHandAdminPage.jsp?page=%s", i);
+                                    String url = String.format("/toy/managerPage/categoryAdminPage.jsp?page=%s", i);
                                     out.println(String.format("<a href='%s' aria-controls='example2' data-dt-idx='%s' tabindex='0'> %s </a>", url, i, i));
 
                                     out.println("</li>");
@@ -169,7 +169,7 @@
                             <li class="paginate_button next <% if (total >= categoryList.size()) {
                                     out.println("disabled");
                                 }%>" id="example2_next">
-                                <a href="/toy/managerPage/secondHandAdminPage.jsp?page=<% pageNumber = (pageNumber < index) ? ++pageNumber : pageNumber;
+                                <a href="/toy/managerPage/categoryAdminPage.jsp?page=<% pageNumber = (pageNumber < index) ? ++pageNumber : pageNumber;
                                     out.println(pageNumber);%>" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a>
                             </li>
                         </ul>

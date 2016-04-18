@@ -154,4 +154,64 @@ public class TransactionDB extends GeneralDB {
         }
     }
 
+    public ArrayList<TransactionHeader> listTransaction() {
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM transactionheader");
+
+            ArrayList<TransactionHeader> tempList = new ArrayList();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                TransactionHeader tempToy = new TransactionHeader();
+                tempToy.setTRANSACTIONID(rs.getInt("TRANSACTIONID"));
+                tempToy.setCUSTID(rs.getInt("CUSTID"));
+                tempToy.setDELIVERYAddressee(rs.getString("DELIVERYAddressee"));
+                tempToy.setDELIVERYAddresseePhone(rs.getString("DELIVERYAddresseePhone"));
+                tempToy.setDELIVERYOPTION(rs.getString("DELIVERYOPTION"));
+                tempToy.setDELIVERYADDRESS(rs.getString("DELIVERYADDRESS"));
+                tempToy.setDELIVERYPROGRSS(rs.getString("DELIVERYPROGRSS"));
+                tempToy.setDELIVERYTIME(rs.getString("DELIVERYTIME"));
+                tempToy.setPayment(rs.getString("Payment"));
+                tempList.add(tempToy);
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempList;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    public TransactionHeader searchTransaction(int TRANSACTIONID) {
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM transactionheader WHERE TRANSACTIONID = ?");
+            pstmt.setInt(1, TRANSACTIONID);
+            // ArrayList<TransactionHeader> tempList = new ArrayList();
+            ResultSet rs = pstmt.executeQuery();
+            TransactionHeader tempToy = new TransactionHeader();
+            while (rs.next()) {
+
+                tempToy.setTRANSACTIONID(rs.getInt("TRANSACTIONID"));
+                tempToy.setCUSTID(rs.getInt("CUSTID"));
+                tempToy.setDELIVERYAddressee(rs.getString("DELIVERYAddressee"));
+                tempToy.setDELIVERYAddresseePhone(rs.getString("DELIVERYAddresseePhone"));
+                tempToy.setDELIVERYOPTION(rs.getString("DELIVERYOPTION"));
+                tempToy.setDELIVERYADDRESS(rs.getString("DELIVERYADDRESS"));
+                tempToy.setDELIVERYPROGRSS(rs.getString("DELIVERYPROGRSS"));
+                tempToy.setDELIVERYTIME(rs.getString("DELIVERYTIME"));
+                tempToy.setPayment(rs.getString("Payment"));
+
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempToy;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
 }

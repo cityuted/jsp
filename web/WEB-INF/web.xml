@@ -84,6 +84,10 @@
         <servlet-name>EditAccount</servlet-name>
         <servlet-class>EditAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>doSearchTransaction</servlet-name>
+        <servlet-class>manager.doSearchTransaction</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -216,7 +220,6 @@
         <servlet-name>doSearchToyCategory</servlet-name>
         <servlet-class>manager.doSearchToyCategory</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>doUpdateToyCategory</servlet-name>
         <servlet-class>manager.doUpdateToyCategory</servlet-class>
@@ -229,7 +232,6 @@
         <servlet-name>doCreateToyCategory</servlet-name>
         <servlet-class>manager.doCreateToyCategory</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
@@ -310,7 +312,6 @@
         <servlet-name>EditAccount</servlet-name>
         <url-pattern>/EditAccount</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>doUpdateToyCategory</servlet-name>
         <url-pattern>/doUpdateToyCategory</url-pattern>
@@ -322,6 +323,10 @@
     <servlet-mapping>
         <servlet-name>doCreateToyCategory</servlet-name>
         <url-pattern>/doCreateToyCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doSearchTransaction</servlet-name>
+        <url-pattern>/doSearchTransaction</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
