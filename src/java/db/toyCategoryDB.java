@@ -77,6 +77,7 @@ public class toyCategoryDB extends GeneralDB{
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO TOYCATEGORY(CATEGORYID,TOYID) VALUES (?,?)");
             pstmt.setInt(1, categoryID);
             pstmt.setInt(2, toyID);
@@ -100,6 +101,7 @@ public class toyCategoryDB extends GeneralDB{
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM TOYCATEGORY WHERE CATEGORYID = ? AND TOYID = ?");
             pstmt.setInt(1, categoryID);
             pstmt.setInt(2, toyID);
@@ -121,6 +123,7 @@ public class toyCategoryDB extends GeneralDB{
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM TOYCATEGORY WHERE TOYID = ?");
           
             pstmt.setInt(1, toyID);

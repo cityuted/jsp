@@ -77,6 +77,7 @@ public class categoryDB extends GeneralDB {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO CATEGORY(CATEGORYNAME) VALUES (?)");
             pstmt.setString(1, categorName);
 
@@ -100,6 +101,7 @@ public class categoryDB extends GeneralDB {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM CATEGORY WHERE CATEGORYID = ?");
             pstmt.setInt(1, categoryID);
             pstmt.executeUpdate();
@@ -121,6 +123,7 @@ public class categoryDB extends GeneralDB {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("UPDATE CATEGORY SET CATEGORYNAME = ? WHERE CATEGORYID = ?");
             pstmt.setString(1, categoryName);
             pstmt.setInt(2, categoryID);
