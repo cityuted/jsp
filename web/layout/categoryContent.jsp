@@ -70,7 +70,7 @@
 
                 <div class="box-tools">
                     <span class='pull-left' style="margin-right:5px">
-                        <button type="button"  onclick='javascript:location.href = "/toy/managerPage/createCategory.jsp"' class="btn btn-block btn-info"  >Create Category</button>
+                        <button type="button"  onclick='javascript:location.href = "/toy/managerPage/createToyCategory.jsp"' class="btn btn-block btn-info"  >Create Category</button>
                     </span>
                     <div class="input-group input-group-sm" style="width: 150px;">
 
@@ -115,8 +115,8 @@
                             out.print(String.format("<td>%s</td>", cat.getCategoryName()));
 
                             //String createUrl = "/toy/doCreateCategory?categoryID=" + cat.getCategoryID();
-                            String updateUrl = "/toy/doUpdateCategory?categoryID=" + cat.getCategoryID();
-                            String deleteUrl = "/toy/doDeleteCategory?categoryID=" + cat.getCategoryID();
+                            String updateUrl = "/toy/managerPage/updateCategory.jsp?categoryID=" + cat.getCategoryID();
+                            String deleteUrl = "/toy/managerPage/deleteCategory.jsp?categoryID=" + cat.getCategoryID();
                             String disabled = "";
                             if (session.getAttribute(cat.getCategoryID() + ".isvalid").equals("true")) {
                                 disabled = "disabled";
@@ -125,7 +125,7 @@
                             out.println("<td>");
 //                             
                             out.println("<div class='btn-group'>"
-                                    + "<button type='button' onclick='javascript:location.href=\"" + updateUrl + "\"' class='btn btn-info'><i class='fa fa-edit'></i></button>"
+                                    + "<button type='button' onclick='javascript:location.href=\"" + updateUrl + "\"' class='btn btn-primary'><i class='fa fa-edit'></i></button>"
                                     + "<button type='button'" + disabled + " onclick='javascript:location.href=\"" + deleteUrl + "\"' class='btn btn-danger'><i class='fa fa-close'></i></button>"
                                     + "</div>");
                             out.println("</td>");

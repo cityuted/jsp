@@ -216,6 +216,20 @@
         <servlet-name>doSearchToyCategory</servlet-name>
         <servlet-class>manager.doSearchToyCategory</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>doUpdateToyCategory</servlet-name>
+        <servlet-class>manager.doUpdateToyCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>doDeleteToyCategory</servlet-name>
+        <servlet-class>manager.doDeleteToyCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>doCreateToyCategory</servlet-name>
+        <servlet-class>manager.doCreateToyCategory</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
@@ -295,6 +309,19 @@
     <servlet-mapping>
         <servlet-name>EditAccount</servlet-name>
         <url-pattern>/EditAccount</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>doUpdateToyCategory</servlet-name>
+        <url-pattern>/doUpdateToyCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doDeleteToyCategory</servlet-name>
+        <url-pattern>/doDeleteToyCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doCreateToyCategory</servlet-name>
+        <url-pattern>/doCreateToyCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

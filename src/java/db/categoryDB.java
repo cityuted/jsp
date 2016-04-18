@@ -116,5 +116,27 @@ public class categoryDB extends GeneralDB {
             return false;
         }
     }
+    
+     public boolean updateToyType(int categoryID,String categoryName) {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE CATEGORY SET CATEGORYNAME = ? WHERE CATEGORYID = ?");
+            pstmt.setString(1, categoryName);
+            pstmt.setInt(2, categoryID);
+            pstmt.executeUpdate();
+            conn.commit();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(toyTypeDB.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            return false;
+        }
+    }
 
 }
