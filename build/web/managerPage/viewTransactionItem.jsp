@@ -79,10 +79,10 @@
                             <div class="form-group">
                                 <label>Customer ID  </label>
                                 <div class='btn-group-vertical'>
-                                    <%  String viewToyUrl = "viewCustomer.jsp?"+"custID=" + header.getCUSTID();
+                                    <%  String viewToyUrl = "viewCustomerProfile.jsp?"+"custID=" + header.getCUSTID();
                                     
                                     %>
-                                    
+                                  
                                     <button type='button' onclick='javascript:location.href = "<%=viewToyUrl%>"' class='btn btn-success'><i class='fa fa-search'></i></button>
                                 </div>
 
