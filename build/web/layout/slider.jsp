@@ -34,7 +34,7 @@
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview" id="toy">
-                <a href="/toy/backend/#">
+                <a href="/toy/doSearchToy">
                     <i class="fa fa-folder"></i> <span>Toy Records</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
@@ -46,12 +46,12 @@
                
             </li>
             <li class="treeview" id="cust">
-                <a href="/toy/backend/#">
+                <a href="/toy/doSearchTransaction">
                     <i class="fa fa-user"></i> <span>Customer Records</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                  <ul class="treeview-menu">
                     <li id="transactionMenu"><a href="/toy/doSearchTransaction"><i class="fa fa-circle-o"></i> Transaction Header</a></li>
-                   
+                    <li id="customerMenu"><a href="/toy/doSearchCustomer"><i class="fa fa-circle-o"></i> Customer Profile</a></li>
                 </ul>
                 
                 

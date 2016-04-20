@@ -308,10 +308,10 @@
         <%@include file="/layout/library.jsp" %>
         <script>
 
-            var slider = document.getElementById("toy");
-            slider.className += " active";
-            var menu = document.getElementById("toyMenu");
-            menu.className += "active";
+          var slider = document.getElementById("toy");
+            slider.className+= " active";
+            var menu = document.getElementById("categoryMenu");
+            menu.className+= "active";
             //alert(slider.className);
         </script>
         

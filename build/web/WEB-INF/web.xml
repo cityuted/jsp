@@ -88,6 +88,14 @@
         <servlet-name>doSearchTransaction</servlet-name>
         <servlet-class>manager.doSearchTransaction</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>doUpdateTransaction</servlet-name>
+        <servlet-class>manager.doUpdateTransaction</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>doSearchCustomer</servlet-name>
+        <servlet-class>manager.doSearchCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -327,6 +335,14 @@
     <servlet-mapping>
         <servlet-name>doSearchTransaction</servlet-name>
         <url-pattern>/doSearchTransaction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doUpdateTransaction</servlet-name>
+        <url-pattern>/doUpdateTransaction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doSearchCustomer</servlet-name>
+        <url-pattern>/doSearchCustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

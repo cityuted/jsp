@@ -213,5 +213,33 @@ public class TransactionDB extends GeneralDB {
             return null;
         }
     }
+    
+    
+    public boolean updateTransaction(int TRANSACTIONID,String TRANSACTIONPROGRESS) {
+        Connection conn = null;
+        try {
+            conn =DriverManager.getConnection(conn_url, conn_username, conn_password);;
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE transactionheader SET DELIVERYPROGRSS = ? WHERE TRANSACTIONID = ?");
+            pstmt.setString(1, TRANSACTIONPROGRESS);
+            pstmt.setInt(2, TRANSACTIONID);
+            // ArrayList<TransactionHeader> tempList = new ArrayList();
+            
+            //stmnt.executeQuery()
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.commit();
+            conn.close();
+           return true;
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                //Logger.getLogger(TransactionDB.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            return false;
+        }
+        
+    }
 
 }

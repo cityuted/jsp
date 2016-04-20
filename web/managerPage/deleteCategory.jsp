@@ -314,9 +314,9 @@
         <script>
 
             var slider = document.getElementById("toy");
-            slider.className += " active";
-            var menu = document.getElementById("toyMenu");
-            menu.className += "active";
+            slider.className+= " active";
+            var menu = document.getElementById("categoryMenu");
+            menu.className+= "active";
             //alert(slider.className);
         </script>
         

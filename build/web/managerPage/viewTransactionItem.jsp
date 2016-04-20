@@ -29,7 +29,7 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <%@ include file="/layout/style.jsp"%>
-        
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -55,7 +55,7 @@
                     }
                     TransactionDB tranDB = new TransactionDB();
                     TransactionHeader header = tranDB.searchTransaction(tranID);
-                   
+
 
                 %>
 
@@ -75,45 +75,48 @@
                                 <input type="text" class="form-control" value="<%= tranID%>" disabled="">
                                 <input type="hidden" name='transactionID' id='toyID' value="<%=tranID%>" >
                             </div>
-                            
-                             <div class="form-group">
+
+                            <div class="form-group">
                                 <label>Customer ID  </label>
                                 <div class='btn-group-vertical'>
-                                    <%  String viewToyUrl = "viewCustomer.jsp?id=" + header.getCUSTID(); %>
-                                        <button type='button' onclick='javascript:location.href="<%=viewToyUrl%>"' class='btn btn-success'><i class='fa fa-search'></i></button>
+                                    <%  String viewToyUrl = "viewCustomer.jsp?"+"custID=" + header.getCUSTID();
+                                    
+                                    %>
+                                    
+                                    <button type='button' onclick='javascript:location.href = "<%=viewToyUrl%>"' class='btn btn-success'><i class='fa fa-search'></i></button>
                                 </div>
-                                
+
                                 <input type="text" class="form-control" value="<%= header.getCUSTID()%>" disabled="">
-                               
+
                                 <input type="hidden" name='deliveryTime' id='deliveryTime' value="<%=header.getCUSTID()%>" >
-                               
+
                             </div>
-                                
+
                             <div class="form-group">
                                 <label>Payment </label>
-                                <input type="text" class="form-control" value="<%= header.getPayment() %>" disabled="">
+                                <input type="text" class="form-control" value="<%= header.getPayment()%>" disabled="">
                                 <input type="hidden" name='deliveryTime' id='deliveryTime' value="<%=header.getPayment()%>" >
-                               
+
                             </div>    
-                            
-                             <div class="form-group">
+
+                            <div class="form-group">
                                 <label>Delivery Progress</label>
                                 <select class="form-control" disabled="">
-                                    <option value="PREPARING" selected="<%= "PREPARING".equals(header.getDELIVERYPROGRSS()) %>">PREPARING </option>
-                                    <option value="DELIVERING" selected="<%= "DELIVERING".equals(header.getDELIVERYPROGRSS()) %>">DELIVERING </option>
-                                    <option value="COMPLETED" selected="<%= "COMPLETED".equals(header.getDELIVERYPROGRSS()) %>">COMPLETED </option>
+                                    <option value="PREPARING" <%= "PREPARING".equals(header.getDELIVERYPROGRSS()) ? "selected" : ""%> >PREPARING </option>
+                                    <option value="DELIVERING" <%= "DELIVERING".equals(header.getDELIVERYPROGRSS()) ? "selected" : ""%> >DELIVERING </option>
+                                    <option value="COMPLETED" <%= "COMPLETED".equals(header.getDELIVERYPROGRSS()) ? "selected" : ""%> >COMPLETED </option>
                                 </select>
-                             
+
                                 <input type="hidden" name='deliveryProgress' id='deliveryProgress' value="<%=header.getDELIVERYPROGRSS()%>" >
-                               
+
                             </div>    
-                            
-                           
-                                
-                            
-                                
-                            
-                            
+
+
+
+
+
+
+
 
 
 
@@ -131,22 +134,22 @@
                             </div>  
 
                         </form>
-                        
+
                     </div>
 
 
 
                     <!-- /.box-body -->
-                    
+
                 </div>
 
                 <!-- /.content -->
-                
+
             </div>
-            
-                            
-                            
-                            
+
+
+
+
 
             <!-- /.content-wrapper -->
             <//jsp:include page="layout/footer.jsp"/>
@@ -350,9 +353,9 @@
         <%@include file="/layout/library.jsp" %>
         <script>
 
-            var slider = document.getElementById("toy");
+            var slider = document.getElementById("cust");
             slider.className += " active";
-            var menu = document.getElementById("toyMenu");
+            var menu = document.getElementById("transactionMenu");
             menu.className += "active";
             //alert(slider.className);
 
@@ -360,7 +363,7 @@
 
 
 
-        
+
     </body>
 </html>
 
