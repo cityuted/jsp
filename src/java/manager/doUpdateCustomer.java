@@ -5,25 +5,20 @@
  */
 package manager;
 
-import bean.User;
-import bean.UserType;
+import db.categoryDB;
 import db.userDB;
-import db.userDB;
-import db.userTypeDB;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Mesong
  */
-public class doLogin extends HttpServlet {
+public class doUpdateCustomer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,34 +33,13 @@ public class doLogin extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+       
         try {
-            /* TODO output your page here. You may use following sample code. */
-            String loginname = request.getParameter("loginname");
-            String password = request.getParameter("password");
-            userDB userdb = new userDB();
-            User u = userdb.searchUser(loginname, password);
-            HttpSession session = request.getSession(true);
-            userTypeDB userTypedb = new userTypeDB();
-            ArrayList<UserType> uts = userTypedb.listUserType();
-            session.setAttribute("username", "");
-            if (u == null) {
-
-                response.sendRedirect("managerPage/login.jsp");
-            } else {
-                for (UserType ut : uts) {
-                    if (ut.getID() == u.getTypeID()) {
-                        if (!ut.getType().toUpperCase().equals("MANAGER")) {
-                            response.sendRedirect("managerPage/login.jsp");
-
-                        } else {
-                            session.setAttribute("userID", u.getUserID());
-                            session.setAttribute("username", u.getUserName());
-                            response.sendRedirect("doSearchToy");
-                        }
-                    }
-                }
-
-            }
+           int custID = Integer.parseInt(request.getParameter("custID"));
+           int cashpoint = Integer.parseInt(request.getParameter("cashpoint"))+Integer.parseInt(request.getParameter("add"));
+           userDB userdb = new userDB();
+           userdb.updateCashoint(custID, cashpoint);
+                response.sendRedirect("doSearchCustomer");
         } finally {
             out.close();
         }

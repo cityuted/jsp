@@ -123,14 +123,14 @@ public class userDB extends GeneralDB {
     }
 
     public boolean updateUser(String userID, String password, String userAddress, String userPhone, String email) {
-        if(!password.equals("")){
-            password = "PASSWORD='"+password+"',";
+        if (!password.equals("")) {
+            password = "PASSWORD='" + password + "',";
         }
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement("UPDATE USER SET "+password+"USERADDRESS=?,USERPHONE=?,EMAIL=?"
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE USER SET " + password + "USERADDRESS=?,USERPHONE=?,EMAIL=?"
                     + "WHERE USERID = ?");
 
             pstmt.setString(1, userAddress);
@@ -248,14 +248,14 @@ public class userDB extends GeneralDB {
         }
 
     }
-    
-     public User searchUserByID(int userID) {
+
+    public User searchUserByID(int userID) {
 
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM USER WHERE USERID = ?");
             pstmt.setInt(1, userID);
-           
+
             ResultSet rs = pstmt.executeQuery();
             //while(rs.next() && rs!=null)
             rs.next();
@@ -280,5 +280,31 @@ public class userDB extends GeneralDB {
             return null;
         }
 
-    } 
+    }
+
+    public boolean updateCashoint(int custID, int cashpoint) {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE  USER SET CASHPOINT = ? WHERE USERID = ?");
+            pstmt.setInt(1, cashpoint);
+            pstmt.setInt(2, custID);
+            pstmt.executeUpdate();
+            // }
+            //stmnt.executeQuery()
+            conn.commit();
+            pstmt.close();
+            conn.close();
+
+            return true;
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(userDB.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            return false;
+        }
+    }
 }

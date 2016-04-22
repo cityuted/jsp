@@ -3,6 +3,7 @@
 <%@ page import="bean.*" %>
 <%@ page import="db.categoryDB" %>
 <%@ page import="bean.Template" %>
+<%@page import="java.util.ArrayList"%>
 <jsp:useBean id="user" class="bean.User" scope="session"/>
 <jsp:useBean id="cart" class="bean.Cart" scope="session"/>
 
@@ -152,7 +153,8 @@
                                     categoryDB catedb = new categoryDB();
                                     ArrayList<bean.Category> listCate = catedb.listToyCategory();
                                     for (int i = 0; i < listCate.size(); i++) {
-                                        if (!listCate.get(i).getCategoryName().toLowerCase().contains("age")) {
+                                        
+                                        if (!listCate.get(i).getCategoryName().toLowerCase().matches(".*age.*")) {
                                             out.print("<li><a href=\"/toy/Category?order=asc&sort=TOYNAME&cate="+listCate.get(i).getCategoryID()+"\">" + listCate.get(i).getCategoryName() + "</a></li>");
                                         }
                                     }
@@ -164,7 +166,7 @@
 
                                         <%
                                             for (int i = 0; i < listCate.size(); i++) {
-                                                if (listCate.get(i).getCategoryName().toLowerCase().contains("age")) {
+                                                if (listCate.get(i).getCategoryName().toLowerCase().matches(".*age.*")) {
                                                     out.print("<li><a href=\"/toy/Category?order=desc&sort=TOYNAME&cate="+listCate.get(i).getCategoryID()+"\">" + listCate.get(i).getCategoryName() + "</a></li>");
                                                 }
                                             }
