@@ -41,6 +41,7 @@
                     <li id="toyMenu"><a href="/toy/doSearchToy"><i class="fa fa-circle-o"></i> Toy</a></li>
                     <li id="secondHandMenu"><a href="/toy/doSearchSecondHand"><i class="fa fa-circle-o"></i> Second-hand toy</a></li>
                     <li id="categoryMenu"><a href="/toy/doSearchToyCategory"><i class="fa fa-circle-o"></i> Toy Category</a></li>
+                    
                 </ul>
 
                
@@ -52,7 +53,8 @@
                  <ul class="treeview-menu">
                     <li id="transactionMenu"><a href="/toy/doSearchTransaction"><i class="fa fa-circle-o"></i> Transaction Header</a></li>
                     <li id="customerMenu"><a href="/toy/doSearchCustomer"><i class="fa fa-circle-o"></i> Customer Profile</a></li>
-                </ul>
+                    <li id="commentMenu"><a href="/toy/doSearchComment"><i class="fa fa-circle-o"></i> Comment</a></li>
+                 </ul>
                 
                 
                 

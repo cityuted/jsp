@@ -6,6 +6,8 @@
 package bean;
 
 import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.codec.binary.Base64;
 
 /**
@@ -156,6 +158,18 @@ public class Toy {
     public String encodedImage() throws UnsupportedEncodingException {
         byte[] encodeBase64 = Base64.encodeBase64(Base64.decodeBase64(getToyIcon()));
         String base64DataString = new String(encodeBase64, "UTF-8");
-        return "data:image/jpeg;base64,"+base64DataString;
+        return "data:image/jpeg;base64," + base64DataString;
+    }
+
+    public String getPhoto() {
+        byte[] encodeBase64 = Base64.encodeBase64(Base64.decodeBase64(getToyIcon()));
+        String base64DataString ="";
+        try {
+             base64DataString = new String(encodeBase64, "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Toy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return base64DataString;
+
     }
 }

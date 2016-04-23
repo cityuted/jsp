@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+g<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <%@ page import="bean.*" %>
 <%@ page import="db.categoryDB" %>

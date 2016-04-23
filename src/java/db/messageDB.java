@@ -148,4 +148,84 @@ public class messageDB extends GeneralDB {
             return false;
         }
     }
+    
+    public ArrayList<Message> listMessageHeader() {
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM COMMENTHEADER");
+            ArrayList<Message> tempMessageList = new ArrayList();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                Message tempMessage = new Message();
+                tempMessage.setMessageID(rs.getInt("MESSAGEID"));
+                tempMessage.setToyID(rs.getInt("TOYID"));
+                tempMessage.setCustID(rs.getInt("CUSTID"));
+                tempMessage.setContent(rs.getString("CONTENT"));
+                tempMessage.setDate(rs.getString("DATE"));
+                tempMessageList.add(tempMessage);
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempMessageList;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
+    public ArrayList<Message> listMessageFromName(String TOYNAME) {
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM COMMENTHEADER where TOYNAME LIKE '%?%'");
+            ArrayList<Message> tempMessageList = new ArrayList();
+            pstmt.setString(1, TOYNAME);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                System.out.println(rs.getInt("TOYID"));
+                Message tempMessage = new Message();
+                tempMessage.setMessageID(rs.getInt("MESSAGEID"));
+                tempMessage.setToyID(rs.getInt("TOYID"));
+                tempMessage.setCustID(rs.getInt("CUSTID"));
+                tempMessage.setContent(rs.getString("CONTENT"));
+                tempMessage.setDate(rs.getString("DATE"));
+                tempMessageList.add(tempMessage);
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempMessageList;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
+    public boolean createReply(int toyID, int managerID, String content) {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO MESSAGE(TOYID,CUSTID,MANAGERID,CONTENT) VALUES (?,?,?,?)");
+            
+            pstmt.setInt(1, toyID);
+            pstmt.setInt(2, managerID);
+            pstmt.setInt(3, managerID);
+            pstmt.setString(4, content);
+           // pstmt.setInt(4, 0);
+            pstmt.executeUpdate();
+            conn.commit();
+            pstmt.close();
+            conn.close();
+           // return true;
+           return true;
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(messageDB.class.getName()).log(Level.SEVERE, null, ex1);
+                
+            }
+            return false;
+        }
+    }
 }

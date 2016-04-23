@@ -5,15 +5,29 @@
  */
 package bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import org.ocpsoft.prettytime.PrettyTime;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Mesong
  */
 public class Message {
+
     private int messageID;
     private int toyID;
     private int custID;
     private String custName;
+    private String content;
+    private String date;
+    private int rating;
+    private int managerID = -1;
 
     public String getCustName() {
         return custName;
@@ -22,7 +36,6 @@ public class Message {
     public void setCustName(String custName) {
         this.custName = custName;
     }
-    private int rating;
 
     public String getDate() {
         return date;
@@ -31,11 +44,7 @@ public class Message {
     public void setDate(String date) {
         this.date = date;
     }
-    private String content;
-    private String date;
 
-
-    
     public int getRating() {
         return rating;
     }
@@ -99,5 +108,40 @@ public class Message {
     public void setContent(String content) {
         this.content = content;
     }
-    
+
+    public String getRelativeTime() {
+        String temp =date;
+        PrettyTime p = new PrettyTime(new Locale("en"));
+        try {
+            
+            
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            
+            Date date;
+            date = sdf.parse(temp);
+            temp =p.format(date);
+            //System.out.println(date);
+            //System.out.println(p.format(date));
+        } catch (ParseException ex) {
+            Logger.getLogger(Message.class.getName()).log(Level.SEVERE, null, ex);
+            return temp;
+        }
+        return temp;
+    }
+
+    /**
+     * @return the managerID
+     */
+    public int getManagerID() {
+        return managerID;
+    }
+
+    /**
+     * @param managerID the managerID to set
+     */
+    public void setManagerID(int managerID) {
+        this.managerID = managerID;
+    }
+
 }

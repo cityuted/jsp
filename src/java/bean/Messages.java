@@ -25,11 +25,18 @@ public class Messages {
     
     public int averageRating(){
         int r=0;
+        int numOfCustComment =0;
         if(messages!=null && messages.size()!=0){
             for(int i=0;i<messages.size();i++){
-                r += messages.get(i).getRating();
+                
+                if( messages.get(i).getManagerID() ==-1 )
+                {
+                    r += messages.get(i).getRating();
+                    numOfCustComment++;
+                }
             }
-            r = r/messages.size();
+            //r = r/messages.size();
+            r = r/numOfCustComment;
             if(messages.size()%r!=0){
                 r += 1;
             }

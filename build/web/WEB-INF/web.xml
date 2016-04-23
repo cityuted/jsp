@@ -100,6 +100,22 @@
         <servlet-name>doUpdateCustomer</servlet-name>
         <servlet-class>manager.doUpdateCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>doSearchComment</servlet-name>
+        <servlet-class>manager.doSearchComment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>doSearchAllComments</servlet-name>
+        <servlet-class>manager.doSearchAllComments</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>doReplyComment</servlet-name>
+        <servlet-class>manager.doReplyComment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>doDeleteComment</servlet-name>
+        <servlet-class>manager.doDeleteComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -351,6 +367,22 @@
     <servlet-mapping>
         <servlet-name>doUpdateCustomer</servlet-name>
         <url-pattern>/doUpdateCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doSearchComment</servlet-name>
+        <url-pattern>/doSearchComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doSearchAllComments</servlet-name>
+        <url-pattern>/doSearchAllComments</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doReplyComment</servlet-name>
+        <url-pattern>/doReplyComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>doDeleteComment</servlet-name>
+        <url-pattern>/doDeleteComment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
