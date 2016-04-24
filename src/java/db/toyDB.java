@@ -57,6 +57,66 @@ public class toyDB extends GeneralDB {
         }
     }
     
+	    public ArrayList<Toy> listSeToy() {
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM TOY where SECONDHANDID is not null");
+            ArrayList<Toy> tempToyList = new ArrayList();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                Toy tempToy = new Toy();
+                tempToy.setToyID(rs.getInt("TOYID"));
+                tempToy.setToyName(rs.getString("TOYNAME"));
+                tempToy.setDescription(rs.getString("DESCRIPTION"));
+                tempToy.setToyIcon(rs.getString("TOYICON"));
+                tempToy.setCashpoint(rs.getInt("CASHPOINT"));
+                tempToy.setQTY(rs.getInt("QTY"));
+                tempToy.setDiscount(rs.getInt("DISCOUNT"));
+
+                tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
+
+                tempToyList.add(tempToy);
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempToyList;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
+    public ArrayList<Toy> listBestSellToy() {
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("select * from toy where TOYID in (SELECT TOYID AS TotalQuantity FROM transactionitem GROUP BY TOYID ORDER BY SUM(QTY) DESC)");
+            ArrayList<Toy> tempToyList = new ArrayList();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                Toy tempToy = new Toy();
+                tempToy.setToyID(rs.getInt("TOYID"));
+                tempToy.setToyName(rs.getString("TOYNAME"));
+                tempToy.setDescription(rs.getString("DESCRIPTION"));
+                tempToy.setToyIcon(rs.getString("TOYICON"));
+                tempToy.setCashpoint(rs.getInt("CASHPOINT"));
+                tempToy.setQTY(rs.getInt("QTY"));
+                tempToy.setDiscount(rs.getInt("DISCOUNT"));
+
+                tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
+
+                tempToyList.add(tempToy);
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempToyList;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+	
     public ArrayList<Toy> listToy() {
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
@@ -131,6 +191,7 @@ public class toyDB extends GeneralDB {
                 tempToy.setToyIcon(rs.getString("TOYICON"));
                 tempToy.setCashpoint(rs.getInt("CASHPOINT"));
                 tempToy.setQTY(rs.getInt("QTY"));
+                tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
                 tempToyList.add(tempToy);
             }
             pstmt.close();

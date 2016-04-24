@@ -86,9 +86,6 @@ public class Toy {
      * @return the QTY
      */
     public int getQTY() {
-        if (QTY == 0) {
-            return 1;
-        }
         return QTY;
     }
 
@@ -153,6 +150,9 @@ public class Toy {
      */
     public void setSecondHandID(int secondHandID) {
         this.secondHandID = secondHandID;
+        if(this.secondHandID>0){
+            this.toyName=this.toyName+"(Second Hand)";
+        }
     }
 
     public String encodedImage() throws UnsupportedEncodingException {

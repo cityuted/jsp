@@ -211,12 +211,21 @@ public class Template {
                 + "                </li>";
     }
 
-    public static String getMessageTemplate(String name, String content, String Date, int rate) {
+    public static String getMessageTemplate(int custID,String name, String content, String Date, int rate) {
+        messageDB mdb = new messageDB();
+        ArrayList<Message> ma = mdb.listMessageReply(custID);
+        String reply = "";
+        if (ma!=null&&ma.size() > 0) {
+            reply = "</br>---reply from Staff("+ma.get(0).getCustName()+") - " + ma.get(0).getDate() + ":"
+                    + "</br>("+ma.get(0).getContent()+")";
+        } else {
+            reply = "";
+        }
         return "                    <li>\n"
                 + "                      <figure><img src=\"images/ava.jpg\" alt=\"\"></figure>\n"
                 + "                      <div>\n"
                 + "                        <div class=\"author\"><strong>" + name + "</strong> - " + Date + ":</div>\n"
-                + "                        " + content + "\n"
+                + "                        " + content + "</br>" + reply + "\n"
                 + "                      </div>\n"
                 + "                      <div class=\"rating\">\n"
                 + getRate(rate)
@@ -271,7 +280,13 @@ public class Template {
                 + "                                        </li>";
     }
 
-    public static String getCart(String image, String name, int cashPoint, int qty, int id) {
+    public static String getCart(String image, String name, int cashPoint, int qty, int id, int sid) {
+        String dis = "";
+        String change = "                                <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"done\"></a>\n";
+        if (sid > 0) {
+            change = "";
+            dis = "disabled=\"disabled\"";
+        }
         int total = qty * cashPoint;
         return "                    <tr>\n"
                 + "                        <td>\n"
@@ -285,10 +300,10 @@ public class Template {
                 + "                        <td>" + id + "</td>\n"
                 + "                        <td>\n"
                 + "                            <form class=\"confirm_quantity\" action='/toy/Cart' method='post' ><input type='hidden' name='action' value='change' />\n"
-                + "                                <input type='hidden' name='id' value='" + id + "' /><input name='qty'type=\"text\" value=\"" + qty + "\" onBlur=\"if (this.value == '' || this.value == 0)\n"
+                + "                                <input type='hidden' name='id' value='" + id + "' /><input " + dis + " name='qty'type=\"text\" value=\"" + qty + "\" onBlur=\"if (this.value == '' || this.value == 0)\n"
                 + "                                            this.value = '1'\" onFocus=\"if (this.value == '1')\n"
                 + "                                                        this.value = ''\">\n"
-                + "                                <a href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"done\"></a>\n"
+                + change
                 + "                                </form>"
                 + "                            \n"
                 + "                        </td>\n"
@@ -535,24 +550,24 @@ public class Template {
                 + "                        </li>";
     }
 
-    public static String getBestSell() {
+    public static String getBestSell(Toy toy) throws UnsupportedEncodingException {
         return "                    <li>\n"
                 + "\n"
                 + "                        <div class=\"bestseller\">\n"
                 + "\n"
                 + "                            <div class=\"inner\">\n"
                 + "\n"
-                + "                                <figure><img src=\"images/bestsell1.jpg\" alt=\"\"></figure>\n"
+                + "                                <figure><img width=\"150\" height=\"150\" src=\"" + toy.encodedImage() + "\" alt=\"\"></figure>\n"
                 + "\n"
-                + "                                <h4><a href=\"product_fullwidth.html\">Bear soft toy</a></h4>\n"
+                + "                                <h4><a href=\"product_fullwidth.html\">" + toy.getToyName() + "</a></h4>\n"
                 + "\n"
-                + "                                <div class=\"price\">$25</div>\n"
+                + "                                <div class=\"price\">$" + toy.getCashpoint() + "</div>\n"
                 + "\n"
-                + "                                <div class=\"product_buttons\">\n"
+                + "                                <div class=\"product_buttons\" >\n"
                 + "\n"
-                + "                                    <a href=\"#\" class=\"add_to_cart\"></a>\n"
+                + "                        <form method=\"post\" action=\"/toy/Cart\"> <input type=\"hidden\" name=\"id\" value=\"" + toy.getToyID() + "\" /><a  href=\"javascript:;\" onclick=\"get_form(this).submit(); return false\" class=\"add_to_cart\"></a> </form>\n"
                 + "\n"
-                + "                                    <a href=\"product_fullwidth.html\" class=\"detail_view\">Details</a>\n"
+                + "                                    <a href=\"/toy/ProductDetail?id=" + toy.getToyID() + "\" class=\"detail_view\">Details</a>\n"
                 + "\n"
                 + "                                </div>\n"
                 + "\n"

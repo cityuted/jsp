@@ -26,7 +26,8 @@
                     </div>  
                 </article>
                 <article class="grid_8">
-                    <h2 class="black"><%=toy.getToyName()%></h2>
+                    <h2 class="black"><%=toy.getToyName()%>
+                    </h2>
                     <div class="product_info">
 
 
@@ -48,12 +49,12 @@
                     </div>
                     <div class="price">$25</div>
                     <div class="product_cart">
-                        <div class="qty">
-                            <span>Quantity:</span>
-                            <label>
+                        <div  class="qty">
 
-                                <input id="qtySet" type="text" value="1" size="2" name="quantity" class="w30" id="qty" onBlur="if (this.value == '' || this.value == 0)
-                                            this.value = '1'" />
+                            <span id='qtyselection2'>Quantity:</span>
+                            <label id='qtyselection'>
+
+                                <input id="qtySet" type="text" value="1" size="2" name="quantity" class="w30" id="qty" onBlur="check(this)" />
                                 <a href="javascript:min();" class="qtyBtn mines"></a>
                                 <a href="javascript:plus();" class="qtyBtn plus"></a>
 
@@ -66,9 +67,25 @@
                                        <input id="addformsubmit" style="visibility: hidden" type="submit"/>
                             </form>
                             <script>
+                                function check(f) {
+                                    if (f.value == '' || f.value == 0) {
+                                        f.value = '1'
+                                    }
+                                    if (isNaN(parseInt(f.value))){
+                                        f.value=1;
+                                    }
+                                    if(f.value > <%=toy.getQTY()%>){
+                                        f.value=<%=toy.getQTY()%>;
+                                    }
+                                }
+
                                 function plus() {
-                                    document.getElementById("qtySet").value++;
-                                    document.getElementById("formQty").value = document.getElementById("qtySet").value;
+                                    var q = parseInt(document.getElementById("qtySet").value);
+                                    q += 1;
+                                    if (q <= <%=toy.getQTY()%>) {
+                                        document.getElementById("qtySet").value++;
+                                        document.getElementById("formQty").value = document.getElementById("qtySet").value;
+                                    }
                                 }
                                 function min() {
                                     if (document.getElementById("qtySet").value > 1) {
@@ -80,7 +97,13 @@
                                     document.getElementById("addformsubmit").click();
                                 }
                             </script>
+                            (<%=toy.getQTY()%> in stock)
                         </div>
+                        <%
+                            if (toy.getSecondHandID() > 0) {
+                                out.println("<script>document.getElementById('qtyselection').style.display = 'none';document.getElementById('qtyselection2').style.display = 'none';</script>");
+                            }
+                        %>
                     </div>
                     <div class="social_btns">
                         <!-- AddThis Button BEGIN -->
@@ -89,7 +112,7 @@
                         <!-- AddThis Button END -->   
                     </div>
                     <dl class="tags1">
-                        <dd>Category: <a href="#">Toys on SALE</a>, <a href="#">Classic &amp; Retro</a></dd>
+
                     </dl>
                 </article>
             </div>
@@ -123,7 +146,7 @@
                     <ul class="ext_list review_list">
                         <%                            for (int i = 0; i < messages.getMessages().size(); i++) {
                                 Message m = messages.getMessages().get(i);
-                                out.print(Template.getMessageTemplate(m.getCustName(), m.getContent(), m.getDate(), m.getRating()));
+                                out.print(Template.getMessageTemplate(m.getMessageID(), m.getCustName(), m.getContent(), m.getDate(), m.getRating()));
                             }
                         %>
 

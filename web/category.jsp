@@ -9,7 +9,7 @@
 <section id="content" class="cont_pad">
     <div class="breadcrump">
         <ul>
-            <li><a href="#">Shop<%=request.getQueryString()%></a></li>
+            <li><a href="#">Shop</a></li>
         </ul>
     </div>
     <div class="row">
@@ -22,12 +22,12 @@
                 }
             %>
         </form>
-        <article class="grid_8">
+        <article class="grid_12">
             <h2 class="ind1"><%=request.getAttribute("pageFor")%></h2>
             <%
-                
-                    out.print("<figure class=\"category_image\"><img src=\"images/category_img1.png\" alt=\"\"></figure>");
-                
+
+                out.print("<figure class=\"category_image\"><img src=\"images/category_img1.png\" alt=\"\"></figure>");
+
 
             %>
 
@@ -45,7 +45,7 @@
                         <div class="clear"></div>
                     </label>
                     <label class="criterion">
-                        <span></span>
+                        <span>	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;&nbsp;&nbsp;</span>
                         <a id="orderDisplay" href="javascript:;" class="slct4">Asc</a>
                         <ul class="drop4">
                             <li onclick="document.getElementById('order').value = 'asc';"><a href="javascript:;">Ascending</a></li>
@@ -77,8 +77,10 @@
             </div>
             <ul id="category" class="grid">
                 <%                    for (int i = 0; i < toys.getToys().size(); i++) {
-                        Toy toy = toys.getToys().get(i);
-                        out.print(Template.getToyTemplate(toy.encodedImage(), toy.getToyName(), String.valueOf(toy.getCashpoint()), String.valueOf(toy.getToyID())));
+                        if (toys.getToys().get(i).getQTY() > 0) {
+                            Toy toy = toys.getToys().get(i);
+                            out.print(Template.getToyTemplate(toy.encodedImage(), toy.getToyName(), String.valueOf(toy.getCashpoint()), String.valueOf(toy.getToyID())));
+                        }
                     }
                 %>
 
@@ -111,75 +113,38 @@
                 </div>
             </div>
             <script>
-                var sort = "";
-                var order = "";
-                if (document.getElementById("sort").value === 'TOYNAME') {
-                    sort = 'Toy Name';
-                }
-                if (document.getElementById("sort").value === 'CASHPOINT') {
-                    sort = 'Cash Point';
-                }
-                if (document.getElementById("sort").value === 'Sales') {
-                    sort = 'Sales';
-                }
-                if (document.getElementById("order").value === 'asc') {
-                    order = 'Ascending';
-                }
-                if (document.getElementById("order").value === 'desc') {
-                    order = 'Descending';
-                }
-                document.getElementById("sortDisplay").innerHTML = sort;
-                document.getElementById("orderDisplay").innerHTML = order;
+                $(document).ready(function () {
+                    var sort = "";
+                    var order = "";
+                    if (document.getElementById("sort").value === 'TOYNAME') {
+                        sort = 'Toy Name';
+                    }
+                    if (document.getElementById("sort").value === 'CASHPOINT') {
+                        sort = 'Cash Point';
+                    }
+                    if (document.getElementById("sort").value === 'Sales') {
+                        sort = 'Sales';
+                    }
+                    if (document.getElementById("order").value === 'asc') {
+                        order = 'Ascending';
+                    }
+                    if (document.getElementById("order").value === 'desc') {
+                        order = 'Descending';
+                    }
+                    document.getElementById("sortDisplay").innerHTML = sort;
+                    document.getElementById("orderDisplay").innerHTML = order;
+                    if (sort === "") {
+                        document.getElementById("sortDisplay").innerHTML = 'TOYNAME';
+                        document.getElementById("sort").value = 'TOYNAME';
+                    }
+                    if (order === "") {
+                        document.getElementById("orderDisplay").innerHTML = 'Ascending';
+                        document.getElementById("order").value = 'asc';
+                    }
+                });
             </script>
         </article>
-        <article class="grid_4">
-            <div class="tags">
-                <h3 class="blue ind">Product Tags</h3>
-                <ul class="tags">
-                    <li>
-                        <a href="#">Animals <span>(54)</span></a>
-                        <a href="#">Arts <span>(12)</span></a>
-                        <a href="#">Bath toys<span>(33)</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Books <span>(276)</span></a>
-                        <a href="#">Biulding blocks <span>(17)</span></a>
-                        <a href="#">Classic <span>(82)</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Colorful <span>(106)</span></a>
-                        <a href="#">Crafts <span>(29)</span></a>
-                        <a href="#">Games <span>(77)</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Outdoor <span>(23)</span></a>
-                        <a href="#">Crafts <span>(29)</span></a>
-                        <a href="#">Games <span>(77)</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Soft <span>(41)</span></a>
-                        <a href="#">Vechicles <span>(36)</span></a>
-                        <a href="#">Wooden <span>(25)</span></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="price_filter">
-                <h3 class="green ind">Filter by Price</h3>
-                <form action="#" method="post">
-                    <div class="sliderCont">
-                        <div id="price_slider"></div>
-                    </div>
-                    <div class="formCost">
-                        <span>Filter</span>
-                        <label>
-                            Price:
-                            $<input type="text" id="minCost" value="0"/>
-                            &mdash;
-                            $<input type="text" id="maxCost" value="1999"/>
-                        </label>
-                    </div>
-                </form>
-            </div>
+
 
         </article>
     </div>

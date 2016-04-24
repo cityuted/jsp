@@ -1,9 +1,8 @@
-g<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <%@ page import="bean.*" %>
 <%@ page import="db.categoryDB" %>
 <%@ page import="bean.Template" %>
-<%@page import="java.util.ArrayList"%>
 <jsp:useBean id="user" class="bean.User" scope="session"/>
 <jsp:useBean id="cart" class="bean.Cart" scope="session"/>
 
@@ -53,7 +52,7 @@ g<%@page import="java.util.ArrayList"%>
                         <ul class="block_headerlinks">
                             <%
                                 if (user.getUserID() == 0) {
-                                    out.print("<li><a href=\"/toy/Register\">Register</a></li>\n"
+                                    out.print("<li><a href=\"/toy/Register\">Create account</a></li>\n"
                                             + "                            <li><a href=\"/toy/Login\" class=\"modal-toggle-1\">Login</a></li>");
                                 } else {
                                     out.print("<li><a href=\"/toy/MyAccount\" class=\"modal-toggle-1\">My Account</a></li><li><a href=\"/toy/Logout\" class=\"modal-toggle-1\">Logout</a></li>");
@@ -153,8 +152,7 @@ g<%@page import="java.util.ArrayList"%>
                                     categoryDB catedb = new categoryDB();
                                     ArrayList<bean.Category> listCate = catedb.listToyCategory();
                                     for (int i = 0; i < listCate.size(); i++) {
-                                        
-                                        if (!listCate.get(i).getCategoryName().toLowerCase().matches(".*age.*")) {
+                                        if (!listCate.get(i).getCategoryName().toLowerCase().contains("age")) {
                                             out.print("<li><a href=\"/toy/Category?order=asc&sort=TOYNAME&cate="+listCate.get(i).getCategoryID()+"\">" + listCate.get(i).getCategoryName() + "</a></li>");
                                         }
                                     }
@@ -166,7 +164,7 @@ g<%@page import="java.util.ArrayList"%>
 
                                         <%
                                             for (int i = 0; i < listCate.size(); i++) {
-                                                if (listCate.get(i).getCategoryName().toLowerCase().matches(".*age.*")) {
+                                                if (listCate.get(i).getCategoryName().toLowerCase().contains("age")) {
                                                     out.print("<li><a href=\"/toy/Category?order=desc&sort=TOYNAME&cate="+listCate.get(i).getCategoryID()+"\">" + listCate.get(i).getCategoryName() + "</a></li>");
                                                 }
                                             }

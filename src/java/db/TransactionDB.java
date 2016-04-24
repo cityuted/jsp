@@ -53,7 +53,13 @@ public class TransactionDB extends GeneralDB {
             ResultSet rs = pstmt.getGeneratedKeys();
             rs.next();
             createTransactionItem(rs.getInt(1), cart);
+            PreparedStatement pstmt2 = conn.prepareStatement("update user set cashpoint=cashpoint-? where USERID=?");
+            pstmt2.setInt(1, cart.getTotal());
+            pstmt2.setInt(2, custID);
+            pstmt2.executeUpdate();
+            conn.commit();
             pstmt.close();
+            pstmt2.close();
             conn.close();
             return true;
         } catch (SQLException ex) {
@@ -72,6 +78,9 @@ public class TransactionDB extends GeneralDB {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             conn.setAutoCommit(false);
             PreparedStatement pstmt = null;
+            PreparedStatement pstmt2 = null;
+            PreparedStatement pstmt3 = null;
+
             for (int i = 0; i < cart.getSize(); i++) {
                 pstmt = conn.prepareStatement("INSERT INTO transactionitem(TRANSACTIONID,TOYID,TOYNAME,CASHPOINT,QTY) VALUES (?,?,?,?,?)");
                 pstmt.setInt(1, TRANSACTIONID);
@@ -80,10 +89,20 @@ public class TransactionDB extends GeneralDB {
                 pstmt.setInt(4, cart.getToys().get(i).getCashpoint());
                 pstmt.setInt(5, cart.getToys().get(i).getQTY());
                 pstmt.executeUpdate();
-
+                pstmt2 = conn.prepareStatement("update toy set qty=qty-? where TOYID=?");
+                pstmt2.setInt(1, cart.getToys().get(i).getQTY());
+                pstmt2.setInt(2, cart.getToys().get(i).getToyID());
+                pstmt2.executeUpdate();
+                
+                pstmt3 = conn.prepareStatement("update user set cashpoint=cashpoint+(select cashpoint from toy where toyid=?) where user.userid = (select custid from secondhand,toy where toyid=? and SECONDHANDID is not null)");
+                pstmt3.setInt(1, cart.getToys().get(i).getToyID());
+                pstmt3.setInt(2, cart.getToys().get(i).getToyID());
+                pstmt3.executeUpdate();
             }
             conn.commit();
             pstmt.close();
+            pstmt2.close();
+            pstmt3.close();
             conn.close();
             return true;
         } catch (SQLException ex) {
@@ -213,24 +232,23 @@ public class TransactionDB extends GeneralDB {
             return null;
         }
     }
-    
-    
-    public boolean updateTransaction(int TRANSACTIONID,String TRANSACTIONPROGRESS) {
+
+    public boolean updateTransaction(int TRANSACTIONID, String TRANSACTIONPROGRESS) {
         Connection conn = null;
         try {
-            conn =DriverManager.getConnection(conn_url, conn_username, conn_password);;
+            conn = DriverManager.getConnection(conn_url, conn_username, conn_password);;
             conn.setAutoCommit(false);
             PreparedStatement pstmt = conn.prepareStatement("UPDATE transactionheader SET DELIVERYPROGRSS = ? WHERE TRANSACTIONID = ?");
             pstmt.setString(1, TRANSACTIONPROGRESS);
             pstmt.setInt(2, TRANSACTIONID);
             // ArrayList<TransactionHeader> tempList = new ArrayList();
-            
+
             //stmnt.executeQuery()
             pstmt.executeUpdate();
             pstmt.close();
             conn.commit();
             conn.close();
-           return true;
+            return true;
         } catch (SQLException ex) {
             try {
                 conn.rollback();
@@ -239,7 +257,7 @@ public class TransactionDB extends GeneralDB {
             }
             return false;
         }
-        
+
     }
 
 }

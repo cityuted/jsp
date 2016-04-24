@@ -162,15 +162,10 @@
 
                 <ul id="latest_products">
 
-                    <%
-                        out.print(Template.getLatest());
-                        out.print(Template.getLatest());
-                        out.print(Template.getLatest());
-                        out.print(Template.getLatest());
-                        out.print(Template.getLatest());
-                        out.print(Template.getLatest());
-                        out.print(Template.getLatest());
-                    %>
+<%
+out.print(request.getAttribute("best"));
+
+%>
 
                 </ul>
 
@@ -184,7 +179,7 @@
 
         <article class="grid_12">
 
-            <h2 class="ind">Second Hand Toy</h2>
+            <h2 class="ind">Latest Second Hand Toy</h2>
 
             <div class="carousel_box list_carousel responsive last">
 
@@ -195,11 +190,8 @@
                 <ul id="bestsellers">
 
 <%
-out.print(Template.getBestSell());
-out.print(Template.getBestSell());
-out.print(Template.getBestSell());
-out.print(Template.getBestSell());
-out.print(Template.getBestSell());
+out.print(request.getAttribute("se"));
+
 %>
 
 

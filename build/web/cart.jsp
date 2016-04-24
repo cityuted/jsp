@@ -22,7 +22,7 @@
                     </tr>
                     <%                        for (int i = 0; i < cart.getToys().size(); i++) {
                             Toy toy = cart.getToys().get(i);
-                            out.println(Template.getCart(toy.encodedImage(), toy.getToyName(), toy.getCashpoint(), toy.getQTY(), toy.getToyID()));
+                            out.println(Template.getCart(toy.encodedImage(), toy.getToyName(), toy.getCashpoint(), toy.getQTY(), toy.getToyID(),toy.getSecondHandID()));
                         }
 
                     %>
@@ -31,8 +31,6 @@
             </div>
             <div class="total_wrap">
                 <dl class="total_list var2">
-                    <dd><span>Sub-Total:</span>$<%=cart.getTotal()%></dd>
-                    <dd><span>Flat Shipping Rate:</span>free</dd>
                     <dd class="total_price"><span>Total:</span>$<%=cart.getTotal()%></dd>
                     
                 </dl>

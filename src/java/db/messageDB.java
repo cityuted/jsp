@@ -51,6 +51,36 @@ public class messageDB extends GeneralDB {
         }
     }
 
+    public ArrayList<Message> listMessageReply(int msgid) {
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM MESSAGE,user where REPLYMSGID=? and MESSAGE.MANAGERID=user.USERID");
+            System.out.print(pstmt);
+            pstmt.setInt(1, msgid);
+            ArrayList<Message> tempMessageList = new ArrayList();
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                Message tempMessage = new Message();
+                tempMessage.setMessageID(rs.getInt("MESSAGEID"));
+                tempMessage.setToyID(rs.getInt("TOYID"));
+                tempMessage.setCustID(rs.getInt("CUSTID"));
+                tempMessage.setContent(rs.getString("CONTENT"));
+                tempMessage.setRating(rs.getInt("Rating"));
+                tempMessage.setDate(rs.getString("DATE"));
+                tempMessage.setCustName(rs.getString("USERNAME"));
+                tempMessageList.add(tempMessage);
+                return tempMessageList;
+            }
+            //stmnt.executeQuery()
+            pstmt.close();
+            conn.close();
+            return tempMessageList;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
     public ArrayList<Message> listMessage() {
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
@@ -78,7 +108,7 @@ public class messageDB extends GeneralDB {
     public ArrayList<Message> listMessageFromID(String TOYID) {
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM MESSAGE,user where TOYID = " + TOYID + " and MESSAGE.CUSTID=user.USERID");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM MESSAGE,user where TOYID = " + TOYID + " and MESSAGE.CUSTID=user.USERID and REPLYMSGID is null");
             ArrayList<Message> tempMessageList = new ArrayList();
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {

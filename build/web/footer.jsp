@@ -48,17 +48,9 @@
 
           <ul class="list1">
 
-            <li><a href="about.html">About Us</a></li>
+            <li><a href="/toy/Contact">About Us</a></li>
 
-            <li><a href="contact.html">Contact Us</a></li>
-
-            <li><a href="#">Brands</a></li>
-
-            <li><a href="order_history.html">Track your order</a></li>
-
-            <li><a href="#">Warranty</a></li>
-
-            <li><a href="#">Delivery</a></li>
+            <li><a href="/toy/Contact">Contact Us</a></li>
 
             <li><a href="#">Terms &amp; Conditions</a></li>
 
@@ -93,11 +85,11 @@
 
             <ul class="footer_menu">
 
-              <li><a href="index-2.html">Home</a></li>
+              <li><a href="/toy/">Home</a></li>
 
-              <li><a href="category.html">Shop</a></li>
+              <li><a href="/toy/Category?order=asc&sort=TOYNAME">Shop</a></li>
 
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="/toy/Contact">Contact</a></li>
 
             </ul>
 
