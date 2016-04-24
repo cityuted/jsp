@@ -90,15 +90,18 @@
 
 
                             <!-- Select multiple-->
-                            <% String disabled ="";%>
+                            <% String disabled =""; String style="";%>
                             <% if (session.getAttribute(categoryID+".isvalid").equals("true"))
                             {
                                 disabled = "disabled";
+                                style="display:none";
+                                out.println("<script>window.location='/toy/doSearchToyCategory'</script>");
+                                
                             }
                             %>
                             <div class="box-footer">
                                 <button class="btn btn-danger " type='button' onclick="javascript:location.href = '/toy/doSearchToyCategory'">Back</button>
-                                <input type="submit" <%=disabled%> class="btn btn-primary pull-right" value='Delete'>
+                                <input type="submit" <%=disabled%> style="<%=style%>" class="btn btn-primary pull-right" value='Delete'>
 
                             </div>  
 
