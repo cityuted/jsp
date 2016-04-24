@@ -152,9 +152,14 @@
                                     categoryDB catedb = new categoryDB();
                                     ArrayList<bean.Category> listCate = catedb.listToyCategory();
                                     for (int i = 0; i < listCate.size(); i++) {
-                                        if (!listCate.get(i).getCategoryName().toLowerCase().contains("age")) {
-                                            out.print("<li><a href=\"/toy/Category?order=asc&sort=TOYNAME&cate="+listCate.get(i).getCategoryID()+"\">" + listCate.get(i).getCategoryName() + "</a></li>");
-                                        }
+                                        
+//                                            if (!listCate.get(i).getCategoryName().toLowerCase().contains("age")) {
+//                                                out.print("<li><a href=\"/toy/Category?order=asc&sort=TOYNAME&cate=" + listCate.get(i).getCategoryID() + "\">" + listCate.get(i).getCategoryName() + "</a></li>");
+//                                            }
+                                        if (!listCate.get(i).getCategoryName().toLowerCase().matches(".*age.*")) {
+                                                out.print("<li><a href=\"/toy/Category?order=asc&sort=TOYNAME&cate=" + listCate.get(i).getCategoryID() + "\">" + listCate.get(i).getCategoryName() + "</a></li>");
+                                            }
+                                        
                                     }
                                 %>
 
@@ -164,9 +169,14 @@
 
                                         <%
                                             for (int i = 0; i < listCate.size(); i++) {
-                                                if (listCate.get(i).getCategoryName().toLowerCase().contains("age")) {
-                                                    out.print("<li><a href=\"/toy/Category?order=desc&sort=TOYNAME&cate="+listCate.get(i).getCategoryID()+"\">" + listCate.get(i).getCategoryName() + "</a></li>");
-                                                }
+                                                
+                                                //    if (listCate.get(i).getCategoryName().toLowerCase().contains("age")) {
+                                               //         out.print("<li><a href=\"/toy/Category?order=desc&sort=TOYNAME&cate=" + listCate.get(i).getCategoryID() + "\">" + listCate.get(i).getCategoryName() + "</a></li>");
+                                                 //   }
+                                                 if (listCate.get(i).getCategoryName().toLowerCase().matches(".*age.*")) {
+                                                        out.print("<li><a href=\"/toy/Category?order=desc&sort=TOYNAME&cate=" + listCate.get(i).getCategoryID() + "\">" + listCate.get(i).getCategoryName() + "</a></li>");
+                                                    }
+                                                
                                             }
                                         %>
 

@@ -60,6 +60,7 @@ public class doLogin extends HttpServlet {
                         } else {
                             session.setAttribute("userID", u.getUserID());
                             session.setAttribute("username", u.getUserName());
+                            session.setAttribute("userPhoto", u.getPhoto());
                             response.sendRedirect("doSearchToy");
                         }
                     }

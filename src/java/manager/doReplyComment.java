@@ -39,10 +39,13 @@ public class doReplyComment extends HttpServlet {
             int toyID = Integer.parseInt(request.getParameter("toyID"));
             String content = request.getParameter("commentContent");
             int managerID = Integer.parseInt(session.getAttribute("userID") + "");
+            int custID = Integer.parseInt(request.getParameter("custID"));
+            int transactionID = Integer.parseInt(request.getParameter("transactionID"));
+            int messageID = Integer.parseInt(request.getParameter("messageID"));
             messageDB msgDB = new messageDB();
             
             request.setAttribute("ID", toyID);
-           out.println(msgDB.createReply(toyID, managerID, content));
+           out.println(msgDB.createReply(transactionID,toyID,custID, content,managerID,messageID));
             //response.sendRedirect("/toy/doSearchAllComments");
             request.getRequestDispatcher("/doSearchAllComments").forward(request, response);
             return;

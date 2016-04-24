@@ -19,7 +19,7 @@
         pageNumber = 1;
     }
 
-    
+
 %>
 <script>
     (function (document) {
@@ -72,7 +72,7 @@
                 <h3 class="box-title">Transaction Header Table</h3>
 
                 <div class="box-tools">
-                   
+
                     <div class="input-group input-group-sm" style="width: 150px;">
 
                         <!--<input type="text" name="table_search" class="form-control pull-right" placeholder="Search">-->
@@ -109,48 +109,49 @@
 
 
                         %>
-                    
-                    <%                        
-                        for (k = 0; k < transactionlist.size(); k++) {
-                            TransactionHeader tran = transactionlist.get(k);
-                            if (k > (pageNumber) * 15 || k < (pageNumber - 1) * 15) {
-                                out.println("<tr style='display:none'>");
-                            } else {
-                                out.println("<tr>");
+
+                        <%                        for (k = 0; k < transactionlist.size(); k++) {
+                                TransactionHeader tran = transactionlist.get(k);
+                                if (k > (pageNumber) * 15 || k < (pageNumber - 1) * 15) {
+                                    out.println("<tr style='display:none'>");
+                                } else {
+                                    out.println("<tr>");
+                                }
+                                out.print(String.format("<td>%s</td>", tran.getTRANSACTIONID()));
+
+                                out.print(String.format("<td>%s</td>", tran.getCUSTID()));
+
+                                out.print(String.format("<td>%s</td>", tran.getDELIVERYAddressee()));
+                                out.print(String.format("<td>%s</td>", tran.getDELIVERYAddresseePhone()));
+                                out.print(String.format("<td>%s</td>", tran.getDELIVERYOPTION()));
+
+                                
+                                out.print(String.format("<td>%s</td>", tran.getDELIVERYADDRESS()));
+                                out.print(String.format("<td>%s</td>", tran.getDELIVERYPROGRSS()));
+                                out.print(String.format("<td>%s</td>", tran.getDELIVERYTIME()));
+                                out.print(String.format("<td>%s</td>", tran.getPayment()));
+
+                                //String createUrl = "/toy/doCreateCategory?categoryID=" + cat.getCategoryID();
+                                String viewUrl = "/toy/managerPage/viewTransactionItem.jsp?transactionID=" + tran.getTRANSACTIONID();
+                                String updateUrl = "/toy/managerPage/updateTransactionHeader.jsp?transactionID=" + tran.getTRANSACTIONID();
+
+                                String disabled = "";
+    //                            if (session.getAttribute(cat.getCategoryID() + ".isvalid").equals("true")) {
+    //                                disabled = "disabled";
+    //                            }
+
+                                out.println("<td>");
+    //                             
+                                out.println("<div class='btn-group-vertical'>"
+                                        + "<button type='button' onclick='javascript:location.href=\"" + viewUrl + "\"' class='btn btn-success'><i class='fa fa-search'></i></button>"
+                                        + "<button type='button'" + disabled + " onclick='javascript:location.href=\"" + updateUrl + "\"' class='btn btn-primary'><i class='fa fa-edit'></i></button>"
+                                        + "</div>");
+                                out.println("</td>");
+
+                                out.println("</tr>");
                             }
-                            out.print(String.format("<td>%s</td>", tran.getTRANSACTIONID()));
 
-                            out.print(String.format("<td>%s</td>", tran.getCUSTID()));
-                        
-                            out.print(String.format("<td>%s</td>", tran.getDELIVERYAddressee()));
-                            out.print(String.format("<td>%s</td>", tran.getDELIVERYAddresseePhone()));
-                            out.print(String.format("<td>%s</td>", tran.getDELIVERYOPTION()));
-                            out.print(String.format("<td>%s</td>", tran.getDELIVERYADDRESS()));
-                            out.print(String.format("<td>%s</td>" , tran.getDELIVERYPROGRSS()));
-                            out.print(String.format("<td>%s</td>" , tran.getDELIVERYTIME()));
-                            out.print(String.format("<td>%s</td>" , tran.getPayment()));
-
-                            //String createUrl = "/toy/doCreateCategory?categoryID=" + cat.getCategoryID();
-                            String viewUrl = "/toy/managerPage/viewTransactionItem.jsp?transactionID=" + tran.getTRANSACTIONID();
-                            String updateUrl = "/toy/managerPage/updateTransactionHeader.jsp?transactionID=" + tran.getTRANSACTIONID();
-                            
-                            String disabled = "";
-//                            if (session.getAttribute(cat.getCategoryID() + ".isvalid").equals("true")) {
-//                                disabled = "disabled";
-//                            }
-
-                            out.println("<td>");
-//                             
-                            out.println("<div class='btn-group-vertical'>"
-                                    + "<button type='button' onclick='javascript:location.href=\"" + viewUrl + "\"' class='btn btn-success'><i class='fa fa-search'></i></button>"
-                                    + "<button type='button'" + disabled + " onclick='javascript:location.href=\"" + updateUrl + "\"' class='btn btn-primary'><i class='fa fa-edit'></i></button>"
-                                    + "</div>");
-                            out.println("</td>");
-
-                            out.println("</tr>");
-                        }
-
-                    %>
+                        %>
 
                     </tbody></table>
 

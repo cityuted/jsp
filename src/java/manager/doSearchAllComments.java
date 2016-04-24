@@ -48,6 +48,9 @@ public class doSearchAllComments extends HttpServlet {
             ArrayList<Message> msgList = msgDB.listMessageHeader();
             ArrayList<Toy> toyList = new ArrayList();
             ArrayList<User> userList = new ArrayList();
+            ArrayList<User> managerList = new ArrayList();
+            ArrayList<Boolean> isReply = new ArrayList();
+            ArrayList<Message> replyList = new ArrayList();
             int toyID = 0;
             
             if (request.getParameter("ID") != null) {
@@ -66,11 +69,37 @@ public class doSearchAllComments extends HttpServlet {
             for (Message m : msgList) {
                 toyList.add(toydb.searchToyByID(m.getToyID() + ""));
                 userList.add(userdb.searchUserByID(m.getCustID()));
+                if(m.getManagerID()==0 || m.getManagerID()==-1)
+                {
+                    isReply.add(false);
+                }
+                else{
+                    isReply.add(true);
+                    
+                    
+                }
+                ArrayList<Message> temp = msgDB.listMessageReply(m.getMessageID());
+                if(temp.size()>0)
+                {
+                    replyList.add(temp.get(0));
+                    
+                   
+                    
+                }
+              
+                 managerList.add(userdb.searchUserByID(m.getManagerID()));
+               
+                
+                
             }
-
+            session.setAttribute("size", managerList.get(managerList.size()-1));
             session.setAttribute("messagelist", msgList);
             session.setAttribute("toylist", toyList);
             session.setAttribute("userlist", userList);
+            session.setAttribute("managerlist", managerList);
+            //session.setAttribute("isReply", isReply);
+            session.setAttribute("replylist", replyList);
+            
             response.sendRedirect("managerPage/viewComment.jsp");
         } finally {
             out.close();

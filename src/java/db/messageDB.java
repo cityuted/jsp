@@ -69,6 +69,10 @@ public class messageDB extends GeneralDB {
                 tempMessage.setRating(rs.getInt("Rating"));
                 tempMessage.setDate(rs.getString("DATE"));
                 tempMessage.setCustName(rs.getString("USERNAME"));
+             
+                tempMessage.setReplyMsgID(rs.getInt("REPLYMSGID"));
+                tempMessage.setManagerID(rs.getInt("MANAGERID"));
+                tempMessage.setTransactionID(rs.getInt("TRANSACTIONID"));
                 tempMessageList.add(tempMessage);
                 return tempMessageList;
             }
@@ -94,6 +98,9 @@ public class messageDB extends GeneralDB {
                 tempMessage.setToyID(rs.getInt("TOYID"));
                 tempMessage.setCustID(rs.getInt("CUSTID"));
                 tempMessage.setContent(rs.getString("CONTENT"));
+                tempMessage.setReplyMsgID(rs.getInt("REPLYMSGID"));
+                tempMessage.setManagerID(rs.getInt("MANAGERID"));
+                tempMessage.setTransactionID(rs.getInt("TRANSACTIONID"));
                 tempMessageList.add(tempMessage);
             }
             //stmnt.executeQuery()
@@ -121,6 +128,9 @@ public class messageDB extends GeneralDB {
                 tempMessage.setRating(rs.getInt("Rating"));
                 tempMessage.setDate(rs.getString("DATE"));
                 tempMessage.setCustName(rs.getString("USERNAME"));
+                tempMessage.setManagerID(rs.getInt("MANAGERID"));
+                tempMessage.setTransactionID(rs.getInt("TRANSACTIONID"));
+                tempMessage.setReplyMsgID(rs.getInt("REPLYMSGID"));
                 tempMessageList.add(tempMessage);
             }
             //stmnt.executeQuery()
@@ -230,30 +240,29 @@ public class messageDB extends GeneralDB {
         }
     }
     
-    public boolean createReply(int toyID, int managerID, String content) {
+    public boolean createReply(int transID,int toyID, int custID, String content,int ManagerID,int replyID) {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
             conn.setAutoCommit(false);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO MESSAGE(TOYID,CUSTID,MANAGERID,CONTENT) VALUES (?,?,?,?)");
-            
-            pstmt.setInt(1, toyID);
-            pstmt.setInt(2, managerID);
-            pstmt.setInt(3, managerID);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO MESSAGE(TRANSACTIONID,TOYID,CUSTID,CONTENT,Rating,MANAGERID,REPLYMSGID) VALUES (?,?,?,?,?,?,?)");
+            pstmt.setInt(1, transID);
+            pstmt.setInt(2, toyID);
+            pstmt.setInt(3, custID);
             pstmt.setString(4, content);
-           // pstmt.setInt(4, 0);
+            pstmt.setInt(5, 0);
+            pstmt.setInt(6, ManagerID);
+             pstmt.setInt(7, replyID);
             pstmt.executeUpdate();
             conn.commit();
             pstmt.close();
             conn.close();
-           // return true;
-           return true;
+            return true;
         } catch (SQLException ex) {
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
                 Logger.getLogger(messageDB.class.getName()).log(Level.SEVERE, null, ex1);
-                
             }
             return false;
         }

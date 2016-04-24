@@ -27,14 +27,18 @@ public class timeTest {
         Date date;
         try {
             date = sdf.parse(dateString);
-             System.out.println(date);
-             System.out.println(p.format(date));
-             
+            System.out.println(date);
+            System.out.println(p.format(date));
+            
+            String Str = new String("1,2,3");
+
+            System.out.print("Return Value :");
+            System.out.println(Str.replace(",", "<br/>"));
+
+           
         } catch (ParseException ex) {
             Logger.getLogger(timeTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        
 
     }
 

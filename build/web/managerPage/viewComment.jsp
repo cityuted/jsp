@@ -60,7 +60,29 @@
                 // document.forms[0].submit();
             }
         }
+        function getReplyData(msgID,transID, custID, custName)
+        {
+            var tran = document.getElementById("transactionID");
+            var cust = document.getElementById("custID");
+            messageID
+            var msg = document.getElementById("messageID");
+            var replyHeader = document.getElementById("replyHeader");
 
+            replyHeader.style.visibility = "visible";
+            msg.value = msgID;
+            tran.value = transID;
+            cust.value = custID;
+            replyHeader.innerHTML = "Reply " + custName + ":";
+            var placeholder = document.getElementById("commentPlace");
+            placeholder.disabled = false;
+            //alert(tran.value+":"+cust.value);
+        }
+
+        function disableReply(id)
+        {
+            var reply = document.getElementById("reply"+id);
+            reply.style.visibility = "hidden";
+        }
 
     </script>
 
@@ -88,21 +110,21 @@
 //                        custID = Integer.parseInt(request.getParameter("custID"));
 //                    }
 //                    User user = userdb.searchUserByID(custID);
-            %>
+%>
             <!-- Main content -->
-            <div class="box box-warning">
-                <div class="box-header with-border">
+            <div class="box box-danger">
+                <div class="box-header ">
                     <h3 class="box-title">View Comments</h3>
                 </div>
                 <!-- /.box-header -->
-                
-                
+
+
                 <img class="img-responsive"  src="data:image/jpeg;base64,${toylist[0].photo}" alt="Photo">
                 <label>${toylist[0].toyName}</label>
                 <hr/>
                 <label>Response</label>
                 <div class="box-body row-sm-8">
-                    
+
 
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
@@ -112,42 +134,98 @@
                             <c:set var="index" value="0" scope="page"/>
 
                             <c:forEach items="${messagelist}" var="msg">
+                                
+                                <c:choose>
+                                    <c:when test="${msg.replyMsgID==0}">
+                                        <div class="post clearfix">
+                                            <div class="user-block">
+                                                <img class="img-circle" src="data:image/jpeg;base64,${userlist[index].photo}" alt="User Image">
 
-                                <div class="post clearfix">
-                                    <div class="user-block">
-                                        <img class="img-circle" src="data:image/jpeg;base64,${userlist[index].photo}" alt="User Image">
-                                        
-                                       
-                                        <span class="username">
-                                            <c:choose>
-                                                <c:when test="${userlist[index].typeID==4}">
-                                                     <a  onclick="location.href='viewCustomerProfile.jsp?custID=${userlist[index].userID}'" href="javascript:void(0)">${userlist[index].userName}</a>
-                                                </c:when>
-                                                <c:otherwise>
-                                                      <a disabled href="javascript:void(0)">${userlist[index].userName}</a>
-                                                </c:otherwise>
-                                            </c:choose>
-                                           
 
-                                                <a  href="javascript:void(0)" onclick="location.href='/toy/doDeleteComment?toyID=${toylist[0].toyID}&msgID=${msg.messageID}'"  class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                                                
-                                        </span>
-                                        <span class="description">Leave a comment - ${msg.relativeTime}</span></span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <p>
-                                        ${msg.content}
-                                    </p>
+                                                <span class="username">
+                                                    <c:choose>
+                                                        <c:when test="${userlist[index].typeID==4}">
+                                                            <a  onclick="location.href = 'viewCustomerProfile.jsp?custID=${userlist[index].userID}'" href="javascript:void(0)">${userlist[index].userName}</a>
 
-                                </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a disabled href="javascript:void(0)">${userlist[index].userName}</a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+
+
+                                                    <a  href="javascript:void(0)"  onclick="location.href = '/toy/doDeleteComment?toyID=${toylist[0].toyID}&msgID=${msg.messageID}'"  class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+
+                                                </span>
+
+
+                                                <span class="description">Leave a comment - ${msg.relativeTime}</span>
+
+                                                <a href="javasciprt:void(0)" id="reply${index}" onclick="getReplyData(${msg.messageID},${msg.transactionID},${msg.custID}, '${userlist[index].userName}')" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Reply</a>
+
+
+                                            </div>
+                                            <!-- /.user-block -->
+                                            <p>
+                                                ${msg.content}
+                                            </p>
+                                            <c:set var="y" value="0" scope="page"/>
+                                          
+                                            
+                                            <c:forEach items="${replylist}" var="reply">
+                                              
+                                                <c:choose>
+                                                    <c:when test="${(reply.replyMsgID==msg.messageID)}">
+                                                        <script>disableReply(${index});</script>
+                                                        <div class="box-footer box-comments">
+                                                            <div class="box-comment">
+                                                                <!-- User image -->
+                                                                <img class="img-circle img-sm" src="data:image/jpeg;base64,${reply.icon}" alt="User Image">
+                                                               
+                                                                <div class="comment-text">
+                                                                    <span class="username">
+                                                                        
+                                                                       
+                                                                                ${reply.custName}
+                                                                           
+                                                                        
+                                                                        <span class="text-muted pull-right">${reply.relativeTime}</span>
+                                                                    </span><!-- /.username -->
+                                                                    ${reply.content}
+                                                                </div>
+                                                                <!-- /.comment-text -->
+                                                            </div>
+                                                            <!-- /.box-comment -->
+
+                                                        </div>
+
+                                                    </c:when>
+                                                </c:choose>
+                                                <c:set var="y" value="${y+1}" scope="page"/>
+                                            </c:forEach>
+                                        </div>
+                                    </c:when>                                    
+                                </c:choose>
+
                                 <c:set var="index" value="${index+1}"/>
+
                             </c:forEach>
-                            <input class="form-control input-sm" id="commentPlace" placeholder="Comment" onchange="getContent(event)"  onkeyup="checkSubmit(event)">
+                            <hr/>
+                            <span>
+                                <label id='replyHeader' class="row-sm-12" style="visibility:hidden"></label>
+                                <br/>
+                                <img class="img-circle img-sm " src="data:image/jpeg;base64,${userPhoto}" alt="User Image">
+                                <input disabled class="form-control  input-sm pull-right" style='width:90%' id="commentPlace" placeholder="Reply" onchange="getContent(event)"  onkeyup="checkSubmit(event)">
+                            </span>
                             <form class="form-horizontal" method="post" action="/toy/doReplyComment" id="leaveComment">
+
                                 <div class="form-group margin-bottom-none">
 
 
                                     <input type="hidden" id="toyID" name="toyID" value="${toylist[0].toyID}"/>
+                                    <input type="hidden" id="messageID" name="messageID" value=""/>
+                                    <input type="hidden" id="custID" name="custID" value=""/>
+                                    <input type="hidden" id="transactionID" name="transactionID" value=""/>
                                     <input type="hidden" id="commentContent" name="commentContent" value=""/>
                                     <input type="submit" style="visibility:hidden" class="btn btn-danger pull-right btn-block btn-sm"/>
 
