@@ -80,7 +80,7 @@ public class TransactionDB extends GeneralDB {
             PreparedStatement pstmt = null;
             PreparedStatement pstmt2 = null;
             PreparedStatement pstmt3 = null;
-
+            System.out.println("checkout:item size:"+cart.getToys().size());
             for (int i = 0; i < cart.getSize(); i++) {
                 pstmt = conn.prepareStatement("INSERT INTO transactionitem(TRANSACTIONID,TOYID,TOYNAME,CASHPOINT,QTY) VALUES (?,?,?,?,?)");
                 pstmt.setInt(1, TRANSACTIONID);
@@ -93,11 +93,12 @@ public class TransactionDB extends GeneralDB {
                 pstmt2.setInt(1, cart.getToys().get(i).getQTY());
                 pstmt2.setInt(2, cart.getToys().get(i).getToyID());
                 pstmt2.executeUpdate();
-                
-                pstmt3 = conn.prepareStatement("update user set cashpoint=cashpoint+(select cashpoint from toy where toyid=?) where user.userid = (select custid from secondhand,toy where toyid=? and SECONDHANDID is not null)");
-                pstmt3.setInt(1, cart.getToys().get(i).getToyID());
-                pstmt3.setInt(2, cart.getToys().get(i).getToyID());
-                pstmt3.executeUpdate();
+                if(cart.getToys().get(i).getSecondHandID()>0){
+                    pstmt3 = conn.prepareStatement("update user set cashpoint=cashpoint+(select cashpoint from toy where toyid=?) where user.userid = (select custid from secondhand,toy where toyid=? and SECONDHANDID is not null and toy.SECONDHANDID=secondhand.id)");
+                    pstmt3.setInt(1, cart.getToys().get(i).getToyID());
+                    pstmt3.setInt(2, cart.getToys().get(i).getToyID());
+                    pstmt3.executeUpdate();
+                }
             }
             conn.commit();
             pstmt.close();
@@ -106,9 +107,11 @@ public class TransactionDB extends GeneralDB {
             conn.close();
             return true;
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
+                System.out.println(ex1.getMessage());
                 Logger.getLogger(TransactionDB.class.getName()).log(Level.SEVERE, null, ex1);
             }
             return false;
