@@ -130,7 +130,7 @@
                         <c:forEach items="${messagelist}" var="msg">
 
                             <c:choose>
-                                <c:when test="${k > (pageNumber) * 15 || k < (pageNumber - 1) * 15}">
+                                <c:when test="${k > (pageNumber) * 15-1 || k < (pageNumber - 1) * 15}">
                                        <tr style='display:none'>
                                
                                 </c:when>

@@ -105,7 +105,7 @@
                     <%                        
                         for (k = 0; k < categoryList.size(); k++) {
                             Category cat = categoryList.get(k);
-                            if (k > (pageNumber) * 15 || k < (pageNumber - 1) * 15) {
+                            if (k > (pageNumber) * 15-1 || k < (pageNumber - 1) * 15) {
                                 out.println("<tr style='display:none'>");
                             } else {
                                 out.println("<tr>");
@@ -152,7 +152,7 @@
                             <li class="paginate_button previous <% if (pageNumber == 1) {
                                     out.println("disabled");
                                 }%>" id="example2_previous">
-                                <a href="/toy/managerPage/secondHandAdminPage.jsp?page=<% pageNumber = (pageNumber > 1) ? --pageNumber : pageNumber;
+                                <a href="/toy/managerPage/categoryAdminPage.jsp?page=<% pageNumber = (pageNumber > 1) ? --pageNumber : pageNumber;
                                     out.print(pageNumber);%>" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a>
                             </li>
                             <% int index = categoryList.size() / 15 + 1;

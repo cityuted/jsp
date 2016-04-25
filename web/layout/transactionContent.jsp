@@ -112,7 +112,7 @@
 
                         <%                        for (k = 0; k < transactionlist.size(); k++) {
                                 TransactionHeader tran = transactionlist.get(k);
-                                if (k > (pageNumber) * 15 || k < (pageNumber - 1) * 15) {
+                                if (k > (pageNumber) * 15-1 || k < (pageNumber - 1) * 15) {
                                     out.println("<tr style='display:none'>");
                                 } else {
                                     out.println("<tr>");
