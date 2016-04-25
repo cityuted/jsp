@@ -70,7 +70,7 @@
 
                         
                             <div class="box-footer">
-                                <button class="btn btn-danger " type ='button' onclick="javascript:location.href = '/toy/doSearchToy'">Back</button>
+                                <button class="btn btn-danger " type ='button' onclick="javascript:location.href = '/toy/doSearchToyCategory'">Back</button>
                                 <input type="submit" class="btn btn-primary pull-right" value='Submit'>
 
                             </div>  
