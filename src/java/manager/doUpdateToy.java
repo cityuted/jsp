@@ -168,7 +168,7 @@ public class doUpdateToy extends HttpServlet {
                 imgString = imageDataString;
                 System.out.println("Image Successfully Manipulated!");
             } catch (FileNotFoundException e) {
-               out.println("Image not found" + e.getMessage());
+               //out.println("Image not found" + e.getMessage());
             } catch (IOException ioe) {
                 System.out.println("Exception while reading the Image " + ioe);
             }
