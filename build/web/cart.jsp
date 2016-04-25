@@ -40,7 +40,7 @@
                 </dl>
             </div>
             <a href="<%
-                if (request.getHeader("Referer") != null && request.getHeader("Referer").contains("Category")) {
+                if (request.getHeader("Referer") != null && request.getHeader("Referer").matches(".*Category.*")) {
                     out.print(request.getHeader("Referer"));
                 } else {
                     out.print("/toy/Category?order=asc&sort=TOYNAME");
