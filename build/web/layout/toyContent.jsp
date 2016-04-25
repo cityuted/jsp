@@ -67,7 +67,7 @@
                     <span class='pull-left' style="margin-right:5px">
                         <button type="button"  onclick='javascript:location.href = "/toy/managerPage/updateDiscount.jsp"' class="btn btn-block  bg-orange "  >Update Discount by Category</button>
                     </span>
-                    <div class="input-group input-group-sm" style="width: 150px;">
+                    <div class="input-group input-group-sm  pull-right" style="width: 150px;">
 
                         <!--<input type="text" name="table_search" class="form-control pull-right" placeholder="Search">-->
                         <input type="search" class="form-control light-table-filter" data-table="order-table" placeholder="Filter">
