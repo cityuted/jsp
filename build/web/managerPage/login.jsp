@@ -116,7 +116,7 @@
             }
 
         </style>
-        <title>JSP Page</title>
+        <title>AdminLTE Login Page</title>
     </head>
     <body >
         <div class="login-page">
