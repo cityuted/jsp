@@ -2,39 +2,7 @@
 
   <footer>
 
-  <aside class="social_block1">
 
-    <div class="container">
-
-      <div class="row">
-
-        <div class="grid_8">
-
-          <form id="newsletter">
-
-            <label>Sign up for newsletter:</label>
-
-            <input type="text" value="Enter your email address here" onBlur="if(this.value=='') this.value='Enter your email address here'" onFocus="if(this.value =='Enter your email address here' ) this.value=''">
-
-            <a href="#" class="news_button"></a>
-
-          </form>
-
-        </div>
-
-        <div class="grid_4">
-
-          <div class="social">
-
-
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </aside>
 
   <aside class="social_block2">
 
@@ -79,7 +47,8 @@
 
             <div class="privacy">
 
-              &copy; 2016 <span>JSP</span> All rights reserved.
+              &copy; 2016 <span>JSP</span> All rights reserved.(This web site exists to fulfill the coursework requirement of CS4280.
+Do not use your real personal data as input.)
 
             </div>
 

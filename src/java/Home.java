@@ -27,20 +27,26 @@ public class Home extends HttpServlet {
         String best = "";
         String se = "";
         ArrayList<Toy> toys = toydb.listBestSellToy();
-        for (int i = 0; i < toys.size(); i++) {
-            if (toys.get(i).getSecondHandID() == 0) {
-                best += Template.getBestSell(toys.get(i));
+
+        if (toys != null) {
+            for (int i = 0; i < toys.size(); i++) {
+                if (toys.get(i).getSecondHandID() == 0) {
+                    best += Template.getBestSell(toys.get(i));
+                }
+            }
+            for (int i = 0; i < 8 - toys.size(); i++) {
+                best += "<li></li>";
             }
         }
-        for(int i=0;i<8-toys.size();i++){
-            best +="<li></li>";
-        }
+        
         ArrayList<Toy> toys2 = toydb.listSeToy();
-        for (int i = 0; i < toys2.size(); i++) {
-            se += Template.getBestSell(toys2.get(i));
-        }
-        for(int i=0;i<8-toys2.size();i++){
-            se +="<li></li>";
+        if (toys2 != null) {
+            for (int i = 0; i < toys2.size(); i++) {
+                se += Template.getBestSell(toys2.get(i));
+            }
+            for (int i = 0; i < 8 - toys2.size(); i++) {
+                se += "<li></li>";
+            }
         }
         request.setAttribute("best", best);
         request.setAttribute("se", se);

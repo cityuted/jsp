@@ -76,10 +76,32 @@
                 <div class="clear"></div>
             </div>
             <ul id="category" class="grid">
-                <%                    for (int i = 0; i < toys.getToys().size(); i++) {
-                        if (toys.getToys().get(i).getQTY() > 0) {
-                            Toy toy = toys.getToys().get(i);
-                            out.print(Template.getToyTemplate(toy.encodedImage(), toy.getToyName(), String.valueOf(toy.getCashpoint()), String.valueOf(toy.getToyID())));
+                <%  
+                    int pageCount = 1;
+                    int pageNum = 1;
+                    if(request.getAttribute("pagesNum")!=null){
+                        pageNum = Integer.parseInt(request.getAttribute("pagesNum").toString());
+                    }
+                    
+                    int from = (pageNum - 1) * 8 + 1;
+
+                    int end = pageNum * 8;
+                    if (toys.getToys().size() > 0) {
+                        pageCount = (toys.getToys().size() / 8);
+                        if (toys.getToys().size() < 8) {
+                            end = toys.getToys().size();
+                        }
+                        if (end > toys.getToys().size()) {
+                            end = toys.getToys().size();
+                        }
+                        if (toys.getToys().size() % 8 != 0) {
+                            pageCount += 1;
+                        }
+                        for (int i = from-1; i < end; i++) {
+                            if (toys.getToys().get(i).getQTY() > 0) {
+                                Toy toy = toys.getToys().get(i);
+                                out.print(Template.getToyTemplate(toy.encodedImage(), toy.getToyName(), String.valueOf(toy.getCashpoint()), String.valueOf(toy.getToyID())));
+                            }
                         }
                     }
                 %>
@@ -87,29 +109,44 @@
             </ul>
             <div class="categories_nav wrapper">
                 <%
-                    int pageCount = (toys.getToys().size() / 8);
-                    int pageNum = 1;
-                    int from = (pageNum - 1) * 8 + 1;
+                    if (toys.getToys().size() > 0) {
+                        
 
-                    int end = pageNum * 8;
-                    if (toys.getToys().size() < 8) {
-                        end = toys.getToys().size();
+                        out.println("<div class=\"showing\">Showing " + from + " to " + end + " of " + toys.getToys().size() + " (" + pageCount + " Pages)</div>");
+
+                    } else {
+                        out.println("<div class=\"showing\">No Toys found</div>");
                     }
-                    if (toys.getToys().size() % 8 != 0) {
-                        pageCount += 1;
-                    }
-                    out.println("<div class=\"showing\">Showing " + from + " to " + end + " of " + toys.getToys().size() + " (" + pageCount + " Pages)</div>");
-
-
                 %>
                 <div class="buttons">
-                    <a href="#" class="prev"></a>
-                    <%                        for (int i = 0; i < pageCount; i++) {
-                            out.print(" <a href=\"#\">" + (i + 1) + "</a>");
+                    <%
+                        String q = request.getQueryString();
+                        q = q.split("&page=")[0];
+                    %>
+                    
+                    <a href="/toy/Category?<%=q%>&page=<%
+                        if(pageNum-1 >= 1){
+                            out.print(pageNum-1);
+                        }else{
+                            out.print(1);
+                        }
+                    %>" class="prev"></a>
+
+                    <%
+                        if (toys.getToys().size() > 0) {
+                            for (int i = 0; i < pageCount; i++) {
+                                out.print(" <a href=\"/toy/Category?"+q+"&page=" + (i + 1) +"\">" + (i + 1) + "</a>");
+                            }
                         }
                     %>
-                    <a href="#" class="next"></a>
-                    <a href="#" class="end"></a>
+                    <a href="/toy/Category?<%=q%>&page=<%
+                        if(pageNum+1 <= pageCount){
+                            out.print(pageNum+1);
+                        }else{
+                            out.print(pageCount);
+                        }
+                    %>" class="next"></a>
+                    <a href="/toy/Category?<%=q%>&page=<%=pageCount%>" class="end"></a>
                 </div>
             </div>
             <script>

@@ -1,4 +1,5 @@
 <jsp:include page="header.jsp"/>
+<%@page import="bean.Template"%>
 <!--==============================content================================-->
 <section id="content" class="cont_pad">
     <div class="breadcrump">
@@ -86,48 +87,23 @@
             <div class="top_rated_block p_top_zero">
                 <h3 class="blue bg_none">Recently Viewed</h3>
                 <ul class="ext_list">
-                    <li>
-                        <figure><a href="#"><img src="images/top_rated1.jpg" alt=""></a></figure>
-                        <div>
-                            <h4 class="blue"><a href="#">Children soft toy</a></h4>
-                            <div class="price">$15</div>
-                            <div class="rating">
-                                <span class="active"></span>
-                                <span class="active"></span>
-                                <span class="active"></span>
-                                <span class="active"></span>
-                                <span></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <figure><a href="#"><img src="images/top_rated2.jpg" alt=""></a></figure>
-                        <div>
-                            <h4 class="blue"><a href="#">Toy dinosaur</a></h4>
-                            <div class="price">$9</div>
-                            <div class="rating">
-                                <span class="active"></span>
-                                <span class="active"></span>
-                                <span class="active"></span>
-                                <span class="active"></span>
-                                <span class="active"></span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="bg_none">
-                        <figure><a href="#"><img src="images/top_rated3.jpg" alt=""></a></figure>
-                        <div>
-                            <h4 class="blue"><a href="#">Toy horse</a></h4>
-                            <div class="price">$124</div>
-                            <div class="rating">
-                                <span class="active"></span>
-                                <span class="active"></span>
-                                <span class="active"></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </div>
-                    </li>
+
+                    <%
+                        Cookie[] cookies = null;
+                        cookies = request.getCookies();
+                        if (cookies != null) {
+                            int k = 0;
+                            for (int i = cookies.length - 1; i > 0; i--) {
+                                if (k >= 8) {
+                                    break;
+                                }
+                                Cookie cookie = cookies[i];
+                                out.print(Template.getRecently(cookie.getValue()));
+                                k++;
+                            }
+                        }
+                    %>
+
                 </ul>
             </div>
         </article>

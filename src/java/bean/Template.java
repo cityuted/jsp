@@ -9,12 +9,30 @@ import db.TransactionDB;
 import db.messageDB;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import db.toyDB;
 
 /**
  *
  * @author ted
  */
 public class Template {
+
+    public static String getRecently(String id) throws UnsupportedEncodingException {
+        toyDB tdb = new toyDB();
+        Toy toy = tdb.searchToyByID(id);
+        System.out.println(toy==null);
+        if (toy != null) {
+            return "                    <li>\n"
+                    + "                        <figure><a href=\"/toy/ProductDetail?id="+toy.getToyID()+"\"><img width='98' height='97' src=\"" + toy.encodedImage() + "\" alt=\"\"></a></figure>\n"
+                    + "                        <div>\n"
+                    + "                            <h4 class=\"blue\"><a href=\"/toy/ProductDetail?id="+toy.getToyID()+"\">" + toy.getToyName() + "</a></h4>\n"
+                    + "                            <div class=\"price\">$" + toy.getCashpoint() + "</div>\n"
+                    + "                        </div>\n"
+                    + "                    </li>";
+        } else {
+            return "";
+        }
+    }
 
     public static String getSubmitSecondHand() {
         return "            <form id=\"create_account\" method=\"post\" action=\"/toy/SecondHandToy\">\n"
@@ -211,13 +229,13 @@ public class Template {
                 + "                </li>";
     }
 
-    public static String getMessageTemplate(int custID,String name, String content, String Date, int rate) {
+    public static String getMessageTemplate(int custID, String name, String content, String Date, int rate) {
         messageDB mdb = new messageDB();
         ArrayList<Message> ma = mdb.listMessageReply(custID);
         String reply = "";
-        if (ma!=null&&ma.size() > 0) {
-            reply = "</br>---reply from Staff("+ma.get(0).getCustName()+") - " + ma.get(0).getDate() + ":"
-                    + "</br>("+ma.get(0).getContent()+")";
+        if (ma != null && ma.size() > 0) {
+            reply = "</br>---reply from Staff(" + ma.get(0).getCustName() + ") - " + ma.get(0).getDate() + ":"
+                    + "</br>(" + ma.get(0).getContent() + ")";
         } else {
             reply = "";
         }

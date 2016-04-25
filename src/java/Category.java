@@ -21,6 +21,10 @@ public class Category extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("pagesNum", 1);
+        if(request.getParameter("page")!=null){
+            request.setAttribute("pagesNum", Integer.parseInt(request.getParameter("page")));
+        }
         toyDB tdb = new toyDB();
         Toys toys = new Toys();
         categoryDB catedb = new categoryDB();

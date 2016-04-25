@@ -10,6 +10,10 @@
     <div class="row">
         <article class="grid_12">
             <h2 class="blue ind2">Shopping Cart</h2>
+            <%                if (request.getAttribute("alert") != null) {
+                    out.print(request.getAttribute("alert"));
+                }
+            %>
             <div class="table_wrap p4">
                 <table class="order_table confirm">
                     <tr>
@@ -22,7 +26,7 @@
                     </tr>
                     <%                        for (int i = 0; i < cart.getToys().size(); i++) {
                             Toy toy = cart.getToys().get(i);
-                            out.println(Template.getCart(toy.encodedImage(), toy.getToyName(), toy.getCashpoint(), toy.getQTY(), toy.getToyID(),toy.getSecondHandID()));
+                            out.println(Template.getCart(toy.encodedImage(), toy.getToyName(), toy.getCashpoint(), toy.getQTY(), toy.getToyID(), toy.getSecondHandID()));
                         }
 
                     %>
@@ -32,12 +36,19 @@
             <div class="total_wrap">
                 <dl class="total_list var2">
                     <dd class="total_price"><span>Total:</span>$<%=cart.getTotal()%></dd>
-                    
+
                 </dl>
             </div>
-            <a href="<%=request.getHeader("Referer")%>" class="button">Continue Shopping</a>&nbsp;
-            <%
-                if (cart.getSize() > 0) {
+            <a href="<%
+                if (request.getHeader("Referer") != null && request.getHeader("Referer").contains("Category")) {
+                    out.print(request.getHeader("Referer"));
+                } else {
+                    out.print("/toy/Category?order=asc&sort=TOYNAME");
+                }
+
+
+               %>" class="button">Continue Shopping</a>&nbsp;
+            <%                if (cart.getSize() > 0) {
                     out.println("<a href=\"/toy/Checkout\" class=\"form_btn log_in\" >Checkout</a>");
                 }
             %>

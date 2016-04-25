@@ -6,6 +6,7 @@
 
 import bean.Template;
 import bean.User;
+import db.userDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,7 +22,9 @@ public class MyAccount extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        userDB ud = new userDB();
+        User user = ud.searchUserByID(((User)request.getSession().getAttribute("user")).getUserID());
+        request.getSession().setAttribute("user", user);
   
         request.getRequestDispatcher("my_account.jsp").forward(request, response);
     }

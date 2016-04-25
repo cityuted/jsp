@@ -30,7 +30,7 @@
                 <li><a href="/toy/EditAccount">Edit Account</a></li>
                 <li><a href="/toy/SecondHandToy">My Second Hand Toy</a></li>
                 <li><a href="/toy/OrderHistory">Order History</a></li>
-                <li><a href="/toy/Logout">Wishlist</a></li>
+
                 <li class="last_item"><a href="/toy/Logout">Logout</a></li>
             </ul>
         </article>

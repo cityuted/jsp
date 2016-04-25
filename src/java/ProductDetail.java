@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bean.*;
 import db.*;
+import javax.servlet.http.Cookie;
 
 /**
  *
@@ -29,6 +30,13 @@ public class ProductDetail extends HttpServlet {
         Messages messages = new Messages();
         messages.setMessages(mdb.listMessageFromID(request.getParameter("id")));
         request.setAttribute("messages", messages);
+        
+        Cookie[] cookies = request.getCookies();
+
+        Cookie firstName = new Cookie(request.getParameter("id"),
+ 	request.getParameter("id"));
+        firstName.setMaxAge(60*60*24);
+        response.addCookie( firstName );
         request.getRequestDispatcher("product_detail.jsp").forward(request, response);
     }
 

@@ -27,6 +27,40 @@ public class toyDB extends GeneralDB {
         connectDB();
     }
 
+	    public Toy checkStockByID(int toyID) {
+
+        try {
+            Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TOY WHERE TOYID = " + toyID);
+
+            ArrayList<Toy> tempToyList = new ArrayList();
+            while (rs.next()) {
+
+                Toy tempToy = new Toy();
+                tempToy.setToyID(rs.getInt("TOYID"));
+                tempToy.setToyName(rs.getString("TOYNAME"));
+                tempToy.setDescription(rs.getString("DESCRIPTION"));
+                tempToy.setToyIcon(rs.getString("TOYICON"));
+                tempToy.setCashpoint(rs.getInt("CASHPOINT"));
+                tempToy.setQTY(rs.getInt("QTY"));
+                tempToy.setDiscount(rs.getInt("DISCOUNT"));
+                //  tempToy.setTypeID(rs.getInt("TYPEID"));
+                tempToy.setSecondHandID(rs.getInt("SECONDHANDID"));
+                tempToyList.add(tempToy);
+                return tempToy;
+            }
+            stmt.close();
+            conn.close();
+            // }
+            //stmnt.executeQuery()
+
+        } catch (SQLException ex) {
+            return null;
+        }
+        return null;
+    }
+	
     public ArrayList<Toy> listToy(String order) {
         try {
             Connection conn = DriverManager.getConnection(conn_url, conn_username, conn_password);

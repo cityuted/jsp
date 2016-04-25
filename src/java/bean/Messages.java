@@ -44,5 +44,19 @@ public class Messages {
         return r;
     }
     
+    public int averageRatingForCustomer(){
+        int r=0;
+        if(messages!=null && messages.size()!=0){
+            for(int i=0;i<messages.size();i++){
+                    r += messages.get(i).getRating();
+            }
+            r = r/messages.size();
+            if(messages.size()%r!=0){
+                r += 1;
+            }
+        }
+        return r;
+    }
+    
 
 }

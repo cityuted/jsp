@@ -44,9 +44,35 @@ public class Checkout extends HttpServlet {
         if (!checkLogin(request, response)) {
             return;
         }
-        if (request.getParameter("goStep")!=null && !request.getParameter("goStep").equals("")) {
+        if (request.getParameter("goStep") != null && !request.getParameter("goStep").equals("")) {
             request.setAttribute("stepString", goStep(request.getParameter("goStep"), request));
         } else {
+            String error = "";
+            toyDB tdb = new toyDB();
+            bean.Cart cart = (bean.Cart) request.getSession().getAttribute("cart");
+            for (int i = 0; i < cart.getToys().size(); i++) {
+                Toy cartToy = cart.getToys().get(i);
+                Toy toy = tdb.checkStockByID(cartToy.getToyID());
+                if (toy != null && toy.getQTY() < cartToy.getQTY()) {
+                    cart.getToys().get(i).setQTY(toy.getQTY());
+                    if (toy.getQTY() == 0) {
+                        error += "The toy of " + cart.getToys().get(i).getToyName() + " is out of stock, the toy be removed</br>";
+                        cart.removeToy(cartToy);
+                    } else {
+                        error += "The toy of " + cart.getToys().get(i).getToyName() + " 's quantity is out of stock, the maximum quantity is " + cartToy.getQTY() + "</br>";
+                    }
+                }
+
+            }
+            request.getSession().setAttribute("cart", cart);
+            if (!error.equals("")) {
+                request.setAttribute("alert", Template.getErrorAlert(error, Boolean.TRUE));
+                request.getRequestDispatcher("cart.jsp").forward(request, response);
+                return;
+            }
+
+            
+            
             request.setAttribute("stepString", getStep(request.getParameter("step"), request));
         }
         processRequest(request, response);
@@ -88,10 +114,10 @@ public class Checkout extends HttpServlet {
                     error = getCheckInput(request.getParameter("firstName").isEmpty(), "First Name", error);
                     error = getCheckInput(request.getParameter("lastName").isEmpty(), "Last Name", error);
                     error = getCheckInput(request.getParameter("tel").isEmpty(), "Telephone", error);
-                    
+
                     checkoutStatus.setFirstName(request.getParameter("firstName"));
                     checkoutStatus.setLastName(request.getParameter("lastName"));
-                    
+
                     checkoutStatus.setTel(request.getParameter("tel"));
                     if (!error.equals("")) {
                         request.setAttribute("alert", Template.getErrorAlert(error, true));
@@ -125,6 +151,9 @@ public class Checkout extends HttpServlet {
             case 4:
                 if (request.getParameter("type").equals("Cash Point")) {
                     checkoutStatus.setBoolPayment(false);
+                    userDB ud = new userDB();
+                    user = ud.searchUserByID(((User)request.getSession().getAttribute("user")).getUserID());
+                    request.getSession().setAttribute("user", user);
                     if (user.getCashpoint() <= cart.getTotal()) {
                         System.out.println("Not enough");
                         request.setAttribute("alert", Template.getErrorAlert("Not Enough Cash Point!", false));
@@ -134,7 +163,7 @@ public class Checkout extends HttpServlet {
                 } else {
                     checkoutStatus.setBoolPayment(true);
                     error = getCheckInput(request.getParameter("creditcard").isEmpty(), "Credit Card ID", error);
-                    checkoutStatus.setPayment("Credit Card-ID:" + request.getParameter("creditcard")+" -Total:"+ cart.getTotal());
+                    checkoutStatus.setPayment("Credit Card-ID:" + request.getParameter("creditcard") + " -Total:" + cart.getTotal());
                     if (!error.equals("")) {
                         request.setAttribute("alert", Template.getErrorAlert(error, true));
                         return Template.getCheckoutStep4() + Template.getCheckoutStep4Session(checkoutStatus);
@@ -172,7 +201,7 @@ public class Checkout extends HttpServlet {
     public Boolean checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
         if (user.getUserID() == 0) {
-            request.setAttribute("alert", Template.getErrorAlert("Please Login or Register a new account", false) + Template.getInfoAlert(Template.getHref("Login", "/toy/Login"))+Template.getInfoAlert(Template.getHref("Register", "/toy/Register")));
+            request.setAttribute("alert", Template.getErrorAlert("Please Login or Register a new account", false) + Template.getInfoAlert(Template.getHref("Login", "/toy/Login")) + Template.getInfoAlert(Template.getHref("Register", "/toy/Register")));
             processRequest(request, response);
             return false;
         }

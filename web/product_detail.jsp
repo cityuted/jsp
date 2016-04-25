@@ -35,7 +35,7 @@
                             <%
                                 if (messages.getMessages() != null) {
 
-                                    out.print(Template.getRate(messages.averageRating()));
+                                    out.print(Template.getRate(messages.averageRatingForCustomer()));
                                 }
 
                             %>
@@ -137,7 +137,7 @@
                             <%
                                 if (messages.getMessages().size() > 0) {
                                     out.print("<em>Average Rating:</em>");
-                                    out.print(Template.getRate(messages.averageRating()));
+                                    out.print(Template.getRate(messages.averageRatingForCustomer()));
                                 }
 
                             %>
