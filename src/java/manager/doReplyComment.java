@@ -45,7 +45,7 @@ public class doReplyComment extends HttpServlet {
             messageDB msgDB = new messageDB();
             
             request.setAttribute("ID", toyID);
-           out.println(msgDB.createReply(transactionID,toyID,custID, content,managerID,messageID));
+           out.println(msgDB.createReply(transactionID,toyID,managerID, content,managerID,messageID));
             //response.sendRedirect("/toy/doSearchAllComments");
             request.getRequestDispatcher("/doSearchAllComments").forward(request, response);
             return;

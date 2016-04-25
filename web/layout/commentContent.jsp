@@ -115,8 +115,8 @@
                             <th>Message ID</th>                            
                             <th>Toy ID</th>
                             <th>Toy Name</th>
-                            <th>Customer ID</th>
-                            <th>Customer Name</th>
+                            <th>User ID</th>
+                            <th>User Name</th>
                             <th>Content</th>
                             <th>Date</th>                         
                             <th>Action</th>
