@@ -199,18 +199,23 @@ public class doUpdateToy extends HttpServlet {
              
             if (!secondHand.equals("")) {
                 secondHandDB seconddb = new secondHandDB();
+                
                 SecondHand sh = seconddb.searchSecondHand(Integer.parseInt(secondHand));
+                
                 int secondHandCashpoint = sh.getCashpoint();
                 toydb.updateToySecondHand(toyID, sh.getID());
-                toydb.updateToy(toyID, toyIcon, secondHandCashpoint, qty, discount);
+                
+                toydb.updateToy(toyID, imgString, secondHandCashpoint, qty, discount);
+               // out.println("abc");
             } else {
                 toydb.updateToySecondHand(toyID, -1);
+                
 
             }
             //out.println(imgString);
             response.sendRedirect("doSearchToy");
         } catch (Exception e) {
-            out.println(e.getMessage());
+            out.println("sql"+e.getMessage());
 
         } finally {
             out.close();

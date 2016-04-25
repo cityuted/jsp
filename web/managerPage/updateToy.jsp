@@ -87,7 +87,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Toy Name</label>
-                                <input type="text" name='toyName'   id='toyName' class="form-control" required value='<%= t.getToyName()%>'>
+                                <input type="text" name='toyName'   id='toyName' class="form-control" required value='<%= t.getToyName().substring(0, t.getToyName().length()-13) %>'>
                             </div>
 
                             <!-- textarea -->
