@@ -134,7 +134,7 @@
                             </div>  
 
                         </form>
-
+                                
                     </div>
 
 
@@ -142,7 +142,7 @@
                     <!-- /.box-body -->
 
                 </div>
-
+                                <%@include  file="/layout/footer.jsp" %>
                 <!-- /.content -->
 
             </div>

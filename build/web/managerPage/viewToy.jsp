@@ -72,12 +72,12 @@
 
                         <div class="col-sm-6 " >
                             <img class="img-responsive"  src="data:image/jpeg;base64,<%=base64DataString%>" alt="Photo">
-                            
+
                         </div>
-                        
+
                         <br/>
                     </div>
-                            
+
                     <div class="box-body row-sm-8">
                         <form  method='post' action='/toy/doSearchToy' >
                             <div class="form-group">
@@ -88,8 +88,8 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Toy Name</label>
-                                
-                                <input type="text" name='toyName' disabled=""  id='toyName' class="form-control" required value='<%= t.getToyName() %>'>
+
+                                <input type="text" name='toyName' disabled=""  id='toyName' class="form-control" required value='<%= t.getToyName()%>'>
                             </div>
 
                             <!-- textarea -->
@@ -158,20 +158,22 @@
                                 </select>
                             </div>
                             <div class="box-footer">
-                                <button class="btn btn-danger " type='button' onclick="javascript:location.href = window.history.back(); ">Back</button>
-<!--                                    <button class="btn btn-danger " type='button' onclick="javascript:location.href = '/toy/doSearchToy'">Back</button>-->
+                                <button class="btn btn-danger " type='button' onclick="javascript:location.href = window.history.back();">Back</button>
+                                <!--                                    <button class="btn btn-danger " type='button' onclick="javascript:location.href = '/toy/doSearchToy'">Back</button>-->
 
                             </div>  
 
                         </form>
+
                     </div>
 
 
                     <!-- /.box-body -->
                 </div>
-
+                <%@include  file="/layout/footer.jsp" %>
                 <!-- /.content -->
             </div>
+
             <!-- /.content-wrapper -->
             <//jsp:include page="layout/footer.jsp"/>
 

@@ -90,6 +90,7 @@
                             </div>  
 
                         </form>
+                                    
                     </div>
 
 
@@ -97,6 +98,7 @@
                 </div>
 
                 <!-- /.content -->
+                <%@include  file="/layout/footer.jsp" %>
             </div>
             <!-- /.content-wrapper -->
             <//jsp:include page="layout/footer.jsp"/>

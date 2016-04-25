@@ -31,6 +31,7 @@
                 <!-- Main content -->
                 
                 <%@include  file="/layout/commentContent.jsp" %>
+                <%@include  file="/layout/footer.jsp" %>
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->

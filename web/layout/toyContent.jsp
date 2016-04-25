@@ -190,6 +190,7 @@
                                 <a href="/toy/managerPage/adminPage.jsp?page=<% pageNumber = (pageNumber < index) ? ++pageNumber : pageNumber;
                                     out.println(pageNumber);%>" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a>
                             </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -198,5 +199,8 @@
         </div>
         <!-- /.box -->
     </div>
+                            
 </section>
+
+ 
 

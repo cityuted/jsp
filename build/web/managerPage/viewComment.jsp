@@ -232,8 +232,9 @@
                                 </div>
                             </form>
                             <!-- /.post -->
-
+                            
                         </div>
+                                    
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="timeline">
                             <!-- The timeline -->
@@ -330,7 +331,7 @@
                             </ul>
                         </div>
                         <!-- /.tab-pane -->
-
+                        
                         <div class="tab-pane" id="settings">
                             <form class="form-horizontal">
                                 <div class="form-group">
@@ -396,6 +397,7 @@
             </div>
 
             <!-- /.content -->
+            <%@include  file="/layout/footer.jsp" %>
         </div>
         <!-- /.content-wrapper -->
         <//jsp:include page="layout/footer.jsp"/>

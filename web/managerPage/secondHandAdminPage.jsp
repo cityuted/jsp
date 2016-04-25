@@ -31,6 +31,7 @@
                 <!-- Main content -->
                 
                 <%@include  file="/layout/secondHandContent.jsp" %>
+                <%@include  file="/layout/footer.jsp" %>
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->

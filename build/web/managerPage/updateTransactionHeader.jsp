@@ -132,7 +132,7 @@
                             </div>  
 
                         </form>
-
+                                
                     </div>
 
 
@@ -142,7 +142,7 @@
                 </div>
 
                 <!-- /.content -->
-
+                <%@include  file="/layout/footer.jsp" %>
             </div>
 
 

@@ -119,7 +119,7 @@
                                 <input type="number" name='add' id='add' min="100" step=100 class="form-control">
                                 <span class="input-group-addon">.0</span>
                             </div>
-                    </div>
+                    
 
 
 
@@ -137,12 +137,13 @@
                     </div>  
 
                     </form>
+                             
                 </div>
-
+                               
 
                 <!-- /.box-body -->
             </div>
-
+                                 <%@include  file="/layout/footer.jsp" %>   
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->

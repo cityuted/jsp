@@ -31,6 +31,7 @@
                 <!-- Main content -->
                 <//jsp:include page="/layout/toyContent.jsp"/>
                 <%@include  file="/layout/toyContent.jsp" %>
+                <%@include  file="/layout/footer.jsp" %>
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
@@ -228,10 +229,11 @@
             <!-- /.control-sidebar -->
             <!-- Add the sidebar's background. This div must be placed
                  immediately after the control sidebar -->
-            <div class="control-sidebar-bg"></div>
+            <div class="control-sidebar-bg"> </div>
+            
         </div>
         <!-- ./wrapper -->
-
+        
         <%@include file="/layout/library.jsp" %>
         <script>
             
@@ -241,5 +243,6 @@
             menu.className+= "active";
             //alert(slider.className);
         </script>
+        
     </body>
 </html>
