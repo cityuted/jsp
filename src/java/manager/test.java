@@ -13,6 +13,9 @@ public class test {
     public static void main(String[] args)
     {
         String name = "mesong pang";
+        int[] num = {2369, 3760, 4692, 4871, 5659, 1821, 1074, 7115, 1620, 2428, 3943, 4750, 6975, 4981, 9208};
+        for (int n : num)
+        System.out.println(n%8);
         //System.out.println(String.indexOf(substring));;
     }
 }
