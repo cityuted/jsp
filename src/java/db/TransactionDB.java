@@ -80,6 +80,7 @@ public class TransactionDB extends GeneralDB {
             PreparedStatement pstmt = null;
             PreparedStatement pstmt2 = null;
             PreparedStatement pstmt3 = null;
+            PreparedStatement pstmt4 = null;
             System.out.println("checkout:item size:"+cart.getToys().size());
             for (int i = 0; i < cart.getSize(); i++) {
                 pstmt = conn.prepareStatement("INSERT INTO transactionitem(TRANSACTIONID,TOYID,TOYNAME,CASHPOINT,QTY) VALUES (?,?,?,?,?)");
@@ -98,12 +99,17 @@ public class TransactionDB extends GeneralDB {
                     pstmt3.setInt(1, cart.getToys().get(i).getToyID());
                     pstmt3.setInt(2, cart.getToys().get(i).getToyID());
                     pstmt3.executeUpdate();
+                    
+                    pstmt4 = conn.prepareStatement("update secondhand set APPROVAL='Sold Out' where id = ?");
+                    pstmt4.setInt(1, cart.getToys().get(i).getSecondHandID());
+                    pstmt4.executeUpdate();
                 }
             }
             conn.commit();
             pstmt.close();
             pstmt2.close();
             pstmt3.close();
+            pstmt4.close();
             conn.close();
             return true;
         } catch (SQLException ex) {

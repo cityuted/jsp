@@ -3,15 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2016 at 06:16 PM
+-- Generation Time: Apr 26, 2016 at 05:34 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-drop database if exists toymarket;
-create database if not EXISTS toymarket;
-use toymarket;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -104,7 +101,7 @@ CREATE TABLE `secondhand` (
   `CUSTID` int(11) NOT NULL,
   `NAME` varchar(30) NOT NULL,
   `CASHPOINT` int(4) NOT NULL DEFAULT '0',
-  `APPROVAL` enum('WAITING','APPROVED','REJECTED') DEFAULT 'WAITING'
+  `APPROVAL` enum('WAITING','APPROVED','REJECTED','Sold Out') DEFAULT 'WAITING'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
